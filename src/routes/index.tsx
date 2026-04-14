@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HeroSection } from "@/components/HeroSection";
 import { ApplicationsGrid } from "@/components/ApplicationsGrid";
+import { ComparisonSection } from "@/components/ComparisonSection";
 import { ValuesSection } from "@/components/ValuesSection";
+import { TimelineSection } from "@/components/TimelineSection";
 import { FinancialSection } from "@/components/FinancialSection";
 
 export const Route = createFileRoute("/")({
@@ -23,7 +25,11 @@ function Index() {
       <div className="section-divider max-w-4xl mx-auto" />
       <ApplicationsGrid />
       <div className="section-divider max-w-4xl mx-auto" />
+      <ComparisonSection />
+      <div className="section-divider max-w-4xl mx-auto" />
       <ValuesSection />
+      <div className="section-divider max-w-4xl mx-auto" />
+      <TimelineSection />
       <div className="section-divider max-w-4xl mx-auto" />
       <FinancialSection />
 
