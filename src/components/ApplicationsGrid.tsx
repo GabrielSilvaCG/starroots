@@ -15,11 +15,15 @@ const applications = [
 
 export function ApplicationsGrid() {
   return (
-    <section className="px-6 py-24 max-w-7xl mx-auto">
+    <section id="identidade" className="scroll-anchor px-6 py-24 max-w-7xl mx-auto">
       <FadeInSection>
-        <div className="mb-16 text-center">
+        <div className="mb-16 text-center max-w-2xl mx-auto">
           <p className="text-xs tracking-[0.3em] uppercase text-accent mb-3">Identidade Visual</p>
-          <h2 className="text-4xl md:text-5xl font-display font-bold">Aplicações</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Aplicações da marca</h2>
+          <p className="text-muted-foreground">
+            Folhas integradas à sereia, paleta verde-kraft e embalagens em papel reciclado —
+            cada peça reforça a narrativa de origem.
+          </p>
         </div>
       </FadeInSection>
 
