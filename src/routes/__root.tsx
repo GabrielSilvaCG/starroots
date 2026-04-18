@@ -29,14 +29,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Starroots" },
+      { name: "description", content: "Starroots Demo showcases a sustainable rebranding of Starbucks with a modern, professional website." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Starroots" },
+      { property: "og:description", content: "Starroots Demo showcases a sustainable rebranding of Starbucks with a modern, professional website." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Starroots" },
+      { name: "twitter:description", content: "Starroots Demo showcases a sustainable rebranding of Starbucks with a modern, professional website." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/10f86c88-d246-4a9f-a1b2-9894bdd2ce1b/id-preview-3713067d--d369ada1-b430-4ab8-8cfc-facb3769200e.lovable.app-1776535774831.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/10f86c88-d246-4a9f-a1b2-9894bdd2ce1b/id-preview-3713067d--d369ada1-b430-4ab8-8cfc-facb3769200e.lovable.app-1776535774831.png" },
     ],
     links: [
       {
