@@ -6,7 +6,15 @@ export function HeroSection() {
   useEffect(() => { setMounted(true); }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 leaf-bg">
+      {/* Decorative leaves */}
+      <svg className="absolute top-10 left-10 w-32 h-32 text-primary/15" viewBox="0 0 100 100" fill="currentColor" aria-hidden>
+        <path d="M50 5 C20 25 15 60 50 95 C85 60 80 25 50 5 Z" />
+      </svg>
+      <svg className="absolute bottom-16 right-12 w-40 h-40 text-accent/15 rotate-45" viewBox="0 0 100 100" fill="currentColor" aria-hidden>
+        <path d="M50 5 C20 25 15 60 50 95 C85 60 80 25 50 5 Z" />
+      </svg>
+
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[600px] rounded-full bg-primary/8 blur-[120px]" />
       </div>
@@ -17,30 +25,29 @@ export function HeroSection() {
         <div
           className={`mb-8 flex justify-center transition-all duration-700 delay-200 ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
         >
-          <img src={logoImg} alt="Starroots logo" className="w-40 h-40 md:w-52 md:h-52 drop-shadow-2xl" />
+          <img src={logoImg} alt="Starroots logo" className="w-36 h-36 md:w-48 md:h-48 drop-shadow-2xl" />
         </div>
 
-        <p
-          className={`text-sm tracking-[0.35em] uppercase text-muted-foreground mb-4 font-body transition-opacity duration-500 delay-500 ${mounted ? "opacity-100" : "opacity-0"}`}
-        >
-          Projeto de Rebrand
+        <p className={`text-xs md:text-sm tracking-[0.45em] uppercase text-accent mb-6 font-body transition-opacity duration-500 delay-500 ${mounted ? "opacity-100" : "opacity-0"}`}>
+          Rebrand Sustentável
         </p>
 
-        <h1 className="text-6xl md:text-8xl font-bold font-display tracking-tight mb-6">
-          Star<span className="text-gradient">roots</span>
+        <h1 className="text-6xl md:text-8xl font-bold font-display tracking-tight mb-8 leading-none">
+          STAR<span className="text-gradient">ROOTS</span>
         </h1>
 
-        <p
-          className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light transition-all duration-600 delay-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
-        >
-          Dos campos de café até o seu copo, a natureza é a prioridade.
-          Uma nova identidade visual que conecta sustentabilidade e experiência.
+        <p className={`text-lg md:text-2xl font-display italic text-foreground/85 max-w-2xl mx-auto leading-relaxed transition-all duration-600 delay-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+          "Dos campos de café até o seu copo, a natureza é a prioridade."
         </p>
 
-        <div className="mt-12 flex items-center justify-center gap-3 text-sm text-muted-foreground">
-          <span className="w-8 h-px bg-border" />
-          <span className="tracking-widest uppercase text-xs">@starroots</span>
-          <span className="w-8 h-px bg-border" />
+        <div className="mt-12 flex items-center justify-center gap-4">
+          <a
+            href="#problema"
+            className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full font-medium tracking-wide hover:bg-accent transition-colors duration-300"
+          >
+            Conheça o projeto
+            <span className="transition-transform group-hover:translate-y-0.5">↓</span>
+          </a>
         </div>
       </div>
 
