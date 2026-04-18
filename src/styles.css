@@ -53,29 +53,30 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.16 0.03 155);
-  --foreground: oklch(0.95 0.01 155);
-  --card: oklch(0.20 0.04 155);
-  --card-foreground: oklch(0.95 0.01 155);
-  --popover: oklch(0.20 0.04 155);
-  --popover-foreground: oklch(0.95 0.01 155);
-  --primary: oklch(0.55 0.12 155);
-  --primary-foreground: oklch(0.98 0.005 155);
-  --secondary: oklch(0.24 0.05 155);
-  --secondary-foreground: oklch(0.90 0.02 155);
-  --muted: oklch(0.22 0.04 155);
-  --muted-foreground: oklch(0.65 0.04 155);
-  --accent: oklch(0.75 0.15 85);
-  --accent-foreground: oklch(0.15 0.03 85);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.30 0.04 155);
-  --input: oklch(0.28 0.04 155);
-  --ring: oklch(0.55 0.12 155);
-  --highlight: oklch(0.75 0.15 85);
-  --highlight-foreground: oklch(0.15 0.03 85);
-  --surface: oklch(0.18 0.035 155);
-  --surface-foreground: oklch(0.85 0.02 155);
+  /* Starroots palette: deep green / medium green / sage / kraft */
+  --background: oklch(0.20 0.035 155);   /* #0a2e1a deep green */
+  --foreground: oklch(0.96 0.015 90);    /* warm off-white */
+  --card: oklch(0.26 0.045 155);         /* #1a4a2e medium green */
+  --card-foreground: oklch(0.96 0.015 90);
+  --popover: oklch(0.26 0.045 155);
+  --popover-foreground: oklch(0.96 0.015 90);
+  --primary: oklch(0.82 0.08 145);       /* #a8d5b5 sage */
+  --primary-foreground: oklch(0.20 0.035 155);
+  --secondary: oklch(0.30 0.05 155);
+  --secondary-foreground: oklch(0.92 0.02 90);
+  --muted: oklch(0.28 0.04 155);
+  --muted-foreground: oklch(0.72 0.04 110);
+  --accent: oklch(0.72 0.08 75);         /* #c8a97e kraft beige */
+  --accent-foreground: oklch(0.20 0.035 155);
+  --destructive: oklch(0.60 0.22 30);
+  --destructive-foreground: oklch(0.98 0.003 90);
+  --border: oklch(0.36 0.045 155);
+  --input: oklch(0.32 0.04 155);
+  --ring: oklch(0.82 0.08 145);
+  --highlight: oklch(0.72 0.08 75);
+  --highlight-foreground: oklch(0.20 0.035 155);
+  --surface: oklch(0.23 0.04 155);
+  --surface-foreground: oklch(0.90 0.02 90);
   --chart-1: oklch(0.55 0.12 155);
   --chart-2: oklch(0.65 0.10 155);
   --chart-3: oklch(0.75 0.15 85);
