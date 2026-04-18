@@ -46,11 +46,14 @@ const cards = [
 
 export function FinancialSection() {
   return (
-    <section className="px-6 py-24 max-w-7xl mx-auto">
+    <section id="financeiro" className="scroll-anchor px-6 py-24 max-w-7xl mx-auto">
       <FadeInSection>
-        <div className="mb-16 text-center">
+        <div className="mb-16 text-center max-w-2xl mx-auto">
           <p className="text-xs tracking-[0.3em] uppercase text-accent mb-3">Business Case</p>
-          <h2 className="text-4xl md:text-5xl font-display font-bold">Análise Financeira</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Um projeto que se paga sozinho</h2>
+          <p className="text-muted-foreground">
+            Dos custos operacionais ao retorno final — todos os números fecham a conta.
+          </p>
         </div>
       </FadeInSection>
 
