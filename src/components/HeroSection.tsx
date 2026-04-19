@@ -25,7 +25,7 @@ export function HeroSection() {
         <div
           className={`mb-8 flex justify-center transition-all duration-700 delay-200 ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
         >
-          <img src={logoImg} alt="Starroots logo" width={192} height={192} fetchPriority="high" decoding="async" className="w-36 h-36 md:w-48 md:h-48 drop-shadow-2xl" />
+          <img src={logoImg} alt="Starroots logo" width={192} height={192} fetchPriority="high" decoding="async" className="w-36 h-36 md:w-48 md:h-48 object-contain drop-shadow-2xl" />
         </div>
 
         <p className={`text-xs md:text-sm tracking-[0.45em] uppercase text-accent mb-6 font-body transition-opacity duration-500 delay-500 ${mounted ? "opacity-100" : "opacity-0"}`}>
