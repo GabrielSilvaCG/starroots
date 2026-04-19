@@ -7,6 +7,7 @@ import { ActionsSection } from "@/components/ActionsSection";
 import { FinancialSection } from "@/components/FinancialSection";
 import { ApplicationsGrid } from "@/components/ApplicationsGrid";
 import { ConclusionSection } from "@/components/ConclusionSection";
+import logoImg from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -16,6 +17,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Dos campos de café até o seu copo, a natureza é a prioridade. Conheça o rebrand Starroots." },
       { property: "og:title", content: "Starroots — Rebrand Sustentável" },
       { property: "og:description", content: "Uma nova identidade visual que conecta sustentabilidade, economia circular e experiência." },
+    ],
+    links: [
+      { rel: "preload", as: "image", href: logoImg, fetchpriority: "high" },
     ],
   }),
 });
