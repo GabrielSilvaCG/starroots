@@ -27,7 +27,7 @@ export function SolutionSection() {
           <div className="relative aspect-square max-w-md mx-auto">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 blur-3xl" />
             <div className="relative h-full flex items-center justify-center">
-              <img src={logoImg} alt="Logo Starroots" className="w-3/4 drop-shadow-2xl" />
+              <img src={logoImg} alt="Logo Starroots" loading="lazy" decoding="async" width={400} height={400} className="w-3/4 drop-shadow-2xl" />
             </div>
           </div>
         </FadeInSection>
