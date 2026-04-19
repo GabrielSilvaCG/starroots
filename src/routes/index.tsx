@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { ProblemSection } from "@/components/ProblemSection";
 import { SolutionSection } from "@/components/SolutionSection";
 import { ActionsSection } from "@/components/ActionsSection";
+import { ComboSection } from "@/components/ComboSection";
 import { FinancialSection } from "@/components/FinancialSection";
 import { ApplicationsGrid } from "@/components/ApplicationsGrid";
 import { ConclusionSection } from "@/components/ConclusionSection";
@@ -36,6 +37,8 @@ function Index() {
         <SolutionSection />
         <div className="section-divider max-w-4xl mx-auto" />
         <ActionsSection />
+        <div className="section-divider max-w-4xl mx-auto" />
+        <ComboSection />
         <div className="section-divider max-w-4xl mx-auto" />
         <FinancialSection />
         <div className="section-divider max-w-4xl mx-auto" />
