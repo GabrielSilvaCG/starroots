@@ -34,6 +34,10 @@ export function ApplicationsGrid() {
               <img
                 src={item.src}
                 alt={item.alt}
+                loading="lazy"
+                decoding="async"
+                width={1200}
+                height={565}
                 className="w-full h-72 md:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-background/90 to-transparent">
