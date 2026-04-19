@@ -1,5 +1,6 @@
 import { FadeInSection } from "./FadeInSection";
 import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 import { Coffee, Cookie, Leaf, RefreshCw, Sprout } from "lucide-react";
 import logoImg from "@/assets/logo.png";
 
@@ -133,10 +134,11 @@ export function ComboSection() {
             Um combo que cuida de você e do planeta.
           </p>
           <Button
+            asChild
             size="lg"
             className="bg-background text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 px-8 py-6 text-base tracking-wider uppercase shadow-lg hover:shadow-2xl hover:scale-105"
           >
-            Quero meu Combo Starroots
+            <Link to="/comprar">Quero meu Combo Starroots</Link>
           </Button>
           <p className="text-xs mt-5 opacity-70 tracking-wider">
             Disponível nas unidades participantes Starroots
