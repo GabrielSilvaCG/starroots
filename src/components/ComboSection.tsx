@@ -2,7 +2,7 @@ import { FadeInSection } from "./FadeInSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import { Coffee, Cookie, Leaf, RefreshCw, Sprout } from "lucide-react";
-import logoImg from "@/assets/logo.png";
+import comboMockup from "@/assets/combo-mockup.png";
 
 const included = [
   { icon: Coffee, text: "Bebida à sua escolha no copo biodegradável Starroots" },
@@ -59,39 +59,17 @@ export function ComboSection() {
 
           <FadeInSection delay={0.2}>
             <div className="relative aspect-square max-w-md mx-auto">
-              {/* Organic background blob */}
               <div className="absolute inset-0 rounded-full bg-primary/15 blur-3xl" />
               <div className="absolute inset-6 rounded-full bg-accent/10 blur-2xl" />
-
-              {/* Kraft cup mockup */}
-              <div className="relative h-full flex items-end justify-center gap-4 pb-6">
-                <div className="relative w-44 md:w-52">
-                  {/* Cup */}
-                  <div className="relative h-64 md:h-72 bg-gradient-to-b from-accent to-accent/70 rounded-b-[2.5rem] rounded-t-md shadow-2xl overflow-hidden">
-                    {/* Lid */}
-                    <div className="absolute -top-3 inset-x-0 h-5 bg-card rounded-md shadow-md" />
-                    {/* Logo on cup */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <img src={logoImg} alt="Logo Starroots no copo" className="w-24 md:w-28 object-contain drop-shadow-md" />
-                    </div>
-                    {/* Texture lines */}
-                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "repeating-linear-gradient(180deg, transparent 0 8px, rgba(0,0,0,0.1) 8px 9px)" }} />
-                  </div>
-                </div>
-                {/* Cookie */}
-                <div className="relative mb-4">
-                  <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-accent via-accent/80 to-accent/60 shadow-xl relative overflow-hidden">
-                    {/* Chocolate chips */}
-                    <div className="absolute top-3 left-4 w-2.5 h-2.5 rounded-full bg-card" />
-                    <div className="absolute top-8 right-5 w-2 h-2 rounded-full bg-card" />
-                    <div className="absolute bottom-5 left-6 w-2.5 h-2.5 rounded-full bg-card" />
-                    <div className="absolute bottom-8 right-4 w-2 h-2 rounded-full bg-card" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10px] md:text-xs font-display italic text-card/80 font-semibold">
-                      seu nome
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img
+                src={comboMockup}
+                alt="Combo Starroots: sacola kraft com logo e cookie personalizado com o seu nome"
+                width={1600}
+                height={1600}
+                loading="lazy"
+                decoding="async"
+                className="relative w-full h-full object-contain drop-shadow-2xl"
+              />
             </div>
           </FadeInSection>
         </div>
