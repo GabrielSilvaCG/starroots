@@ -110,7 +110,7 @@ export function ComboSection() {
             <p className="text-[10px] tracking-[0.5em] uppercase mb-6 opacity-70">Por apenas</p>
             <p
               className="font-display font-black leading-[0.8] tracking-[-0.05em]"
-              style={{ fontSize: "clamp(text-5xl md:text-7xl)" }}
+              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
             >
               R$12,50
             </p>
