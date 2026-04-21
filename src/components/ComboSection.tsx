@@ -47,7 +47,7 @@ export function ComboSection() {
             <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Edição limitada</p>
             <h3
               className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)" }}
+              style={{ fontSize: "clamp(text-6xl md:text-8xl)" }}
             >
               O copo que tem nome.<br />
               <em className="italic font-semibold text-accent">O cookie que é só seu.</em>
