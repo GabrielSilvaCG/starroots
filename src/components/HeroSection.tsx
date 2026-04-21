@@ -15,7 +15,6 @@ export function HeroSection() {
       <div className="relative z-10 max-w-[1400px] w-full mx-auto flex items-center justify-between text-[10px] tracking-[0.35em] uppercase text-foreground/60">
         <span>Edição 01 — Rebrand</span>
         <span className="hidden md:inline">2025 / Manifesto Verde</span>
-        <span>São Paulo · Brasil</span>
       </div>
 
       {/* title block */}
