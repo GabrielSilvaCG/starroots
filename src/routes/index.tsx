@@ -5,7 +5,6 @@ import { ProblemSection } from "@/components/ProblemSection";
 import { SolutionSection } from "@/components/SolutionSection";
 import { ActionsSection } from "@/components/ActionsSection";
 import { ComboSection } from "@/components/ComboSection";
-import { CookiePersonalizer } from "@/components/CookiePersonalizer";
 import { ImpactCalculator } from "@/components/ImpactCalculator";
 import { FinancialSection } from "@/components/FinancialSection";
 import { ApplicationsGrid } from "@/components/ApplicationsGrid";
@@ -33,7 +32,6 @@ function Index() {
         <SolutionSection />
         <ActionsSection />
         <ComboSection />
-        <CookiePersonalizer />
         <ImpactCalculator />
         <FinancialSection />
         <ApplicationsGrid />
