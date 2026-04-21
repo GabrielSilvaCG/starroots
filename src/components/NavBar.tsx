@@ -4,6 +4,8 @@ const links = [
   { href: "#problema", label: "Problema" },
   { href: "#solucao", label: "Solução" },
   { href: "#acoes", label: "Ações" },
+  { href: "#combo", label: "Combo" },
+  { href: "#impacto", label: "Impacto" },
   { href: "#financeiro", label: "Financeiro" },
   { href: "#identidade", label: "Identidade" },
 ];
@@ -20,18 +22,23 @@ export function NavBar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/85 backdrop-blur-md border-b border-border" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${
+        scrolled ? "bg-background/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#top" className="font-display font-bold tracking-widest text-sm">
+      <nav className="max-w-[1400px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+        <a
+          href="#top"
+          className="font-body font-medium text-[11px] tracking-[0.4em] uppercase"
+        >
           STAR<span className="text-accent">ROOTS</span>
         </a>
-        <ul className="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase text-muted-foreground">
+        <ul className="hidden md:flex items-center gap-10 text-[10px] tracking-[0.35em] uppercase text-foreground/70">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="hover:text-accent transition-colors">{l.label}</a>
+              <a href={l.href} className="hover:text-accent transition-colors duration-300">
+                {l.label}
+              </a>
             </li>
           ))}
         </ul>
