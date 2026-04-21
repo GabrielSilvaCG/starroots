@@ -3,32 +3,43 @@ import logoImg from "@/assets/logo.png";
 
 export function SolutionSection() {
   return (
-    <section id="solucao" className="scroll-anchor relative px-6 py-24 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <FadeInSection>
-          <p className="text-xs tracking-[0.3em] uppercase text-accent mb-3">A Solução</p>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
-            A mesma essência.<br />
-            <span className="text-gradient italic">Novas raízes.</span>
+    <section id="solucao" className="scroll-anchor relative px-6 md:px-10 py-32" style={{ backgroundColor: "#1a3d2b" }}>
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+        <FadeInSection className="md:col-span-7">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 02 — Resposta</p>
+          <h2
+            className="font-display font-black leading-[0.88] tracking-[-0.03em] mb-10"
+            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+          >
+            Mesma sereia.<br />
+            <em className="italic font-semibold text-accent">Novas raízes.</em>
           </h2>
-          <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-            <strong className="font-semibold">Starroots</strong> mantém a alma do café que você conhece —
-            mas planta novas bases. <em className="text-accent">Roots</em> são raízes, origem, natureza:
-            o ponto onde a marca se reconecta com a terra.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Uma identidade que cresce a partir do que sustenta o produto: o solo, as plantações,
-            as comunidades. Cada elemento — da sereia coroada de folhas às embalagens kraft — fala
-            essa mesma língua.
-          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/85 leading-relaxed font-body">
+              <strong className="font-semibold text-foreground">Starroots</strong> mantém a alma do café que você conhece —
+              mas planta novas bases. <em className="text-accent not-italic">Roots</em> são raízes,
+              origem, natureza: o ponto onde a marca se reconecta com a terra.
+            </p>
+            <p className="text-sm md:text-base text-foreground/65 leading-relaxed font-body">
+              Uma identidade que cresce a partir do que sustenta o produto: o solo, as plantações,
+              as comunidades. Cada elemento — da sereia coroada de folhas às embalagens kraft —
+              fala essa mesma língua.
+            </p>
+          </div>
         </FadeInSection>
 
-        <FadeInSection delay={0.2}>
+        <FadeInSection delay={0.2} className="md:col-span-5">
           <div className="relative aspect-square max-w-md mx-auto">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 blur-3xl" />
-            <div className="relative h-full flex items-center justify-center">
-              <img src={logoImg} alt="Logo Starroots" loading="lazy" decoding="async" width={400} height={400} className="w-3/4 drop-shadow-2xl" />
-            </div>
+            <div className="absolute inset-0 bg-primary/15 blur-3xl" />
+            <img
+              src={logoImg}
+              alt="Logo Starroots"
+              loading="lazy"
+              decoding="async"
+              width={500}
+              height={500}
+              className="relative w-full h-full object-contain"
+            />
           </div>
         </FadeInSection>
       </div>
