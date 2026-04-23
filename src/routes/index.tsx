@@ -6,6 +6,7 @@ import { SolutionSection } from "@/components/SolutionSection";
 import { ActionsSection } from "@/components/ActionsSection";
 import { ComboSection } from "@/components/ComboSection";
 import { ImpactCalculator } from "@/components/ImpactCalculator";
+import { RouteMapSection } from "@/components/RouteMapSection";
 import { FinancialSection } from "@/components/FinancialSection";
 import { ApplicationsGrid } from "@/components/ApplicationsGrid";
 import { ConclusionSection } from "@/components/ConclusionSection";
@@ -33,6 +34,7 @@ function Index() {
         <ActionsSection />
         <ComboSection />
         <ImpactCalculator />
+        <RouteMapSection />
         <FinancialSection />
         <ApplicationsGrid />
         <ConclusionSection />
