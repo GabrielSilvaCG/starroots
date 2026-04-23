@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NavBar } from "@/components/NavBar";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { HeroSection } from "@/components/HeroSection";
 import { ProblemSection } from "@/components/ProblemSection";
 import { SolutionSection } from "@/components/SolutionSection";
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
+      <ScrollProgress />
       <NavBar />
       <main id="top" className="min-h-screen">
         <HeroSection />

@@ -1,11 +1,17 @@
 import { FadeInSection } from "./FadeInSection";
+import { FloatingLeaves } from "./FloatingLeaves";
 import logoImg from "@/assets/logo.png";
 
 export function SolutionSection() {
   return (
-    <section id="solucao" className="scroll-anchor relative px-6 md:px-10 py-32" style={{ backgroundColor: "#1a3d2b" }}>
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
-        <FadeInSection className="md:col-span-7">
+    <section
+      id="solucao"
+      className="scroll-anchor relative overflow-hidden px-6 md:px-10 py-32"
+      style={{ backgroundColor: "#1a3d2b" }}
+    >
+      <FloatingLeaves />
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center relative z-10">
+        <FadeInSection className="md:col-span-7" variant="left">
           <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 02 — Resposta</p>
           <h2
             className="font-display font-black leading-[0.88] tracking-[-0.03em] mb-10"
@@ -28,9 +34,13 @@ export function SolutionSection() {
           </div>
         </FadeInSection>
 
-        <FadeInSection delay={0.2} className="md:col-span-5">
-          <div className="relative aspect-square max-w-md mx-auto">
-            <div className="absolute inset-0 bg-primary/15 blur-3xl" />
+        <FadeInSection delay={0.2} variant="scale" className="md:col-span-5">
+          <div className="relative aspect-square max-w-md mx-auto group">
+            <div className="absolute inset-0 bg-primary/15 blur-3xl animate-drift" />
+            <div
+              className="absolute inset-8 bg-accent/10 blur-2xl animate-drift"
+              style={{ animationDelay: "-4s" }}
+            />
             <img
               src={logoImg}
               alt="Logo Starroots"
@@ -38,7 +48,7 @@ export function SolutionSection() {
               decoding="async"
               width={500}
               height={500}
-              className="relative w-full h-full object-contain"
+              className="relative w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.04]"
             />
           </div>
         </FadeInSection>

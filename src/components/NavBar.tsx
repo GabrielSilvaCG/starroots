@@ -36,7 +36,10 @@ export function NavBar() {
         <ul className="hidden md:flex items-center gap-10 text-[10px] tracking-[0.35em] uppercase text-foreground/70">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="hover:text-accent transition-colors duration-300">
+              <a
+                href={l.href}
+                className="link-grow inline-block hover:text-accent transition-colors duration-300"
+              >
                 {l.label}
               </a>
             </li>

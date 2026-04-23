@@ -1,5 +1,7 @@
 import { FadeInSection } from "./FadeInSection";
 import { Link } from "@tanstack/react-router";
+import { MagneticLink } from "./MagneticLink";
+import { FloatingLeaves } from "./FloatingLeaves";
 import comboMockup from "@/assets/combo-mockup.png";
 
 const included = [
@@ -22,7 +24,10 @@ export function ComboSection() {
         className="relative px-6 md:px-10 py-32 md:py-40 overflow-hidden"
         style={{ backgroundColor: "#c8a97e", color: "#0a2e1a" }}
       >
-        <div className="max-w-[1400px] mx-auto">
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none" aria-hidden="true">
+          <FloatingLeaves />
+        </div>
+        <div className="max-w-[1400px] mx-auto relative z-10">
           <FadeInSection>
             <p className="text-[10px] tracking-[0.5em] uppercase mb-8 opacity-70">Capítulo 04 — Lançamento</p>
             <h2
@@ -59,10 +64,13 @@ export function ComboSection() {
             </p>
           </FadeInSection>
 
-          <FadeInSection delay={0.2} className="md:col-span-6">
-            <div className="relative aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-primary/15 blur-3xl" />
-              <div className="absolute inset-6 bg-accent/10 blur-2xl" />
+          <FadeInSection delay={0.2} variant="scale" className="md:col-span-6">
+            <div className="relative aspect-square max-w-md mx-auto group">
+              <div className="absolute inset-0 bg-primary/15 blur-3xl animate-drift" />
+              <div
+                className="absolute inset-6 bg-accent/10 blur-2xl animate-drift"
+                style={{ animationDelay: "-5s" }}
+              />
               <img
                 src={comboMockup}
                 alt="Combo Starroots: sacola kraft com logo e cookie personalizado"
@@ -70,7 +78,7 @@ export function ComboSection() {
                 height={1600}
                 loading="lazy"
                 decoding="async"
-                className="relative w-full h-full object-contain"
+                className="relative w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.04] group-hover:-rotate-1"
               />
             </div>
           </FadeInSection>
@@ -119,13 +127,15 @@ export function ComboSection() {
             <p className="text-2xl md:text-3xl font-display italic mb-10 leading-snug">
               Um combo que cuida de você e do planeta.
             </p>
-            <Link
-              to="/comprar"
-              className="group inline-flex items-center gap-5 border-2 border-[#0a2e1a] px-10 py-6 text-sm tracking-[0.3em] uppercase font-semibold bg-[#0a2e1a] text-[#c8a97e] hover:bg-transparent hover:text-[#0a2e1a] transition-colors duration-300"
-            >
-              Quero meu combo
-              <span className="w-8 h-px bg-current transition-all group-hover:w-14" />
-            </Link>
+            <MagneticLink>
+              <Link
+                to="/comprar"
+                className="sheen-on-hover group inline-flex items-center gap-5 border-2 border-[#0a2e1a] px-10 py-6 text-sm tracking-[0.3em] uppercase font-semibold bg-[#0a2e1a] text-[#c8a97e] hover:bg-transparent hover:text-[#0a2e1a] transition-colors duration-500"
+              >
+                Quero meu combo
+                <span className="w-8 h-px bg-current transition-all duration-500 group-hover:w-16" />
+              </Link>
+            </MagneticLink>
             <p className="text-[10px] tracking-[0.3em] uppercase mt-6 opacity-60">
               Disponível nas unidades participantes
             </p>
