@@ -187,4 +187,144 @@
     to { opacity: 1; transform: translateY(0); }
   }
   .animate-letter { display: inline-block; animation: letter-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+  /* Floating leaves drifting from top to bottom of a section */
+  @keyframes leaf-fall {
+    0% {
+      transform: translate3d(0, -10vh, 0) rotate(0deg);
+      opacity: 0;
+    }
+    8% { opacity: var(--leaf-opacity, 1); }
+    50% {
+      transform: translate3d(var(--drift, 40px), 50vh, 0) rotate(180deg);
+    }
+    92% { opacity: var(--leaf-opacity, 1); }
+    100% {
+      transform: translate3d(calc(var(--drift, 40px) * -0.5), 110vh, 0) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  .leaf-float {
+    animation: leaf-fall linear infinite;
+    will-change: transform, opacity;
+  }
+
+  /* Gentle pulsing glow used on accent highlights */
+  @keyframes soft-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+  .animate-soft-pulse { animation: soft-pulse 3.6s ease-in-out infinite; }
+
+  /* Slow drift used on background blurs / glows */
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(2%, -3%) scale(1.05); }
+  }
+  .animate-drift { animation: drift 14s ease-in-out infinite; }
+
+  /* Marquee for the seamless brand banner */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 38s linear infinite;
+    will-change: transform;
+  }
+
+  /* Underline that grows on hover */
+  .link-grow {
+    position: relative;
+  }
+  .link-grow::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform-origin: right center;
+    transform: scaleX(0);
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .link-grow:hover::after {
+    transform-origin: left center;
+    transform: scaleX(1);
+  }
+
+  /* Cards with subtle lift + accent border reveal */
+  .card-lift {
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+                background-color 0.4s ease,
+                box-shadow 0.5s ease;
+    will-change: transform;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 1px 0 0 color-mix(in oklab, var(--accent) 40%, transparent),
+      0 30px 60px -30px color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+
+  /* Image reveal on hover (used by lookbook figures) */
+  .img-reveal img {
+    transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1),
+                filter 0.6s ease;
+  }
+  .img-reveal:hover img {
+    transform: scale(1.06);
+    filter: saturate(1.08) contrast(1.03);
+  }
+
+  /* Vertical tick used inside the actions timeline */
+  @keyframes tick-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 8px color-mix(in oklab, var(--accent) 0%, transparent);
+    }
+  }
+  .animate-tick { animation: tick-pulse 2.6s ease-out infinite; }
+
+  /* Slow horizontal sheen across a surface */
+  @keyframes sheen {
+    0% { transform: translateX(-120%) skewX(-12deg); }
+    100% { transform: translateX(220%) skewX(-12deg); }
+  }
+  .sheen-on-hover {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .sheen-on-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg,
+      transparent 30%,
+      color-mix(in oklab, var(--accent) 18%, transparent) 50%,
+      transparent 70%);
+    transform: translateX(-120%) skewX(-12deg);
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .sheen-on-hover:hover::before { transform: translateX(120%) skewX(-12deg); }
+  .sheen-on-hover > * { position: relative; z-index: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .leaf-float,
+    .animate-soft-pulse,
+    .animate-drift,
+    .animate-marquee,
+    .animate-tick,
+    .animate-letter,
+    .animate-rise {
+      animation: none !important;
+    }
+    .card-lift:hover { transform: none; }
+    .img-reveal:hover img { transform: none; }
+  }
 }
