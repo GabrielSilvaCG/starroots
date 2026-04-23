@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { FadeInSection } from "./FadeInSection";
+import { FloatingLeaves } from "./FloatingLeaves";
 import { Slider } from "@/components/ui/slider";
 
 // Approximate impact factors per disposable cup avoided:
@@ -35,10 +36,11 @@ export function ImpactCalculator() {
   return (
     <section
       id="impacto"
-      className="scroll-anchor px-6 md:px-10 py-32"
+      className="scroll-anchor relative overflow-hidden px-6 md:px-10 py-32"
       style={{ backgroundColor: "#1a3d2b" }}
     >
-      <div className="max-w-[1400px] mx-auto">
+      <FloatingLeaves />
+      <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 items-end">
           <FadeInSection className="md:col-span-7">
             <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 05 — Calcule</p>
