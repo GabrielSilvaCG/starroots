@@ -33,9 +33,9 @@ const problems = [
 
 export function ProblemSection() {
   return (
-    <section id="problema" className="scroll-anchor px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
+    <section id="problema" className="scroll-anchor relative px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 mb-20">
-        <FadeInSection className="md:col-span-5">
+        <FadeInSection className="md:col-span-5" variant="left">
           <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 01 — Diagnóstico</p>
           <h2
             className="font-display font-black leading-[0.9] tracking-[-0.03em]"
@@ -44,7 +44,7 @@ export function ProblemSection() {
             O que o<br />Starbucks<br /><em className="italic font-semibold text-accent">causa.</em>
           </h2>
         </FadeInSection>
-        <FadeInSection delay={0.15} className="md:col-span-6 md:col-start-7 self-end">
+        <FadeInSection delay={0.15} variant="right" className="md:col-span-6 md:col-start-7 self-end">
           <div className="editorial-rule mb-6 text-foreground/40" />
           <p className="text-base md:text-lg text-foreground/75 leading-relaxed font-body">
             Por trás de cada copo, há um custo ambiental que precisa ser repensado. O diagnóstico não é
@@ -55,9 +55,9 @@ export function ProblemSection() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/40">
         {problems.map((p, i) => (
-          <FadeInSection key={p.title} delay={i * 0.08} className="bg-background">
+          <FadeInSection key={p.title} delay={i * 0.08} variant="blur" className="bg-background">
             <article
-              className="h-full p-8 md:p-10 transition-colors duration-300 hover:bg-card/40"
+              className="card-lift sheen-on-hover h-full p-8 md:p-10 transition-colors duration-300 hover:bg-card/40 cursor-default"
               style={{ borderTop: `2px solid ${p.accent}` }}
             >
               <p

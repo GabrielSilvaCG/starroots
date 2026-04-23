@@ -49,14 +49,17 @@ export function ActionsSection() {
 
       {/* Timeline */}
       <div className="relative">
-        <div className="hidden md:block absolute top-12 left-0 right-0 h-px bg-primary/30" />
+        <div className="hidden md:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-px md:gap-0">
           {actions.map((a, i) => (
-            <FadeInSection key={a.n} delay={i * 0.1}>
-              <div className="relative h-full p-8 md:p-10 md:border-r md:border-primary/20 md:last:border-r-0 group transition-colors hover:bg-card/40">
-                <div className="hidden md:flex absolute top-12 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary border-2 border-background z-10 rotate-45" />
+            <FadeInSection key={a.n} delay={i * 0.1} variant="up">
+              <div className="card-lift relative h-full p-8 md:p-10 md:border-r md:border-primary/20 md:last:border-r-0 group transition-colors hover:bg-card/40">
+                <div
+                  className="hidden md:flex absolute top-12 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-accent border-2 border-background z-10 rotate-45 animate-tick"
+                  style={{ animationDelay: `${i * 0.4}s` }}
+                />
                 <p
-                  className="font-display font-black text-primary/30 leading-none mb-6 group-hover:text-accent/50 transition-colors"
+                  className="font-display font-black text-primary/30 leading-none mb-6 group-hover:text-accent/60 transition-colors duration-500"
                   style={{ fontSize: "clamp(4rem, 7vw, 6rem)" }}
                 >
                   {a.n}
