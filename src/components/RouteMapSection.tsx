@@ -33,10 +33,10 @@ export function RouteMapSection() {
               key={o.num}
               className="flex flex-col lg:flex-row items-stretch lg:items-center gap-4 lg:gap-2 flex-1"
             >
-              <FadeInSection delay={i * 0.15} className="flex-1">
-                <div className="relative border border-[#a8d5b5]/20 p-8 md:p-10 bg-[#0a2e1a] h-full flex flex-col justify-between min-h-[320px]">
+              <FadeInSection delay={i * 0.15} variant="up" className="flex-1">
+                <div className="card-lift sheen-on-hover relative border border-[#a8d5b5]/20 p-8 md:p-10 bg-[#0a2e1a] h-full flex flex-col justify-between min-h-[320px]">
                   <div
-                    className="font-display text-7xl md:text-8xl leading-none mb-4"
+                    className="font-display text-7xl md:text-8xl leading-none mb-4 transition-all duration-500"
                     style={{ color: "rgba(168, 213, 181, 0.18)" }}
                   >
                     {o.num}
@@ -57,10 +57,12 @@ export function RouteMapSection() {
               </FadeInSection>
 
               <div
-                className="text-[#a8d5b5] text-3xl font-light px-2 self-center rotate-90 lg:rotate-0"
+                className="text-[#a8d5b5] text-3xl font-light px-2 self-center rotate-90 lg:rotate-0 flex items-center gap-2"
                 aria-hidden="true"
               >
+                <span className="hidden lg:inline-block w-2 h-2 rounded-full bg-accent animate-soft-pulse" />
                 →
+                <span className="hidden lg:inline-block w-2 h-2 rounded-full bg-accent animate-soft-pulse" style={{ animationDelay: "1.2s" }} />
               </div>
             </div>
           ))}

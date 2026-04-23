@@ -36,8 +36,8 @@ export function ApplicationsGrid() {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* main image */}
-        <FadeInSection className="md:col-span-8 md:row-span-2">
-          <figure className="group">
+        <FadeInSection variant="scale" className="md:col-span-8 md:row-span-2">
+          <figure className="img-reveal group">
             <div className="overflow-hidden">
               <img
                 src={main.src}
@@ -46,10 +46,10 @@ export function ApplicationsGrid() {
                 decoding="async"
                 width={1600}
                 height={1200}
-                className="w-full h-[400px] md:h-[720px] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                className="w-full h-[400px] md:h-[720px] object-cover"
               />
             </div>
-            <figcaption className="mt-4 text-[10px] tracking-[0.4em] uppercase text-foreground/60">
+            <figcaption className="mt-4 text-[10px] tracking-[0.4em] uppercase text-foreground/60 transition-colors duration-500 group-hover:text-accent">
               {main.caption}
             </figcaption>
           </figure>
@@ -57,8 +57,8 @@ export function ApplicationsGrid() {
 
         {/* side images */}
         {side.map((item, i) => (
-          <FadeInSection key={item.label} delay={(i + 1) * 0.08} className="md:col-span-4">
-            <figure className="group">
+          <FadeInSection key={item.label} delay={(i + 1) * 0.08} variant="up" className="md:col-span-4">
+            <figure className="img-reveal group">
               <div className="overflow-hidden">
                 <img
                   src={item.src}
@@ -67,10 +67,10 @@ export function ApplicationsGrid() {
                   decoding="async"
                   width={800}
                   height={600}
-                  className="w-full h-56 md:h-[345px] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="w-full h-56 md:h-[345px] object-cover"
                 />
               </div>
-              <figcaption className="mt-3 text-[10px] tracking-[0.35em] uppercase text-foreground/60">
+              <figcaption className="mt-3 text-[10px] tracking-[0.35em] uppercase text-foreground/60 transition-colors duration-500 group-hover:text-accent">
                 {item.caption}
               </figcaption>
             </figure>

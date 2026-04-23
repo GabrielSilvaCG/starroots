@@ -53,8 +53,8 @@ export function FinancialSection() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/40">
         {cards.map((c, i) => (
-          <FadeInSection key={c.title} delay={i * 0.08} className="bg-background">
-            <article className="h-full p-8 md:p-10 flex flex-col" style={{ borderTop: `3px solid ${c.barColor}` }}>
+          <FadeInSection key={c.title} delay={i * 0.08} variant="blur" className="bg-background">
+            <article className="card-lift sheen-on-hover h-full p-8 md:p-10 flex flex-col" style={{ borderTop: `3px solid ${c.barColor}` }}>
               <span
                 className="self-start text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1 mb-8"
                 style={{ backgroundColor: c.barColor, color: "#0a2e1a" }}
