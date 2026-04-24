@@ -41,7 +41,7 @@ export function ActionsSection() {
           </h2>
         </FadeInSection>
         <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
-          <p className="text-base text-foreground/70 leading-relaxed font-body">
+          <p className="text-lg md:text-xl text-foreground/75 leading-relaxed font-body">
             Quatro frentes integradas — ambiental, econômica e social — operando como um sistema vivo.
           </p>
         </FadeInSection>
@@ -64,9 +64,9 @@ export function ActionsSection() {
                 >
                   {a.n}
                 </p>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-accent mb-3">{a.tag}</p>
-                <h3 className="font-display text-3xl md:text-[2.2rem] font-semibold mb-4 leading-tight">{a.title}</h3>
-                <p className="text-base text-foreground/70 leading-relaxed font-body">{a.text}</p>
+                <p className="text-xs tracking-[0.32em] uppercase text-accent mb-4">{a.tag}</p>
+                <h3 className="font-display text-[2.15rem] md:text-[2.65rem] font-semibold mb-5 leading-[0.95]">{a.title}</h3>
+                <p className="text-lg md:text-xl text-foreground/75 leading-relaxed font-body">{a.text}</p>
               </div>
             </FadeInSection>
           ))}
