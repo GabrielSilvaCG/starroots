@@ -38,15 +38,17 @@ function OrganicRoots() {
   const { ref, visible } = useRevealOnce();
 
   return (
-    <div ref={ref} className={`roots-grow pointer-events-none absolute -left-2 bottom-0 top-0 w-20 md:w-32 ${visible ? "is-visible" : ""}`}>
-      <svg viewBox="0 0 132 520" className="h-full w-full" fill="none" aria-hidden="true">
-        <path d="M68 516C70 410 61 329 66 244C71 153 84 84 64 6" strokeWidth="4" strokeLinecap="round" />
-        <path d="M66 318C39 294 22 262 12 221" strokeWidth="2.4" strokeLinecap="round" />
-        <path d="M68 258C95 226 113 191 121 146" strokeWidth="2.4" strokeLinecap="round" />
-        <path d="M68 405C96 379 115 344 124 304" strokeWidth="2.4" strokeLinecap="round" />
-        <path d="M68 454C40 431 23 399 16 358" strokeWidth="2.4" strokeLinecap="round" />
-        <path d="M66 188C40 162 28 134 24 102" strokeWidth="1.8" strokeLinecap="round" />
-        <path d="M68 352C49 342 36 325 30 304" strokeWidth="1.8" strokeLinecap="round" />
+    <div ref={ref} className={`roots-grow pointer-events-none absolute -left-8 -bottom-16 -top-20 w-32 md:-left-16 md:w-56 ${visible ? "is-visible" : ""}`}>
+      <svg viewBox="0 0 220 720" className="h-full w-full" fill="none" aria-hidden="true">
+        <path d="M118 706C126 573 104 482 112 356C119 236 153 126 104 12" strokeWidth="5.2" strokeLinecap="round" />
+        <path d="M113 502C72 470 42 422 24 354" strokeWidth="3.2" strokeLinecap="round" />
+        <path d="M116 392C158 354 190 303 205 232" strokeWidth="3.2" strokeLinecap="round" />
+        <path d="M120 591C163 553 194 500 209 435" strokeWidth="3" strokeLinecap="round" />
+        <path d="M117 638C72 606 41 558 18 491" strokeWidth="3" strokeLinecap="round" />
+        <path d="M110 286C66 248 42 205 34 154" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M118 452C84 438 57 412 42 376" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M116 246C151 210 174 166 181 105" strokeWidth="2" strokeLinecap="round" />
+        <path d="M119 565C91 548 70 522 58 486" strokeWidth="2" strokeLinecap="round" />
       </svg>
     </div>
   );
@@ -104,7 +106,7 @@ export function SolutionSection() {
               fala essa mesma língua.
             </p>
           </div>
-          <div className="relative mt-14 pl-16 md:pl-32">
+          <div className="root-sanctuary relative mt-14 pl-20 md:pl-44">
             <OrganicRoots />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
               {topics.map((topic) => (

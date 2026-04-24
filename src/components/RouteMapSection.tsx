@@ -14,6 +14,10 @@ function ElectricBolts({ delay = 0 }: { delay?: number }) {
         <path className="bolt bolt-a" d="M42 34 27 76h24l-16 54 53-70H61l21-26H42Z" />
         <path className="bolt bolt-b" d="m143 28-18 45h22l-33 63 6-47H98l45-61Z" />
         <path className="bolt bolt-c" d="m114 124-10 26h14l-21 30 4-24H87l27-32Z" />
+        <path className="energy-line energy-a" d="M16 132C54 104 84 99 119 72c18-14 32-29 45-48" />
+        <path className="energy-line energy-b" d="M22 44c35 20 67 29 109 23" />
+        <circle className="energy-dot dot-a" cx="0" cy="0" r="3" />
+        <circle className="energy-dot dot-b" cx="0" cy="0" r="2.3" />
       </svg>
     </div>
   );
@@ -40,7 +44,7 @@ export function RouteMapSection() {
           </div>
         </FadeInSection>
 
-        <div className="flex flex-col lg:flex-row items-stretch justify-between gap-4 lg:gap-2">
+        <div className="electric-route flex flex-col lg:flex-row items-stretch justify-between gap-4 lg:gap-2">
           {origins.map((o, i) => (
             <div
               key={o.num}
@@ -56,14 +60,14 @@ export function RouteMapSection() {
                     {o.num}
                   </div>
                   <div>
-                    <h3 className="font-display text-4xl md:text-[2.65rem] text-foreground mb-4 tracking-wide">
+                    <h3 className="font-display text-4xl md:text-[2.9rem] text-foreground mb-4 tracking-wide">
                       {o.country}
                     </h3>
-                    <p className="text-3xl md:text-[2.2rem] font-display text-primary mb-6">
+                    <p className="text-3xl md:text-[2.45rem] font-display text-primary mb-6">
                       {o.distance}
                     </p>
                     <div className="w-full h-px bg-primary/20 mb-4" />
-                    <p className="text-sm tracking-wider uppercase text-foreground/65 leading-relaxed">
+                    <p className="text-sm md:text-[0.98rem] tracking-wider uppercase text-foreground/70 leading-relaxed">
                       {o.co2}
                     </p>
                   </div>
