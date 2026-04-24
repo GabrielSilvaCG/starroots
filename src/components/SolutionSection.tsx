@@ -11,6 +11,29 @@ const topics = [
   { title: "Inovação", text: "Tecnologia elétrica para reduzir o caminho até você.", color: "var(--primary)", delay: 1.2, icon: "bolt" },
 ];
 
+function useRevealOnce(delay = 0) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setVisible(true), delay * 1000);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return { ref, visible };
+}
+
 export function SolutionSection() {
   return (
     <section
