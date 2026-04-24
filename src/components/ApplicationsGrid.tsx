@@ -1,16 +1,12 @@
 import embalagemImg from "@/assets/embalagem.png";
 import lojaImg from "@/assets/logoemloja.png";
 import copoImg from "@/assets/copopequeno.png";
-import sacolaImg from "@/assets/sacolaecologica.png";
-import copobrImg from "@/assets/copobranco.png";
 import { FadeInSection } from "./FadeInSection";
 
 const main = { src: lojaImg, alt: "Logo aplicado na fachada da loja", label: "Fachada", caption: "01 — Identidade no ponto de venda" };
 const side = [
   { src: copoImg, alt: "Copo pequeno com identidade Starroots", label: "Copo", caption: "02 — Embalagem primária" },
   { src: embalagemImg, alt: "Embalagem kraft com logo", label: "Embalagem", caption: "03 — Material kraft" },
-  { src: sacolaImg, alt: "Sacola ecológica kraft", label: "Sacola", caption: "04 — Take-away sustentável" },
-  { src: copobrImg, alt: "Copo branco ao ar livre", label: "Lifestyle", caption: "05 — Uso no cotidiano" },
 ];
 
 export function ApplicationsGrid() {
@@ -36,7 +32,7 @@ export function ApplicationsGrid() {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* main image */}
-        <FadeInSection variant="scale" className="md:col-span-8 md:row-span-2">
+        <FadeInSection variant="scale" className="md:col-span-8">
           <figure className="img-reveal group">
             <div className="overflow-hidden">
               <img
@@ -46,7 +42,7 @@ export function ApplicationsGrid() {
                 decoding="async"
                 width={1600}
                 height={1200}
-                className="w-full h-[400px] md:h-[720px] object-cover"
+                className="w-full h-[400px] md:h-[620px] object-cover"
               />
             </div>
             <figcaption className="mt-4 text-[10px] tracking-[0.4em] uppercase text-foreground/60 transition-colors duration-500 group-hover:text-accent">
@@ -67,7 +63,7 @@ export function ApplicationsGrid() {
                   decoding="async"
                   width={800}
                   height={600}
-                  className="w-full h-56 md:h-[345px] object-cover"
+                  className="w-full h-56 md:h-[295px] object-cover"
                 />
               </div>
               <figcaption className="mt-3 text-[10px] tracking-[0.35em] uppercase text-foreground/60 transition-colors duration-500 group-hover:text-accent">
