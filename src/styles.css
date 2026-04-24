@@ -317,6 +317,19 @@
     border-top: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
     text-shadow: 0 1px 14px color-mix(in oklab, var(--background) 85%, transparent);
   }
+  .brand-signature {
+    position: absolute;
+    width: clamp(7rem, 16vw, 12rem);
+    height: clamp(7rem, 16vw, 12rem);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+    color: var(--primary);
+    filter: drop-shadow(0 0 24px color-mix(in oklab, var(--background) 70%, transparent));
+  }
+  .brand-signature svg { width: 100%; height: 100%; }
 
   /* Vertical tick used inside the actions timeline */
   @keyframes tick-pulse {
@@ -373,6 +386,8 @@
   @keyframes energy-travel-a { 0% { offset-distance: 0%; opacity: 0; } 12%, 82% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
   @keyframes energy-travel-b { 0% { offset-distance: 0%; opacity: 0; } 18%, 76% { opacity: 0.8; } 100% { offset-distance: 100%; opacity: 0; } }
   @keyframes living-border { 0%, 100% { clip-path: inset(0 78% 96% 0); opacity: 0.45; } 35% { clip-path: inset(0 0 96% 0); opacity: 1; } 70% { clip-path: inset(0 0 0 96%); opacity: 0.7; } }
+  @keyframes signature-draw { to { stroke-dashoffset: 0; } }
+  @keyframes signature-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.04); } }
 
   .roots-grow path { stroke: var(--root-line); opacity: 0.4; stroke-dasharray: 420; stroke-dashoffset: 420; }
   .roots-grow path:first-child { stroke-dasharray: 760; stroke-dashoffset: 760; }
@@ -393,6 +408,21 @@
   .roots-topic.is-visible .heart-icon { animation: sr-pulse 1.5s ease-in-out infinite; animation-delay: var(--topic-delay); }
   .roots-topic.is-visible .profit-icon { animation: sr-float 2s ease-in-out infinite; animation-delay: var(--topic-delay); }
   .roots-topic.is-visible .bolt-icon { animation: sr-flicker 1.2s ease-in-out infinite; animation-delay: var(--topic-delay); }
+  .signature-ring,
+  .signature-root,
+  .signature-leaf {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+    opacity: 0.88;
+    animation: signature-draw 3.8s ease-out forwards;
+  }
+  .signature-root { stroke: var(--accent); animation-delay: 0.35s; }
+  .signature-leaf { animation-delay: 0.7s; fill: color-mix(in oklab, var(--primary) 9%, transparent); }
+  .brand-signature { animation: signature-breathe 5s ease-in-out infinite 3.8s; }
 
   .coffee-particle { animation: bean-float var(--float-duration, 12s) linear infinite; animation-delay: var(--float-delay, 0s); }
   .border-pulse { animation: borderPulse 2.2s ease-in-out infinite; }

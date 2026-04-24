@@ -32,13 +32,13 @@ export function RouteMapSection() {
       <div className="max-w-[1400px] mx-auto">
         <FadeInSection>
           <div className="text-center mb-20">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#a8d5b5]/60 mb-6">
+            <p className="text-xs tracking-[0.42em] uppercase text-primary/60 mb-6">
               Rota Sustentável
             </p>
-            <h2 className="font-display text-5xl md:text-7xl text-foreground mb-6 leading-[0.95]">
+            <h2 className="font-display text-6xl md:text-8xl text-foreground mb-6 leading-[0.9]">
               De onde vem o seu café.
             </h2>
-            <p className="font-display italic text-xl md:text-2xl text-[#a8d5b5]/80 max-w-2xl mx-auto">
+            <p className="font-display italic text-2xl md:text-4xl text-primary/80 max-w-3xl mx-auto">
               E como a Starroots está mudando o caminho.
             </p>
           </div>
@@ -60,14 +60,14 @@ export function RouteMapSection() {
                     {o.num}
                   </div>
                   <div>
-                    <h3 className="font-display text-4xl md:text-[2.9rem] text-foreground mb-4 tracking-wide">
+                    <h3 className="font-display text-[2.8rem] md:text-[3.35rem] text-foreground mb-4 tracking-wide leading-none">
                       {o.country}
                     </h3>
-                    <p className="text-3xl md:text-[2.45rem] font-display text-primary mb-6">
+                    <p className="text-[2.35rem] md:text-[2.9rem] font-display text-primary mb-6 leading-none">
                       {o.distance}
                     </p>
                     <div className="w-full h-px bg-primary/20 mb-4" />
-                    <p className="text-sm md:text-[0.98rem] tracking-wider uppercase text-foreground/70 leading-relaxed">
+                    <p className="text-base md:text-lg tracking-wider uppercase text-foreground/75 leading-relaxed">
                       {o.co2}
                     </p>
                   </div>
@@ -100,10 +100,10 @@ export function RouteMapSection() {
               >
                 <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z" />
               </svg>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-primary">
+              <p className="text-xs tracking-[0.32em] uppercase text-primary">
                 Starroots
               </p>
-              <p className="font-display text-2xl text-foreground mt-1">SP</p>
+              <p className="font-display text-4xl text-foreground mt-1">SP</p>
             </div>
           </FadeInSection>
         </div>
