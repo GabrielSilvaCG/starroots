@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
 import logoImg from "@/assets/logo.png";
@@ -62,7 +62,7 @@ function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number])
   const { ref, visible } = useRevealOnce(delay);
 
   return (
-    <div ref={ref} style={{ "--topic-delay": `${delay}s` } as React.CSSProperties} className={`roots-topic flex gap-4 ${visible ? "is-visible" : ""}`}>
+    <div ref={ref} style={{ "--topic-delay": `${delay}s` } as CSSProperties} className={`roots-topic flex gap-4 ${visible ? "is-visible" : ""}`}>
       <div className="mt-1 shrink-0"><TopicIcon icon={icon} color={color} /></div>
       <div>
         <h3 className="font-display text-xl text-foreground">{title}</h3>
