@@ -38,13 +38,15 @@ function OrganicRoots() {
   const { ref, visible } = useRevealOnce();
 
   return (
-    <div ref={ref} className={`roots-grow pointer-events-none absolute left-0 bottom-0 top-0 w-12 md:w-16 ${visible ? "is-visible" : ""}`}>
-      <svg viewBox="0 0 72 280" className="h-full w-full" fill="none" aria-hidden="true">
-        <path d="M38 276C39 220 35 174 37 128C39 82 46 48 36 4" strokeWidth="3" strokeLinecap="round" />
-        <path d="M37 160C24 145 15 130 10 111" strokeWidth="2" strokeLinecap="round" />
-        <path d="M38 132C52 117 60 99 64 76" strokeWidth="2" strokeLinecap="round" />
-        <path d="M38 210C51 199 59 184 62 166" strokeWidth="2" strokeLinecap="round" />
-        <path d="M38 235C25 225 17 212 14 194" strokeWidth="2" strokeLinecap="round" />
+    <div ref={ref} className={`roots-grow pointer-events-none absolute -left-2 bottom-0 top-0 w-20 md:w-32 ${visible ? "is-visible" : ""}`}>
+      <svg viewBox="0 0 132 520" className="h-full w-full" fill="none" aria-hidden="true">
+        <path d="M68 516C70 410 61 329 66 244C71 153 84 84 64 6" strokeWidth="4" strokeLinecap="round" />
+        <path d="M66 318C39 294 22 262 12 221" strokeWidth="2.4" strokeLinecap="round" />
+        <path d="M68 258C95 226 113 191 121 146" strokeWidth="2.4" strokeLinecap="round" />
+        <path d="M68 405C96 379 115 344 124 304" strokeWidth="2.4" strokeLinecap="round" />
+        <path d="M68 454C40 431 23 399 16 358" strokeWidth="2.4" strokeLinecap="round" />
+        <path d="M66 188C40 162 28 134 24 102" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M68 352C49 342 36 325 30 304" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
     </div>
   );
@@ -102,7 +104,7 @@ export function SolutionSection() {
               fala essa mesma língua.
             </p>
           </div>
-          <div className="relative mt-14 pl-10 md:pl-20">
+          <div className="relative mt-14 pl-16 md:pl-32">
             <OrganicRoots />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
               {topics.map((topic) => (

@@ -30,11 +30,11 @@ export function ApplicationsGrid() {
         </FadeInSection>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div className="brand-cluster grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
         {/* main image */}
-        <FadeInSection variant="scale" className="md:col-span-8">
-          <figure className="img-reveal group">
-            <div className="overflow-hidden">
+        <FadeInSection variant="scale" className="md:col-span-6 md:row-span-2">
+          <figure className="img-reveal brand-cluster-item group h-full">
+            <div className="overflow-hidden h-full">
               <img
                 src={main.src}
                 alt={main.alt}
@@ -42,10 +42,10 @@ export function ApplicationsGrid() {
                 decoding="async"
                 width={1600}
                 height={1200}
-                className="w-full h-[400px] md:h-[620px] object-cover"
+                className="w-full h-[360px] md:h-full min-h-[520px] object-cover"
               />
             </div>
-            <figcaption className="mt-4 text-[10px] tracking-[0.4em] uppercase text-foreground/60 transition-colors duration-500 group-hover:text-accent">
+            <figcaption className="brand-caption text-[10px] tracking-[0.4em] uppercase text-foreground/75 transition-colors duration-500 group-hover:text-accent">
               {main.caption}
             </figcaption>
           </figure>
@@ -53,8 +53,8 @@ export function ApplicationsGrid() {
 
         {/* side images */}
         {side.map((item, i) => (
-          <FadeInSection key={item.label} delay={(i + 1) * 0.08} variant="up" className="md:col-span-4">
-            <figure className="img-reveal group">
+          <FadeInSection key={item.label} delay={(i + 1) * 0.08} variant="up" className="md:col-span-6">
+            <figure className="img-reveal brand-cluster-item group">
               <div className="overflow-hidden">
                 <img
                   src={item.src}
@@ -63,10 +63,10 @@ export function ApplicationsGrid() {
                   decoding="async"
                   width={800}
                   height={600}
-                  className="w-full h-56 md:h-[295px] object-cover"
+                  className="w-full h-[250px] md:h-[252px] object-cover"
                 />
               </div>
-              <figcaption className="mt-3 text-[10px] tracking-[0.35em] uppercase text-foreground/60 transition-colors duration-500 group-hover:text-accent">
+              <figcaption className="brand-caption text-[10px] tracking-[0.35em] uppercase text-foreground/75 transition-colors duration-500 group-hover:text-accent">
                 {item.caption}
               </figcaption>
             </figure>
