@@ -30,9 +30,9 @@ export function ApplicationsGrid() {
         </FadeInSection>
       </div>
 
-      <div className="brand-cluster grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+      <div className="brand-cluster grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         {/* main image */}
-        <FadeInSection variant="scale" className="md:col-span-6 md:row-span-2">
+        <FadeInSection variant="scale" className="h-full">
           <figure className="img-reveal brand-cluster-item group h-full">
             <div className="overflow-hidden h-full">
               <img
@@ -42,7 +42,7 @@ export function ApplicationsGrid() {
                 decoding="async"
                 width={1600}
                 height={1200}
-                className="w-full h-[360px] md:h-full min-h-[520px] object-cover"
+                className="w-full h-[340px] md:h-full md:min-h-[560px] object-cover"
               />
             </div>
             <figcaption className="brand-caption text-[10px] tracking-[0.4em] uppercase text-foreground/75 transition-colors duration-500 group-hover:text-accent">
@@ -52,26 +52,28 @@ export function ApplicationsGrid() {
         </FadeInSection>
 
         {/* side images */}
-        {side.map((item, i) => (
-          <FadeInSection key={item.label} delay={(i + 1) * 0.08} variant="up" className="md:col-span-6">
-            <figure className="img-reveal brand-cluster-item group">
-              <div className="overflow-hidden">
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading="lazy"
-                  decoding="async"
-                  width={800}
-                  height={600}
-                  className="w-full h-[250px] md:h-[252px] object-cover"
-                />
-              </div>
-              <figcaption className="brand-caption text-[10px] tracking-[0.35em] uppercase text-foreground/75 transition-colors duration-500 group-hover:text-accent">
-                {item.caption}
-              </figcaption>
-            </figure>
-          </FadeInSection>
-        ))}
+        <div className="grid grid-cols-1 gap-4 md:gap-5">
+          {side.map((item, i) => (
+            <FadeInSection key={item.label} delay={(i + 1) * 0.08} variant="up">
+              <figure className="img-reveal brand-cluster-item group">
+                <div className="overflow-hidden">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={600}
+                    className="w-full h-[270px] object-cover"
+                  />
+                </div>
+                <figcaption className="brand-caption text-[10px] tracking-[0.35em] uppercase text-foreground/75 transition-colors duration-500 group-hover:text-accent">
+                  {item.caption}
+                </figcaption>
+              </figure>
+            </FadeInSection>
+          ))}
+        </div>
       </div>
     </section>
   );
