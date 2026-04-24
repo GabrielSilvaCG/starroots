@@ -1,4 +1,5 @@
 import { FadeInSection } from "./FadeInSection";
+import type { CSSProperties } from "react";
 
 const origins = [
   { num: "01", country: "BRASIL", distance: "1.400 km", co2: "2,1 ton de CO₂ evitadas com frota elétrica" },
@@ -8,7 +9,7 @@ const origins = [
 
 function ElectricBolts({ delay = 0 }: { delay?: number }) {
   return (
-    <div className="electric-bolts" aria-hidden="true" style={{ "--bolt-delay": `${delay}s` } as React.CSSProperties}>
+    <div className="electric-bolts" aria-hidden="true" style={{ "--bolt-delay": `${delay}s` } as CSSProperties}>
       <svg viewBox="0 0 180 180" fill="none">
         <path className="bolt bolt-a" d="M42 34 27 76h24l-16 54 53-70H61l21-26H42Z" />
         <path className="bolt bolt-b" d="m143 28-18 45h22l-33 63 6-47H98l45-61Z" />
