@@ -6,6 +6,18 @@ const origins = [
   { num: "03", country: "ETIÓPIA", distance: "8.200 km", co2: "12,3 ton de CO₂ evitadas com frota elétrica" },
 ];
 
+function ElectricBolts({ delay = 0 }: { delay?: number }) {
+  return (
+    <div className="electric-bolts" aria-hidden="true" style={{ "--bolt-delay": `${delay}s` } as React.CSSProperties}>
+      <svg viewBox="0 0 180 180" fill="none">
+        <path className="bolt bolt-a" d="M42 34 27 76h24l-16 54 53-70H61l21-26H42Z" />
+        <path className="bolt bolt-b" d="m143 28-18 45h22l-33 63 6-47H98l45-61Z" />
+        <path className="bolt bolt-c" d="m114 124-10 26h14l-21 30 4-24H87l27-32Z" />
+      </svg>
+    </div>
+  );
+}
+
 export function RouteMapSection() {
   return (
     <section
@@ -34,7 +46,8 @@ export function RouteMapSection() {
               className="flex flex-col lg:flex-row items-stretch lg:items-center gap-4 lg:gap-2 flex-1"
             >
               <FadeInSection delay={i * 0.15} variant="up" className="flex-1">
-                <div className="card-lift sheen-on-hover relative border border-[#a8d5b5]/20 p-8 md:p-10 bg-[#0a2e1a] h-full flex flex-col justify-between min-h-[320px]">
+                <div className="card-lift sheen-on-hover route-card relative border border-primary/20 p-8 md:p-10 bg-background h-full flex flex-col justify-between min-h-[320px]">
+                  <ElectricBolts delay={i * 0.45} />
                   <div
                     className="font-display text-7xl md:text-8xl leading-none mb-4 transition-all duration-500"
                     style={{ color: "rgba(168, 213, 181, 0.18)" }}
@@ -42,14 +55,14 @@ export function RouteMapSection() {
                     {o.num}
                   </div>
                   <div>
-                    <h3 className="font-display text-3xl md:text-4xl text-foreground mb-4 tracking-wide">
+                    <h3 className="font-display text-4xl md:text-[2.65rem] text-foreground mb-4 tracking-wide">
                       {o.country}
                     </h3>
-                    <p className="text-2xl md:text-3xl font-display text-[#a8d5b5] mb-6">
+                    <p className="text-3xl md:text-[2.2rem] font-display text-primary mb-6">
                       {o.distance}
                     </p>
-                    <div className="w-full h-px bg-[#a8d5b5]/20 mb-4" />
-                    <p className="text-xs tracking-wider uppercase text-foreground/60 leading-relaxed">
+                    <div className="w-full h-px bg-primary/20 mb-4" />
+                    <p className="text-sm tracking-wider uppercase text-foreground/65 leading-relaxed">
                       {o.co2}
                     </p>
                   </div>
@@ -57,7 +70,7 @@ export function RouteMapSection() {
               </FadeInSection>
 
               <div
-                className="text-[#a8d5b5] text-3xl font-light px-2 self-center rotate-90 lg:rotate-0 flex items-center gap-2"
+                className="text-primary text-3xl font-light px-2 self-center rotate-90 lg:rotate-0 flex items-center gap-2"
                 aria-hidden="true"
               >
                 <span className="hidden lg:inline-block w-2 h-2 rounded-full bg-accent animate-soft-pulse" />
@@ -68,20 +81,21 @@ export function RouteMapSection() {
           ))}
 
           <FadeInSection delay={0.6} className="flex-shrink-0 self-stretch lg:self-auto">
-            <div className="border border-[#a8d5b5]/40 bg-[#a8d5b5]/5 px-6 py-8 flex flex-col items-center justify-center text-center min-w-[160px] h-full min-h-[320px]">
+            <div className="route-card border border-primary/40 bg-primary/5 px-6 py-8 flex flex-col items-center justify-center text-center min-w-[160px] h-full min-h-[320px]">
+              <ElectricBolts delay={1.3} />
               <svg
                 width="28"
                 height="28"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#a8d5b5"
+                stroke="currentColor"
                 strokeWidth="1.5"
-                className="mb-3"
+                className="mb-3 text-primary"
                 aria-hidden="true"
               >
                 <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z" />
               </svg>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-[#a8d5b5]">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-primary">
                 Starroots
               </p>
               <p className="font-display text-2xl text-foreground mt-1">SP</p>
