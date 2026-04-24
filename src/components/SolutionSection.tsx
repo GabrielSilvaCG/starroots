@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
 import logoImg from "@/assets/logo.png";
@@ -32,6 +32,44 @@ function useRevealOnce(delay = 0) {
   }, [delay]);
 
   return { ref, visible };
+}
+
+function OrganicRoots() {
+  const { ref, visible } = useRevealOnce();
+
+  return (
+    <div ref={ref} className={`roots-grow pointer-events-none absolute left-0 bottom-0 top-0 w-12 md:w-16 ${visible ? "is-visible" : ""}`}>
+      <svg viewBox="0 0 72 280" className="h-full w-full" fill="none" aria-hidden="true">
+        <path d="M38 276C39 220 35 174 37 128C39 82 46 48 36 4" strokeWidth="3" strokeLinecap="round" />
+        <path d="M37 160C24 145 15 130 10 111" strokeWidth="2" strokeLinecap="round" />
+        <path d="M38 132C52 117 60 99 64 76" strokeWidth="2" strokeLinecap="round" />
+        <path d="M38 210C51 199 59 184 62 166" strokeWidth="2" strokeLinecap="round" />
+        <path d="M38 235C25 225 17 212 14 194" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+}
+
+function TopicIcon({ icon, color }: { icon: string; color: string }) {
+  if (icon === "coffee") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><ellipse className="coffee-bean" cx="14" cy="14" rx="7" ry="10" stroke={color} strokeWidth="2" /><path className="coffee-bean" d="M14 5c-3 4 3 7 0 18" stroke={color} strokeWidth="1.6" strokeLinecap="round" /></svg>;
+  if (icon === "leaf") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="leaf-icon" d="M22 5C12 5 6 10 6 18c8 1 15-4 16-13Z" stroke={color} strokeWidth="2" /><path className="leaf-icon" d="M7 20c4-5 8-8 14-14" stroke={color} strokeWidth="1.6" strokeLinecap="round" /></svg>;
+  if (icon === "heart") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="heart-icon" d="M14 23S5 18 5 10.5C5 7 7.5 5 10.5 5c1.8 0 3 1 3.5 2 .5-1 1.7-2 3.5-2C20.5 5 23 7 23 10.5 23 18 14 23 14 23Z" stroke={color} strokeWidth="2" strokeLinejoin="round" /></svg>;
+  if (icon === "profit") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="profit-icon" d="M7 20 20 7m0 0v10m0-10H10" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+  return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="bolt-icon" d="m16 3-9 13h7l-2 9 9-13h-7l2-9Z" stroke={color} strokeWidth="2" strokeLinejoin="round" /></svg>;
+}
+
+function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number]) {
+  const { ref, visible } = useRevealOnce(delay);
+
+  return (
+    <div ref={ref} style={{ "--topic-delay": `${delay}s` } as React.CSSProperties} className={`roots-topic flex gap-4 ${visible ? "is-visible" : ""}`}>
+      <div className="mt-1 shrink-0"><TopicIcon icon={icon} color={color} /></div>
+      <div>
+        <h3 className="font-display text-xl text-foreground">{title}</h3>
+        <p className="text-sm leading-relaxed text-foreground/65">{text}</p>
+      </div>
+    </div>
+  );
 }
 
 export function SolutionSection() {
