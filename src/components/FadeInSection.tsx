@@ -29,7 +29,7 @@ export function FadeInSection({
           observer.unobserve(el);
         }
       },
-      { rootMargin: "-40px" }
+      { rootMargin: "-40px", threshold: 0.2 }
     );
 
     observer.observe(el);

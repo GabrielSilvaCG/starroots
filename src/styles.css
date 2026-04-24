@@ -1,9 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap');
 
 @theme inline {
   --font-display: 'Playfair Display', Georgia, serif;
@@ -84,6 +83,7 @@
   --kraft: oklch(0.74 0.075 75);
   --kraft-foreground: oklch(0.20 0.035 155);
   --cream: oklch(0.96 0.015 85);          /* #f5f0e8 */
+  --root-line: #2d6a4f;
 
   --chart-1: oklch(0.62 0.18 28);         /* red */
   --chart-2: oklch(0.70 0.15 145);        /* green */
@@ -314,6 +314,35 @@
   .sheen-on-hover:hover::before { transform: translateX(120%) skewX(-12deg); }
   .sheen-on-hover > * { position: relative; z-index: 1; }
 
+  @keyframes roots-grow { to { stroke-dashoffset: 0; } }
+  @keyframes sr-spin { to { transform: rotate(360deg); } }
+  @keyframes sr-sway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+  @keyframes sr-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+  @keyframes sr-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes sr-flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  @keyframes bean-float { from { transform: translateY(110vh); opacity: 0; } 15%, 80% { opacity: 1; } to { transform: translateY(-20vh); opacity: 0; } }
+  @keyframes borderPulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 45%, transparent); } 50% { box-shadow: 0 0 0 10px color-mix(in oklab, var(--primary) 0%, transparent); } }
+  @keyframes sr-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+  @keyframes typewriter { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes particle-burst { from { opacity: 1; transform: translate(0, 0) scale(1); } to { opacity: 0; transform: translate(var(--burst-x), var(--burst-y)) scale(0.2); } }
+  @keyframes price-pop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+  .roots-grow path { stroke: var(--root-line); opacity: 0.4; stroke-dasharray: 420; stroke-dashoffset: 420; }
+  .roots-grow.is-visible path { animation: roots-grow 3s ease-out forwards; }
+  .roots-topic svg > * { transform-box: fill-box; transform-origin: center; }
+  .roots-topic.is-visible .coffee-bean { animation: sr-spin 4s linear infinite; animation-delay: var(--topic-delay); }
+  .roots-topic.is-visible .leaf-icon { animation: sr-sway 2s ease-in-out infinite; animation-delay: var(--topic-delay); }
+  .roots-topic.is-visible .heart-icon { animation: sr-pulse 1.5s ease-in-out infinite; animation-delay: var(--topic-delay); }
+  .roots-topic.is-visible .profit-icon { animation: sr-float 2s ease-in-out infinite; animation-delay: var(--topic-delay); }
+  .roots-topic.is-visible .bolt-icon { animation: sr-flicker 1.2s ease-in-out infinite; animation-delay: var(--topic-delay); }
+
+  .coffee-particle { animation: bean-float var(--float-duration, 12s) linear infinite; animation-delay: var(--float-delay, 0s); }
+  .border-pulse { animation: borderPulse 2.2s ease-in-out infinite; }
+  .scroll-bounce { animation: sr-bounce 1.5s ease-in-out infinite; }
+  .typewriter-in.is-visible { animation: typewriter 1.1s steps(7, end) both; }
+  .particle-burst { animation: particle-burst 0.62s ease-out forwards; }
+  .price-pop.is-visible { animation: price-pop 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
   @media (prefers-reduced-motion: reduce) {
     .leaf-float,
     .animate-soft-pulse,
@@ -321,7 +350,15 @@
     .animate-marquee,
     .animate-tick,
     .animate-letter,
-    .animate-rise {
+    .animate-rise,
+    .roots-grow.is-visible path,
+    .roots-topic.is-visible svg > *,
+    .coffee-particle,
+    .border-pulse,
+    .scroll-bounce,
+    .typewriter-in.is-visible,
+    .particle-burst,
+    .price-pop.is-visible {
       animation: none !important;
     }
     .card-lift:hover { transform: none; }
