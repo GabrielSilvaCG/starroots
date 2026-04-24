@@ -292,6 +292,16 @@
     opacity: 0.85;
     z-index: -1;
   }
+  .brand-cluster::after {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border: 1px solid var(--accent);
+    opacity: 0.65;
+    z-index: -1;
+    animation: living-border 6s ease-in-out infinite;
+    pointer-events: none;
+  }
   .brand-cluster-item {
     position: relative;
     height: 100%;
