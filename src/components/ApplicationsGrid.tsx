@@ -23,7 +23,7 @@ export function ApplicationsGrid() {
           </h2>
         </FadeInSection>
         <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
-          <p className="text-base text-foreground/70 leading-relaxed font-body">
+          <p className="text-lg md:text-xl text-foreground/75 leading-relaxed font-body">
             Folhas integradas à sereia, paleta verde-kraft e embalagens em papel reciclado — cada
             peça reforça a narrativa de origem.
           </p>
@@ -45,7 +45,7 @@ export function ApplicationsGrid() {
                 className="w-full h-[340px] md:h-full md:min-h-[560px] object-cover"
               />
             </div>
-            <figcaption className="brand-caption text-[10px] tracking-[0.4em] uppercase text-foreground/75 transition-colors duration-500 group-hover:text-accent">
+            <figcaption className="brand-caption text-xs md:text-sm tracking-[0.36em] uppercase text-foreground/80 transition-colors duration-500 group-hover:text-accent">
               {main.caption}
             </figcaption>
           </figure>
@@ -67,7 +67,7 @@ export function ApplicationsGrid() {
                     className="w-full h-[270px] object-cover"
                   />
                 </div>
-                <figcaption className="brand-caption text-[10px] tracking-[0.35em] uppercase text-foreground/75 transition-colors duration-500 group-hover:text-accent">
+                <figcaption className="brand-caption text-xs md:text-sm tracking-[0.32em] uppercase text-foreground/80 transition-colors duration-500 group-hover:text-accent">
                   {item.caption}
                 </figcaption>
               </figure>
