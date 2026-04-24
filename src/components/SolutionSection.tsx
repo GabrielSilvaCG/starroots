@@ -41,6 +41,14 @@ export function SolutionSection() {
               fala essa mesma língua.
             </p>
           </div>
+          <div className="relative mt-14 pl-10 md:pl-20">
+            <OrganicRoots />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+              {topics.map((topic) => (
+                <RootTopic key={topic.title} {...topic} />
+              ))}
+            </div>
+          </div>
         </FadeInSection>
 
         <FadeInSection delay={0.2} variant="scale" className="md:col-span-5">
