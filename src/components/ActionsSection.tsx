@@ -65,8 +65,8 @@ export function ActionsSection() {
                   {a.n}
                 </p>
                 <p className="text-[10px] tracking-[0.3em] uppercase text-accent mb-3">{a.tag}</p>
-                <h3 className="font-display text-2xl md:text-3xl font-semibold mb-4 leading-tight">{a.title}</h3>
-                <p className="text-sm text-foreground/65 leading-relaxed font-body">{a.text}</p>
+                <h3 className="font-display text-3xl md:text-[2.2rem] font-semibold mb-4 leading-tight">{a.title}</h3>
+                <p className="text-base text-foreground/70 leading-relaxed font-body">{a.text}</p>
               </div>
             </FadeInSection>
           ))}
