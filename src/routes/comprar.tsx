@@ -168,7 +168,7 @@ function CookieGenerator() {
                   src={letterMap[char]}
                   alt={char}
                   style={{
-                    height: `${letterSize}px`,
+                    height: `${letterSizePct}%`,
                     width: "auto",
                     transition: "height 250ms ease",
                   }}
