@@ -3,14 +3,14 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import comboMockup from "@/assets/combo-mockup.png";
 import cookieBase from "@/assets/cookie-sem-nome.png";
 
-const letterModules = import.meta.glob("@/assets/letras/letras_chocolate/*.png", {
+const letterModules = import.meta.glob("@/assets/letras/letras_seu_nome/*.png", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
 
 const letterMap: Record<string, string> = Object.entries(letterModules).reduce(
   (acc, [path, url]) => {
-    const match = path.match(/\/([A-Z])\.png$/);
+    const match = path.match(/\/([A-Za-z])\.png$/);
     if (match) acc[match[1]] = url;
     return acc;
   },
