@@ -93,7 +93,7 @@ function CookieGenerator() {
   const isPlaceholder = name.length === 0;
   // Letras em % do container — escalam de ~17% (poucas letras) a ~8% (10 letras)
   const letterSizePct = Math.max(8, 17 - displayLetters.length * 0.9);
-  const letterGap = Math.max(-10, 4 - displayLetters.length);
+  const letterGap = Math.max(-15, 4 - displayLetters.length);
 
   return (
     <section
