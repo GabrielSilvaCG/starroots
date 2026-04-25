@@ -91,8 +91,9 @@ function CookieGenerator() {
   }, [name]);
 
   const isPlaceholder = name.length === 0;
-  const letterSize = Math.max(18, 44 - displayLetters.length * 3);
-  const letterGap = Math.max(-6, 8 - displayLetters.length);
+  // Letras em % do container — escalam de ~22% (poucas letras) a ~11% (10 letras)
+  const letterSizePct = Math.max(11, 22 - displayLetters.length * 1.1);
+  const letterGap = Math.max(-4, 10 - displayLetters.length);
 
   return (
     <section
