@@ -86,12 +86,12 @@ function CookieGenerator() {
   const [name, setName] = useState("");
 
   const displayLetters = useMemo(() => {
-    const source = name.length > 0 ? name : "STARROOTS";
+    const source = name.length > 0 ? name : "Starroots";
     return source.split("").filter((char) => letterMap[char]);
   }, [name]);
 
   const isPlaceholder = name.length === 0;
-  // Letras em % do container — escalam de ~22% (poucas letras) a ~11% (10 letras)
+  // Letras em % do container — escalam de ~17% (poucas letras) a ~8% (10 letras)
   const letterSizePct = Math.max(8, 17 - displayLetters.length * 0.9);
   const letterGap = Math.max(-4, 10 - displayLetters.length);
 
@@ -117,15 +117,14 @@ function CookieGenerator() {
           <input
             value={name}
             onChange={(e) =>
-              setName(e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 10))
+              setName(e.target.value.replace(/[^A-Za-z]/g, "").slice(0, 10))
             }
             maxLength={10}
-            placeholder="DIGITE SEU NOME"
-            className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none uppercase tracking-[0.2em]"
+            placeholder="Digite seu nome"
+            className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none tracking-[0.2em]"
             style={{
               borderColor: "var(--background)",
               color: "var(--background)",
-              textTransform: "uppercase",
             }}
           />
           <div
