@@ -83,41 +83,104 @@ function ProductPrice() {
 }
 
 function CookieGenerator() {
-  const [name, setName] = useState("SEU NOME");
-  const [flip, setFlip] = useState(false);
-  const [burst, setBurst] = useState(0);
+  const [name, setName] = useState("");
 
-  const confirmName = () => {
-    setFlip(true);
-    setBurst((value) => value + 1);
-    window.setTimeout(() => setFlip(false), 400);
-  };
+  const displayLetters = useMemo(() => {
+    const source = name.length > 0 ? name : "STARROOTS";
+    return source.split("").filter((char) => letterMap[char]);
+  }, [name]);
+
+  const isPlaceholder = name.length === 0;
+  const letterSize = Math.max(18, 44 - displayLetters.length * 3);
+  const letterGap = Math.max(-6, 8 - displayLetters.length);
 
   return (
-    <section className="px-6 md:px-10 py-28" style={{ backgroundColor: "var(--cream)", color: "var(--background)" }}>
+    <section
+      className="px-6 md:px-10 py-28"
+      style={{ backgroundColor: "var(--cream)", color: "var(--background)" }}
+    >
       <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <p className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: "var(--accent-foreground)" }}>Cookie personalizado</p>
-          <h2 className="font-display font-black leading-none mb-6" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>O seu nome vira detalhe.</h2>
+          <p
+            className="text-[10px] tracking-[0.4em] uppercase mb-5"
+            style={{ color: "var(--accent-foreground)" }}
+          >
+            Personalize seu cookie
+          </p>
+          <h2
+            className="font-display font-black leading-none mb-8"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+          >
+            O seu nome vira detalhe.
+          </h2>
           <input
-            value={name === "SEU NOME" ? "" : name}
-            onChange={(e) => setName(e.target.value.toUpperCase().slice(0, 12) || "SEU NOME")}
-            onBlur={confirmName}
-            onKeyDown={(e) => e.key === "Enter" && confirmName()}
-            placeholder="Digite seu nome"
-            className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none"
-            style={{ borderColor: "var(--background)", color: "var(--background)" }}
+            value={name}
+            onChange={(e) =>
+              setName(e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 10))
+            }
+            maxLength={10}
+            placeholder="DIGITE SEU NOME"
+            className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none uppercase tracking-[0.2em]"
+            style={{
+              borderColor: "var(--background)",
+              color: "var(--background)",
+              textTransform: "uppercase",
+            }}
           />
-        </div>
-        <div className="relative mx-auto h-72 w-72 md:h-96 md:w-96 grid place-items-center [perspective:900px]">
-          <div className={`relative grid h-60 w-60 md:h-72 md:w-72 place-items-center rounded-full transition-transform duration-400 ${flip ? "rotate-y-90" : "rotate-y-0"}`} style={{ background: "radial-gradient(circle, var(--accent), #f5f0e8 68%)", boxShadow: "inset 0 -18px 40px color-mix(in oklab, var(--background) 18%, transparent)" }}>
-            <span className="font-script text-4xl md:text-5xl" style={{ color: "var(--background)" }}>{name}</span>
+          <div
+            className="mt-3 text-[11px] tracking-[0.3em] uppercase opacity-60"
+            style={{ color: "var(--background)" }}
+          >
+            {name.length}/10
           </div>
-          {burst > 0 && [
-            ["-64px", "-54px"], ["70px", "-42px"], ["-56px", "62px"], ["62px", "58px"],
-          ].map(([x, y], index) => (
-            <span key={`${burst}-${index}`} className="particle-burst absolute left-1/2 top-1/2 h-3 w-3 rounded-full" style={{ backgroundColor: "var(--primary)", "--burst-x": x, "--burst-y": y } as CSSProperties} />
-          ))}
+        </div>
+
+        <div className="flex flex-col items-center gap-6">
+          <div
+            className="relative overflow-hidden rounded-full"
+            style={{
+              width: "min(360px, 80vw)",
+              height: "min(360px, 80vw)",
+              boxShadow:
+                "inset 0 -18px 40px color-mix(in oklab, var(--background) 22%, transparent), 0 30px 60px -30px color-mix(in oklab, var(--background) 50%, transparent)",
+            }}
+          >
+            <img
+              src={cookieBase}
+              alt="Cookie Starroots sem nome"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                gap: `${letterGap}px`,
+                padding: "0 14%",
+                opacity: isPlaceholder ? 0.5 : 1,
+                transition: "opacity 300ms ease",
+              }}
+            >
+              {displayLetters.map((char, index) => (
+                <img
+                  key={`${char}-${index}`}
+                  src={letterMap[char]}
+                  alt={char}
+                  style={{
+                    height: `${letterSize}px`,
+                    width: "auto",
+                    transition: "height 250ms ease",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+          <p
+            className="font-display italic text-base md:text-lg text-center"
+            style={{ color: "var(--background)" }}
+          >
+            Cada cookie é único — assim como você.
+          </p>
         </div>
       </div>
     </section>
