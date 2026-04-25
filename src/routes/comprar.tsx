@@ -1,6 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import comboMockup from "@/assets/combo-mockup.png";
+import cookieBase from "@/assets/cookie-sem-nome.png";
+
+const letterModules = import.meta.glob("@/assets/letras/letras_chocolate/*.png", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+const letterMap: Record<string, string> = Object.entries(letterModules).reduce(
+  (acc, [path, url]) => {
+    const match = path.match(/\/([A-Z])\.png$/);
+    if (match) acc[match[1]] = url;
+    return acc;
+  },
+  {} as Record<string, string>,
+);
 
 export const Route = createFileRoute("/comprar")({
   component: CheckoutPage,
