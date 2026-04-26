@@ -82,7 +82,7 @@ function CookieGenerator() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Configurações do texto
-    const fontSize = Math.max(24, 64 - displayText.length * 4);
+    const fontSize = Math.max(30,  80 - displayText.length * 5);
     ctx.font = `${fontSize}px fontechocolate`; // Referenciando o nome que demos no FontFace
     ctx.fillStyle = "#4a200a";
     ctx.textAlign = "center";
