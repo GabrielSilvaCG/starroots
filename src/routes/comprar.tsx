@@ -76,7 +76,7 @@ function CookieGenerator() {
   useEffect(() => {
     const fontFace = new FontFace(
       "CHOCD",
-      "url(/src/assets/fonts/CHOCD_TRIAL___.otf)",
+      "url(/src/assets/fonts",
       { style: "normal", weight: "400" }
     );
     fontFace.load().then(() => {
