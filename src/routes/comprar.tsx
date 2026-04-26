@@ -1,20 +1,17 @@
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import comboMockup from "@/assets/combo-mockup.png";
 import cookieBase from "@/assets/cookie-sem-nome.png";
 
+// Importando a fonte como um módulo (o Vite transforma isso em uma URL)
+// @ts-ignore - Caso o TS reclame do import de .otf
+import fontechocolateUrl from "@/assets/fonts/fontechocolate.otf";
+
 export const Route = createFileRoute("/comprar")({
   component: CheckoutPage,
-  head: () => ({
-    meta: [
-      { title: "Combo Starroots — O combo que cuida de você" },
-      { name: "description", content: "Peça o Combo Starroots: copo biodegradável e cookie personalizado por R$12,50." },
-      { property: "og:title", content: "Combo Starroots — O combo que cuida de você" },
-      { property: "og:description", content: "Um copo, um cookie e uma escolha que financia a compostagem nas plantações de café." },
-    ],
-  }),
 });
 
+// --- Partículas e Hooks ---
 const particles = Array.from({ length: 28 }, (_, i) => ({
   left: `${(i * 37) % 100}%`,
   size: 4 + (i % 4) * 2,
@@ -25,246 +22,156 @@ const particles = Array.from({ length: 28 }, (_, i) => ({
 function useInView(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setVisible(true), delay * 1000);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => setVisible(true), delay * 1000);
+        observer.unobserve(el);
+      }
+    }, { threshold: 0.2 });
     observer.observe(el);
     return () => observer.disconnect();
   }, [delay]);
-
   return { ref, visible };
 }
 
-function LeafIcon() {
-  return <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path className="leaf-icon" d="M22 5C12 5 6 10 6 18c8 1 15-4 16-13Z" stroke="currentColor" strokeWidth="2" /><path className="leaf-icon" d="M7 20c4-5 8-8 14-14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>;
-}
+// --- Componentes de Ícones (Simplificados) ---
+const LeafIcon = () => <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M22 5C12 5 6 10 6 18c8 1 15-4 16-13Z" stroke="currentColor" strokeWidth="2" /><path d="M7 20c4-5 8-8 14-14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>;
+const StarIcon = () => <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="m14 4 2.6 6.2 6.7.5-5.1 4.4 1.6 6.5-5.8-3.5-5.8 3.5 1.6-6.5-5.1-4.4 6.7-.5L14 4Z" stroke="currentColor" strokeWidth="2" /></svg>;
 
-function StarIcon() {
-  return <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path className="heart-icon" d="m14 4 2.6 6.2 6.7.5-5.1 4.4 1.6 6.5-5.8-3.5-5.8 3.5 1.6-6.5-5.1-4.4 6.7-.5L14 4Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /></svg>;
-}
-
-function InfinityIcon() {
-  return <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path className="coffee-bean" d="M6 14c2.2-4 5.2-4 8 0 2.8 4 5.8 4 8 0-2.2-4-5.2-4-8 0-2.8 4-5.8 4-8 0Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-}
-
-function CycleIcon({ type }: { type: "cup" | "soil" | "plant" }) {
-  if (type === "cup") return <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><path className="sr-cycle-icon" d="M23 16h26l-4 42H27L23 16Z" stroke="currentColor" strokeWidth="2.5" /><path className="sr-cycle-icon" d="M27 25h18" stroke="currentColor" strokeWidth="2" /></svg>;
-  if (type === "soil") return <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><path className="sr-cycle-icon" d="M18 49c9-8 27-8 36 0" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" /><circle className="sr-cycle-icon" cx="27" cy="39" r="3" fill="currentColor" /><circle className="sr-cycle-icon" cx="38" cy="35" r="2.5" fill="currentColor" /><circle className="sr-cycle-icon" cx="47" cy="41" r="2" fill="currentColor" /></svg>;
-  return <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><path className="leaf-icon" d="M36 57V28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" /><path className="leaf-icon" d="M36 33c-10 0-16-6-17-16 10 0 16 6 17 16Z" stroke="currentColor" strokeWidth="2.5" /><path className="leaf-icon" d="M37 40c10-1 16-7 16-17-10 1-16 7-16 17Z" stroke="currentColor" strokeWidth="2.5" /></svg>;
-}
-
-function ProductPrice() {
-  const { ref, visible } = useInView();
-  return <div ref={ref} className={`typewriter-in font-display font-black leading-none ${visible ? "is-visible" : ""}`} style={{ fontSize: "clamp(3rem, 8vw, 7rem)", color: "var(--background)" }}>R$12,50</div>;
-}
-
+// --- O Gerador de Cookie (Onde a mágica acontece) ---
 function CookieGenerator() {
   const [name, setName] = useState("");
+  const [fontLoaded, setFontLoaded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Carregar a fonte OTF
+  // Lógica de carregamento da fonte via TSX
   useEffect(() => {
-    const fontFace = new FontFace(
-      "CHOCD",
-      "url(/src/assets/fonts/CHOCD TRIAL___.otf",
-      { style: "normal", weight: "400" }
-    );
-    fontFace.load().then(() => {
-      document.fonts.add(fontFace);
-    }).catch(err => console.error("Erro ao carregar fonte:", err));
+    const loadCustomFont = async () => {
+      try {
+        // Criando a fonte programaticamente
+        const font = new FontFace("fontechocolate", `url(${fontechocolateUrl})`);
+        
+        // Esperando o browser baixar o arquivo
+        const loadedFont = await font.load();
+        
+        // Adicionando a fonte ao documento para que o Canvas a enxergue
+        document.fonts.add(loadedFont);
+        
+        setFontLoaded(true);
+      } catch (error) {
+        console.error("Falha ao carregar a fonte do cookie:", error);
+      }
+    };
+
+    loadCustomFont();
   }, []);
 
-  // Renderizar no Canvas
+  // Renderização do Canvas
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !fontLoaded) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const displayText = name.length > 0 ? name : "Starroots";
 
-    // Limpar canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Configurar fonte
-    const fontSize = Math.max(20, 60 - displayText.length * 4);
-    ctx.font = `${fontSize}px CHOCD, serif`;
+    // Configurações do texto
+    const fontSize = Math.max(24, 64 - displayText.length * 4);
+    ctx.font = `${fontSize}px fontechocolate`; // Referenciando o nome que demos no FontFace
     ctx.fillStyle = "#4a200a";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    // Sombra
-    ctx.shadowColor = "rgba(40, 15, 5, 0.6)";
+    // Efeito de "entalhe" no cookie
+    ctx.shadowColor = "rgba(40, 15, 5, 0.5)";
     ctx.shadowBlur = 8;
     ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 4;
+    ctx.shadowOffsetY = 3;
 
-    // Desenhar texto
     ctx.fillText(displayText, canvas.width / 2, canvas.height / 2);
-  }, [name]);
-
-  const isPlaceholder = name.length === 0;
+  }, [name, fontLoaded]);
 
   return (
-    <section
-      className="px-6 md:px-10 py-28"
-      style={{ backgroundColor: "var(--cream)", color: "var(--background)" }}
-    >
+    <section className="px-6 md:px-10 py-28" style={{ backgroundColor: "var(--cream)", color: "var(--background)" }}>
       <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <p
-            className="text-[10px] tracking-[0.4em] uppercase mb-5"
-            style={{ color: "var(--accent-foreground)" }}
-          >
-            Personalize seu cookie
-          </p>
-          <h2
-            className="font-display font-black leading-none mb-8"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
-          >
-            O seu nome vira detalhe.
-          </h2>
+          <p className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: "var(--accent-foreground)" }}>Personalize seu cookie</p>
+          <h2 className="font-display font-black leading-none mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>O seu nome vira detalhe.</h2>
           <input
             value={name}
-            onChange={(e) =>
-              setName(e.target.value.replace(/[^A-Za-z]/g, "").slice(0, 10))
-            }
+            onChange={(e) => setName(e.target.value.replace(/[^A-Za-z]/g, "").slice(0, 10))}
             maxLength={10}
             placeholder="Digite seu nome"
             className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none tracking-[0.2em]"
-            style={{
-              borderColor: "var(--background)",
-              color: "var(--background)",
-            }}
+            style={{ borderColor: "var(--background)", color: "var(--background)" }}
           />
-          <div
-            className="mt-3 text-[11px] tracking-[0.3em] uppercase opacity-60"
-            style={{ color: "var(--background)" }}
-          >
-            {name.length}/10
-          </div>
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <div
-            className="relative overflow-hidden rounded-full"
-            style={{
-              width: "min(360px, 80vw)",
-              height: "min(360px, 80vw)",
-              boxShadow:
-                "inset 0 -18px 40px color-mix(in oklab, var(--background) 22%, transparent), 0 30px 60px -30px color-mix(in oklab, var(--background) 50%, transparent)",
-            }}
-          >
-            <img
-              src={cookieBase}
-              alt="Cookie Starroots sem nome"
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-            <canvas
-              ref={canvasRef}
-              width={360}
-              height={360}
-              className="absolute inset-0 h-full w-full"
-              style={{
-                opacity: isPlaceholder ? 0.5 : 1,
-                transition: "opacity 300ms ease",
-              }}
-            />
+          <div className="relative overflow-hidden rounded-full" style={{ width: "min(360px, 80vw)", height: "min(360px, 80vw)", boxShadow: "0 30px 60px -20px rgba(0,0,0,0.2)" }}>
+            <img src={cookieBase} alt="Cookie Base" className="absolute inset-0 h-full w-full object-cover" />
+            <canvas ref={canvasRef} width={360} height={360} className="absolute inset-0 h-full w-full" style={{ opacity: name.length === 0 ? 0.3 : 1, transition: "opacity 300ms ease" }} />
           </div>
-          <p
-            className="font-display italic text-base md:text-lg text-center"
-            style={{ color: "var(--background)" }}
-          >
-            Cada cookie é único — assim como você.
-          </p>
+          <p className="font-display italic text-lg opacity-80">Cookie artesanal Starroots</p>
         </div>
       </div>
     </section>
   );
 }
 
-function FinalCta() {
-  const { ref, visible } = useInView();
-  const [clicked, setClicked] = useState(false);
-
-  const handleClick = () => {
-    setClicked(true);
-    window.setTimeout(() => setClicked(false), 2000);
-  };
+// --- Página Principal ---
+export function CheckoutPage() {
+  const { ref: priceRef, visible: priceVisible } = useInView();
 
   return (
-    <section className="px-6 md:px-10 py-28 text-center" style={{ backgroundColor: "var(--accent)", color: "var(--background)" }}>
-      <h2 className="font-display font-black leading-none mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>Pronto para fazer parte?</h2>
-      <div ref={ref} className={`price-pop font-display font-black leading-none mb-10 ${visible ? "is-visible" : ""}`} style={{ fontSize: "clamp(4rem, 10vw, 9rem)" }}>R$12,50</div>
-      <button onClick={handleClick} className="w-full md:w-auto px-12 py-5 uppercase tracking-[0.28em] text-sm font-bold transition-transform active:scale-95" style={{ backgroundColor: "var(--background)", color: "var(--accent)" }}>
-        {clicked ? "🌱 Pedido anotado!" : "Pedir meu combo"}
-      </button>
-      <p className="mt-7 text-[10px] tracking-[0.35em] uppercase">Disponível nas unidades participantes Starroots</p>
-    </section>
-  );
-}
-
-function CheckoutPage() {
-  return (
-    <main className="min-h-screen overflow-hidden">
-      <section className="relative min-h-screen px-6 md:px-10 grid place-items-center overflow-hidden" style={{ backgroundColor: "var(--background)", color: "white" }}>
-        {particles.map((particle, index) => (
-          <span key={index} className="coffee-particle absolute rounded-full" style={{ left: particle.left, bottom: "-10vh", width: particle.size, height: particle.size, backgroundColor: "var(--card)", "--float-duration": particle.duration, "--float-delay": particle.delay } as CSSProperties} />
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-screen grid place-items-center overflow-hidden" style={{ backgroundColor: "var(--background)", color: "white" }}>
+        {particles.map((p, i) => (
+          <span key={i} className="coffee-particle absolute rounded-full" style={{ left: p.left, bottom: "-10vh", width: p.size, height: p.size, backgroundColor: "var(--card)", "--float-duration": p.duration, "--float-delay": p.delay } as any} />
         ))}
-        <Link to="/" className="absolute left-6 top-6 md:left-10 md:top-10 text-[10px] uppercase tracking-[0.35em] text-white/70 hover:text-primary">Voltar</Link>
-        <div className="relative z-10 max-w-[1200px] text-center">
-          <div className="border-pulse inline-flex border px-5 py-3 text-[10px] tracking-[0.35em] uppercase mb-10" style={{ borderColor: "var(--primary)", color: "var(--primary)" }}>Exclusivo · peça o seu</div>
-          <h1 className="font-display font-black leading-[0.88]" style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)" }}>
-            O combo que cuida de você<br /><span style={{ color: "var(--primary)" }}>e do planeta.</span>
-          </h1>
-        </div>
-        <div className="scroll-bounce absolute bottom-9 text-4xl" style={{ color: "var(--primary)" }}>↓</div>
+        <Link to="/" className="absolute left-10 top-10 text-[10px] uppercase tracking-[0.4em] text-white/60 hover:text-white transition-colors">Voltar</Link>
+        <h1 className="relative z-10 font-display font-black text-center leading-[0.9]" style={{ fontSize: "clamp(3rem, 10vw, 8rem)" }}>
+          O COMBO QUE <br /> <span style={{ color: "var(--primary)" }}>PLANTA O FUTURO.</span>
+        </h1>
       </section>
 
-      <section className="px-6 md:px-10 py-28" style={{ backgroundColor: "var(--cream)", color: "var(--background)" }}>
-        <div className="max-w-[1300px] mx-auto grid md:grid-cols-2 gap-14 items-center">
-          <img src={comboMockup} alt="Combo Starroots com copo biodegradável e cookie" className="w-full transition-transform duration-700 hover:scale-[1.03]" loading="lazy" decoding="async" />
+      {/* Seção do Produto */}
+      <section className="px-6 py-28" style={{ backgroundColor: "var(--cream)" }}>
+        <div className="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-20 items-center">
+          <img src={comboMockup} alt="Combo" className="w-full drop-shadow-2xl" />
           <div>
-            <h2 className="font-display font-black leading-none mb-10" style={{ fontSize: "clamp(2.75rem, 6vw, 5.5rem)" }}>Um copo. Um cookie. Uma escolha.</h2>
-            <div className="border-y" style={{ borderColor: "color-mix(in oklab, var(--background) 22%, transparent)" }}>
-              {[
-                [<LeafIcon />, "Biodegradável", "vira adubo nas plantações"],
-                [<StarIcon />, "Personalizado", "com o seu nome"],
-                [<InfinityIcon />, "Ilimitado", "disponível todos os dias"],
-              ].map(([icon, title, text], index) => (
-                <div key={String(title)} className="roots-topic is-visible flex items-center gap-4 py-5 border-b last:border-b-0" style={{ borderColor: "color-mix(in oklab, var(--background) 18%, transparent)", color: index === 1 ? "var(--accent)" : "var(--background)", "--topic-delay": `${index * 0.3}s` } as CSSProperties}>
-                  <div>{icon}</div><p><strong>{title}</strong> — {text}</p>
-                </div>
-              ))}
+            <h2 className="font-display font-black text-5xl mb-8" style={{ color: "var(--background)" }}>Sustentável & Único.</h2>
+            <div className="space-y-6 mb-12">
+              <div className="flex gap-4 items-center">
+                <LeafIcon /> <p><strong>Copo Biodegradável</strong> — Vira adubo em 90 dias.</p>
+              </div>
+              <div className="flex gap-4 items-center">
+                <StarIcon /> <p><strong>Cookie Personalizado</strong> — Com o seu nome gravado.</p>
+              </div>
             </div>
-            <div className="mt-10"><ProductPrice /></div>
+            <div ref={priceRef} className={`font-display font-black text-7xl transition-all duration-1000 ${priceVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ color: "var(--background)" }}>
+              R$12,50
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="px-6 md:px-10 py-28 text-center" style={{ backgroundColor: "var(--card)", color: "white" }}>
-        <h2 className="font-display font-black leading-none mb-5" style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)" }}>Um café que planta o futuro.</h2>
-        <p className="font-display italic text-xl md:text-3xl max-w-4xl mx-auto mb-16" style={{ color: "var(--primary)" }}>Cada combo vendido financia a coleta e compostagem dos copos nas plantações de café.</p>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12" style={{ color: "var(--primary)" }}>
-          <CycleIcon type="cup" /><span className="text-4xl">→</span><CycleIcon type="soil" /><span className="text-4xl">→</span><CycleIcon type="plant" />
-        </div>
-      </section>
-
       <CookieGenerator />
-      <FinalCta />
+
+      {/* CTA Final */}
+      <section className="py-28 text-center" style={{ backgroundColor: "var(--accent)", color: "var(--background)" }}>
+        <h2 className="font-display font-black text-6xl mb-10">Peça o seu agora.</h2>
+        <button className="bg-background text-accent px-16 py-6 font-bold uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-transform">
+          Finalizar Pedido
+        </button>
+      </section>
     </main>
   );
 }
