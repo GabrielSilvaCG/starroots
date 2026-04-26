@@ -3,20 +3,6 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import comboMockup from "@/assets/combo-mockup.png";
 import cookieBase from "@/assets/cookie-sem-nome.png";
 
-const letterModules = import.meta.glob("@/assets/letras/letras_seu_nome/*.png", {
-  eager: true,
-  import: "default",
-}) as Record<string, string>;
-
-const letterMap: Record<string, string> = Object.entries(letterModules).reduce(
-  (acc, [path, url]) => {
-    const match = path.match(/\/([A-Za-z])\.png$/);
-    if (match) acc[match[1]] = url;
-    return acc;
-  },
-  {} as Record<string, string>,
-);
-
 export const Route = createFileRoute("/comprar")({
   component: CheckoutPage,
   head: () => ({
@@ -84,16 +70,51 @@ function ProductPrice() {
 
 function CookieGenerator() {
   const [name, setName] = useState("");
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const displayLetters = useMemo(() => {
-    const source = name.length > 0 ? name : "Starroots";
-    return source.split("").filter((char) => letterMap[char]);
+  // Carregar a fonte OTF
+  useEffect(() => {
+    const fontFace = new FontFace(
+      "CHOCD",
+      "url(/src/assets/fonts/CHOCD_TRIAL___.otf)",
+      { style: "normal", weight: "400" }
+    );
+    fontFace.load().then(() => {
+      document.fonts.add(fontFace);
+    }).catch(err => console.error("Erro ao carregar fonte:", err));
+  }, []);
+
+  // Renderizar no Canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const displayText = name.length > 0 ? name : "Starroots";
+
+    // Limpar canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Configurar fonte
+    const fontSize = Math.max(20, 60 - displayText.length * 4);
+    ctx.font = `${fontSize}px CHOCD, serif`;
+    ctx.fillStyle = "#4a200a";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // Sombra
+    ctx.shadowColor = "rgba(40, 15, 5, 0.6)";
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 4;
+
+    // Desenhar texto
+    ctx.fillText(displayText, canvas.width / 2, canvas.height / 2);
   }, [name]);
 
   const isPlaceholder = name.length === 0;
-  // Letras em % do container — escalam de ~17% (poucas letras) a ~8% (10 letras)
-  const letterSizePct = Math.max(8, 17 - displayLetters.length * 0.9);
-  const letterGap = Math.max(-15, 1 - displayLetters.length);
 
   return (
     <section
@@ -152,28 +173,16 @@ function CookieGenerator() {
               loading="lazy"
               decoding="async"
             />
-            <div
-              className="absolute inset-0 flex items-center justify-center"
+            <canvas
+              ref={canvasRef}
+              width={360}
+              height={360}
+              className="absolute inset-0 h-full w-full"
               style={{
-                gap: `${letterGap}px`,
-                padding: "0 14%",
                 opacity: isPlaceholder ? 0.5 : 1,
                 transition: "opacity 300ms ease",
               }}
-            >
-              {displayLetters.map((char, index) => (
-                <img
-                  key={`${char}-${index}`}
-                  src={letterMap[char]}
-                  alt={char}
-                  style={{
-                    height: `${letterSizePct}%`,
-                    width: "auto",
-                    transition: "height 250ms ease",
-                  }}
-                />
-              ))}
-            </div>
+            />
           </div>
           <p
             className="font-display italic text-base md:text-lg text-center"
