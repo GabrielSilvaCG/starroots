@@ -51,12 +51,12 @@ export function ComboSection() {
           <FadeInSection className="md:col-span-6">
             <p className="text-[20px] tracking-[0.4em] uppercase text-accent mb-6">Edição limitada</p>
             <h3
-              className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
-              style={{ fontSize: "clamp(text-15x7 md:text-15x7)" }}
-            >
-              O copo que tem nome.<br />
-              <em className="italic font-semibold text-accent">O cookie que é só seu.</em>
-            </h3>
+  className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
+  style={{ fontSize: "clamp(40px, 8vw, 90px)" }} // Mínimo 40px, ideal 8% da tela, máximo 90px
+>
+  O copo que tem nome.<br />
+  <em className="italic font-semibold text-accent">O cookie que é só seu.</em>
+</h3>
             <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-body max-w-xl">
               O Combo Starroots é mais do que uma compra — é uma experiência. Sua bebida vem no copo
               biodegradável que, após o uso, vira adubo nas plantações de café. E o cookie artesanal?
