@@ -49,7 +49,7 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-28" style={{ backgroundColor: "#1a3d2b" }}>
         <div className="max-w-[1400px] mx-auto grid md:grid-cols-12 gap-12 md:gap-16 items-center">
           <FadeInSection className="md:col-span-6">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Edição limitada</p>
+            <p className="text-[20px] tracking-[0.4em] uppercase text-accent mb-6">Edição limitada</p>
             <h3
               className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
               style={{ fontSize: "clamp(text-15x2 md:text-15x2)" }}
