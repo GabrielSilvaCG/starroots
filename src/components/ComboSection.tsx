@@ -52,7 +52,7 @@ export function ComboSection() {
             <p className="text-[20px] tracking-[0.4em] uppercase text-accent mb-6">Edição limitada</p>
             <h3
   className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
-  style={{ fontSize: "clamp(60px, 8vw, 120px)" }} // Mínimo 40px, ideal 8% da tela, máximo 90px
+  style={{ fontSize: "clamp(60px, 8vw, 100px)" }} // Mínimo 40px, ideal 8% da tela, máximo 90px
 >
   O copo que tem nome.<br />
   <em className="italic font-semibold text-accent">O cookie que é só seu.</em>
