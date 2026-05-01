@@ -125,24 +125,41 @@ function CookieGenerator() {
   );
 }
 
-// --- Animação de Celebração (overlay) ---
+// --- Animação de Celebração (overlay) — silhueta única ---
 // Timeline (3s loop):
-//   0.0–0.8s  Copo cai do topo (translateY + easing) e morfa para "tronco vertical"
+//   0.0–0.8s  Copo cai e morfa para "tronco vertical"
 //   0.8–2.0s  Raízes orgânicas ramificadas crescem (stroke-dashoffset)
-//   2.0–3.0s  Grão de café aparece com depressão central + glow dourado pulsante
+//   2.0–3.0s  As 3 raízes principais morfam para o contorno do grão de café (silhueta)
+//             As raízes secundárias e capilares somem.
+// Tudo em #2d6a4f, sem preenchimento, sem glow, sem 3D.
+
+const STROKE = "#2d6a4f";
 
 const CUP_PATH =
   "M40 35 C40 35 80 35 80 35 C80 35 78 50 76 60 C74 70 72 75 60 75 C48 75 46 70 44 60 Z";
 const TRUNK_PATH =
   "M58 40 C58 40 62 40 62 40 C62 40 62 60 62 75 C62 90 62 95 60 95 C58 95 58 90 58 75 Z";
 
-// Raízes orgânicas — múltiplos paths ramificados (referência: raízes pivotantes reais)
-const ROOT_PATHS = [
-  { d: "M60 55 C60 65 59 75 60 95", len: 42, delay: 0 },
-  { d: "M60 65 C54 70 48 76 42 88", len: 32, delay: 0.05 },
+// Raízes orgânicas — as 3 primeiras viram o grão; as demais somem.
+// IMPORTANTE: paths que vão morfar para o grão precisam de mesma topologia
+// (mesmo número de comandos). Por isso usamos cubics em todos.
+
+// Raiz central (fissura do grão) — desce reta, depois curva levemente como a fenda
+const ROOT_CENTER = "M60 55 C60 65 60 75 60 95";
+const BEAN_FISSURE = "M60 45 C58 53 57 65 60 80";
+
+// Raiz principal esquerda — vira a metade esquerda do contorno do grão
+const ROOT_LEFT = "M60 65 C54 70 48 76 42 88";
+const BEAN_LEFT = "M60 45 C45 50 42 65 60 80";
+
+// Raiz principal direita — vira a metade direita do contorno do grão
+const ROOT_RIGHT = "M60 65 C66 70 72 76 78 88";
+const BEAN_RIGHT = "M60 45 C75 50 78 65 60 80";
+
+// Raízes secundárias / capilares — apenas crescem e somem
+const ROOT_EXTRAS = [
   { d: "M50 75 C46 78 43 82 40 90", len: 18, delay: 0.12 },
   { d: "M44 84 C42 86 41 88 39 93", len: 10, delay: 0.18 },
-  { d: "M60 65 C66 70 72 76 78 88", len: 32, delay: 0.05 },
   { d: "M70 75 C74 78 77 82 80 90", len: 18, delay: 0.12 },
   { d: "M76 84 C78 86 79 88 81 93", len: 10, delay: 0.18 },
   { d: "M58 80 C52 84 48 88 45 95", len: 20, delay: 0.22 },
@@ -150,6 +167,55 @@ const ROOT_PATHS = [
   { d: "M60 90 C58 92 57 94 56 96", len: 8, delay: 0.28 },
   { d: "M60 90 C62 92 63 94 64 96", len: 8, delay: 0.28 },
 ];
+
+// Helper para criar um path "raiz que morfa para parte do grão"
+function MorphRoot({
+  rootD,
+  beanD,
+  len,
+  delay,
+  strokeWidth,
+  index,
+}: {
+  rootD: string;
+  beanD: string;
+  len: number;
+  delay: number;
+  strokeWidth: number;
+  index: number;
+}) {
+  return (
+    <path
+      fill="none"
+      stroke={STROKE}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeDasharray={len}
+      strokeDashoffset={len}
+      style={{ animation: `morphRoot-${index} 3s ease-in-out infinite` }}
+    >
+      {/* Crescimento (dashoffset) */}
+      <animate
+        attributeName="stroke-dashoffset"
+        dur="3s"
+        repeatCount="indefinite"
+        keyTimes={`0;${0.27 + delay};${0.55};1`}
+        values={`${len};${len};0;0`}
+      />
+      {/* Morphing raiz → grão entre 60% e 73% */}
+      <animate
+        attributeName="d"
+        dur="3s"
+        repeatCount="indefinite"
+        calcMode="spline"
+        keyTimes="0;0.6;0.73;1"
+        keySplines="0 0 1 1; 0.42 0 0.58 1; 0 0 1 1"
+        values={`${rootD};${rootD};${beanD};${beanD}`}
+      />
+    </path>
+  );
+}
 
 function CelebrationOverlay({ onDone }: { onDone: () => void }) {
   const [fadingOut, setFadingOut] = useState(false);
@@ -173,26 +239,11 @@ function CelebrationOverlay({ onDone }: { onDone: () => void }) {
       }}
     >
       <svg width="120" height="120" viewBox="0 0 120 120" overflow="visible">
-        <defs>
-          <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <radialGradient id="beanGrad" cx="40%" cy="35%" r="70%">
-            <stop offset="0%" stopColor="#7a3a1a" />
-            <stop offset="60%" stopColor="#4a200a" />
-            <stop offset="100%" stopColor="#2a1005" />
-          </radialGradient>
-        </defs>
-
         {/* FASE 1 — Copo caindo + morphing para tronco */}
         <g style={{ animation: "cupDrop 3s ease-in-out infinite" }}>
           <path
             fill="none"
-            stroke="#2d6a4f"
+            stroke={STROKE}
             strokeWidth="2"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -216,16 +267,15 @@ function CelebrationOverlay({ onDone }: { onDone: () => void }) {
           </path>
         </g>
 
-        {/* FASE 2 — Raízes orgânicas crescendo */}
-        <g
-          stroke="#2d6a4f"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          style={{ animation: "rootsGroup 3s linear infinite" }}
-        >
-          {ROOT_PATHS.map((r, i) => {
-            const sw = r.len > 25 ? 1.8 : r.len > 12 ? 1.3 : 0.9;
+        {/* FASE 2+3 — Raízes principais que morfam para o contorno do grão */}
+        <MorphRoot index={0} rootD={ROOT_CENTER} beanD={BEAN_FISSURE} len={42} delay={0} strokeWidth={1.6} />
+        <MorphRoot index={1} rootD={ROOT_LEFT} beanD={BEAN_LEFT} len={32} delay={0.05} strokeWidth={1.8} />
+        <MorphRoot index={2} rootD={ROOT_RIGHT} beanD={BEAN_RIGHT} len={32} delay={0.05} strokeWidth={1.8} />
+
+        {/* FASE 2 — Raízes secundárias e capilares (somem antes do morphing) */}
+        <g stroke={STROKE} strokeLinecap="round" strokeLinejoin="round" fill="none">
+          {ROOT_EXTRAS.map((r, i) => {
+            const sw = r.len > 12 ? 1.3 : 0.9;
             return (
               <path
                 key={i}
@@ -233,41 +283,10 @@ function CelebrationOverlay({ onDone }: { onDone: () => void }) {
                 strokeWidth={sw}
                 strokeDasharray={r.len}
                 strokeDashoffset={r.len}
-                style={{ animation: `rootDraw-${i} 3s ease-out infinite` }}
+                style={{ animation: `extraDraw-${i} 3s ease-out infinite` }}
               />
             );
           })}
-        </g>
-
-        {/* FASE 3 — Grão de café realista */}
-        <g style={{ animation: "beanAppear 3s ease-out infinite", transformOrigin: "60px 60px" }}>
-          <ellipse
-            cx="60"
-            cy="60"
-            rx="20"
-            ry="26"
-            fill="#c8a97e"
-            opacity="0"
-            style={{ animation: "beanGlow 3s ease-in-out infinite", filter: "blur(6px)" }}
-          />
-          <ellipse
-            cx="60"
-            cy="60"
-            rx="15"
-            ry="22"
-            fill="url(#beanGrad)"
-            stroke="#2a1005"
-            strokeWidth="0.8"
-            filter="url(#goldGlow)"
-          />
-          <path
-            d="M60 40 C58 48 57 55 58 60 C59 65 58 72 60 80"
-            stroke="#1a0a02"
-            strokeWidth="1.4"
-            fill="none"
-            strokeLinecap="round"
-          />
-          <ellipse cx="55" cy="50" rx="4" ry="7" fill="#c8a97e" opacity="0.35" />
         </g>
       </svg>
 
@@ -281,33 +300,32 @@ function CelebrationOverlay({ onDone }: { onDone: () => void }) {
           100% { transform: translateY(0); }
         }
 
-        @keyframes rootsGroup {
-          0%, 27% { opacity: 0; }
-          30%     { opacity: 1; }
-          67%     { opacity: 1; }
-          72%     { opacity: 0; }
-          100%    { opacity: 0; }
-        }
+        ${[0, 1, 2].map((i) => `
+          @keyframes morphRoot-${i} {
+            0%, 27% { opacity: 0; }
+            30%, 95% { opacity: 1; }
+            100% { opacity: 0; }
+          }
+        `).join("\n")}
 
-        ${ROOT_PATHS.map((r, i) => {
+        ${ROOT_EXTRAS.map((r, i) => {
           const startPct = 30 + r.delay * 100;
-          const endPct = Math.min(startPct + 25, 67);
+          const endPct = Math.min(startPct + 20, 55);
           return `
-          @keyframes rootDraw-${i} {
-            0%, ${startPct}% { stroke-dashoffset: ${r.len}; }
-            ${endPct}%, 67%  { stroke-dashoffset: 0; }
-            72%, 100%        { stroke-dashoffset: 0; opacity: 0; }
+          @keyframes extraDraw-${i} {
+            0%, ${startPct}% { stroke-dashoffset: ${r.len}; opacity: 1; }
+            ${endPct}%       { stroke-dashoffset: 0; opacity: 1; }
+            58%              { opacity: 1; }
+            65%, 100%        { opacity: 0; }
           }`;
         }).join("\n")}
+      `}</style>
+    </div>
+  );
+}
 
-        @keyframes beanAppear {
-          0%, 67% { opacity: 0; transform: scale(0.4); }
-          73%     { opacity: 1; transform: scale(1.08); }
-          78%     { transform: scale(1); }
-          100%    { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes beanGlow {
+// (placeholder removido)
+function _UnusedKeyframe() { return null; /* @keyframes beanGlow */
           0%, 67% { opacity: 0; }
           73%     { opacity: 0.9; }
           80%     { opacity: 0.2; }
