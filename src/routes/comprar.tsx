@@ -125,9 +125,123 @@ function CookieGenerator() {
   );
 }
 
+// --- Animação de Celebração (overlay) ---
+function CelebrationOverlay({ onDone }: { onDone: () => void }) {
+  const [fadingOut, setFadingOut] = useState(false);
+
+  useEffect(() => {
+    // 3 ciclos de 3.5s = 10.5s, depois fade-out de 2s
+    const fadeTimer = setTimeout(() => setFadingOut(true), 3500 * 3);
+    const doneTimer = setTimeout(() => onDone(), 3500 * 3 + 2000);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(doneTimer);
+    };
+  }, [onDone]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] grid place-items-center"
+      style={{
+        background: "rgba(0,0,0,0.3)",
+        animation: fadingOut ? "celebFadeOut 2s ease forwards" : "celebFadeIn 0.4s ease both",
+        pointerEvents: "none",
+      }}
+    >
+      <svg
+        width="120"
+        height="120"
+        viewBox="0 0 120 120"
+        style={{ animation: "celebScale 3.5s ease-in-out infinite" }}
+      >
+        {/* Fase 1: Copo caindo (0 - 0.8s) */}
+        <g style={{ animation: "cupFall 3.5s linear infinite", transformOrigin: "60px 60px" }}>
+          <path
+            d="M40 35 L80 35 L75 75 L45 75 Z"
+            fill="#f5f0e8"
+            stroke="#4a200a"
+            strokeWidth="1.5"
+          />
+          <ellipse cx="60" cy="35" rx="20" ry="3" fill="#e8e0d0" stroke="#4a200a" strokeWidth="1.5" />
+        </g>
+
+        {/* Fase 2: Raízes saindo do solo (0.8s - 2.0s) */}
+        <g style={{ animation: "rootsGrow 3.5s linear infinite" }}>
+          <path
+            d="M60 80 L60 100 M60 90 L50 105 M60 90 L70 105 M60 95 L45 110 M60 95 L75 110 M55 100 L48 115 M65 100 L72 115"
+            stroke="#2d6a4f"
+            strokeWidth="2"
+            strokeLinecap="round"
+            fill="none"
+            strokeDasharray="60"
+            strokeDashoffset="60"
+            style={{ animation: "rootsDash 3.5s linear infinite" }}
+          />
+        </g>
+
+        {/* Fase 3: Grão de café com brilho (2.0s - 3.0s) */}
+        <g style={{ animation: "beanAppear 3.5s linear infinite", transformOrigin: "60px 40px" }}>
+          <ellipse
+            cx="60"
+            cy="40"
+            rx="14"
+            ry="20"
+            fill="#4a200a"
+            style={{ filter: "drop-shadow(0 0 8px #c8a97e)" }}
+          />
+          <path d="M60 22 Q58 40 60 58" stroke="#c8a97e" strokeWidth="1.2" fill="none" />
+        </g>
+      </svg>
+
+      <style>{`
+        @keyframes celebFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes celebFadeOut {
+          from { opacity: 1; }
+          to { opacity: 0; }
+        }
+        @keyframes celebScale {
+          0%, 100% { transform: scale(1); }
+          22%, 57%, 85% { transform: scale(1.1); }
+        }
+        @keyframes cupFall {
+          0% { transform: translateY(-120px) rotate(-15deg); opacity: 1; }
+          15% { transform: translateY(0) rotate(15deg); opacity: 1; }
+          22% { transform: translateY(0) rotate(0deg); opacity: 1; }
+          25% { opacity: 0; }
+          100% { opacity: 0; }
+        }
+        @keyframes rootsDash {
+          0%, 22% { stroke-dashoffset: 60; }
+          57% { stroke-dashoffset: 0; }
+          70% { stroke-dashoffset: 0; opacity: 1; }
+          75% { opacity: 0; }
+          100% { stroke-dashoffset: 0; opacity: 0; }
+        }
+        @keyframes rootsGrow {
+          0%, 22% { opacity: 0; }
+          25%, 70% { opacity: 1; }
+          75%, 100% { opacity: 0; }
+        }
+        @keyframes beanAppear {
+          0%, 57% { opacity: 0; transform: scale(0.5); }
+          70% { opacity: 1; transform: scale(1); }
+          78% { opacity: 0.5; transform: scale(1.05); }
+          85% { opacity: 1; transform: scale(1); }
+          95% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(1); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 // --- Página Principal ---
 export function CheckoutPage() {
   const { ref: priceRef, visible: priceVisible } = useInView();
+  const [celebrating, setCelebrating] = useState(false);
 
   return (
     <main className="min-h-screen">
@@ -168,10 +282,16 @@ export function CheckoutPage() {
       {/* CTA Final */}
       <section className="py-28 text-center" style={{ backgroundColor: "var(--accent)", color: "var(--background)" }}>
         <h2 className="font-display font-black text-6xl mb-10">Peça o seu agora.</h2>
-        <button className="bg-background text-accent px-16 py-6 font-bold uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-transform">
-          Finalizar Pedido
+        <button
+          onClick={() => setCelebrating(true)}
+          disabled={celebrating}
+          className="bg-background text-accent px-16 py-6 font-bold uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-transform disabled:opacity-70"
+        >
+          Pedir meu combo
         </button>
       </section>
+
+      {celebrating && <CelebrationOverlay onDone={() => setCelebrating(false)} />}
     </main>
   );
 }
