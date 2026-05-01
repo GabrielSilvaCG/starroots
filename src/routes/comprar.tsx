@@ -282,10 +282,16 @@ export function CheckoutPage() {
       {/* CTA Final */}
       <section className="py-28 text-center" style={{ backgroundColor: "var(--accent)", color: "var(--background)" }}>
         <h2 className="font-display font-black text-6xl mb-10">Peça o seu agora.</h2>
-        <button className="bg-background text-accent px-16 py-6 font-bold uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-transform">
-          Finalizar Pedido
+        <button
+          onClick={() => setCelebrating(true)}
+          disabled={celebrating}
+          className="bg-background text-accent px-16 py-6 font-bold uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-transform disabled:opacity-70"
+        >
+          Pedir meu combo
         </button>
       </section>
+
+      {celebrating && <CelebrationOverlay onDone={() => setCelebrating(false)} />}
     </main>
   );
 }
