@@ -324,19 +324,6 @@ function CelebrationOverlay({ onDone }: { onDone: () => void }) {
   );
 }
 
-// (placeholder removido)
-function _UnusedKeyframe() { return null; /* @keyframes beanGlow */
-          0%, 67% { opacity: 0; }
-          73%     { opacity: 0.9; }
-          80%     { opacity: 0.2; }
-          87%     { opacity: 0.9; }
-          95%     { opacity: 0.2; }
-          100%    { opacity: 0.4; }
-        }
-      `}</style>
-    </div>
-  );
-}
 
 // --- Página Principal ---
 export function CheckoutPage() {
