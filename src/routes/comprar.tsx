@@ -125,25 +125,36 @@ function CookieGenerator() {
   );
 }
 
-// --- Animação de Celebração (overlay) com SVG path morphing ---
-// Todos os paths têm a MESMA estrutura (mesmo número de comandos e pontos)
-// para permitir interpolação suave nativa via SMIL <animate>.
-//
-// Estrutura: M (start) C C C C C Z  — 4 curvas cúbicas + close
-// Isso garante morphing fluido entre copo → raízes → grão.
+// --- Animação de Celebração (overlay) ---
+// Timeline (3s loop):
+//   0.0–0.8s  Copo cai do topo (translateY + easing) e morfa para "tronco vertical"
+//   0.8–2.0s  Raízes orgânicas ramificadas crescem (stroke-dashoffset)
+//   2.0–3.0s  Grão de café aparece com depressão central + glow dourado pulsante
 
 const CUP_PATH =
   "M40 35 C40 35 80 35 80 35 C80 35 78 50 76 60 C74 70 72 75 60 75 C48 75 46 70 44 60 Z";
-const ROOTS_PATH =
-  "M60 40 C50 50 45 60 40 75 C50 70 55 80 60 95 C65 80 70 70 80 75 C75 60 70 50 60 40 Z";
-const BEAN_PATH =
-  "M60 35 C72 35 75 45 75 55 C75 70 70 80 60 80 C50 80 45 70 45 55 C45 45 48 35 60 35 Z";
+const TRUNK_PATH =
+  "M58 40 C58 40 62 40 62 40 C62 40 62 60 62 75 C62 90 62 95 60 95 C58 95 58 90 58 75 Z";
+
+// Raízes orgânicas — múltiplos paths ramificados (referência: raízes pivotantes reais)
+const ROOT_PATHS = [
+  { d: "M60 55 C60 65 59 75 60 95", len: 42, delay: 0 },
+  { d: "M60 65 C54 70 48 76 42 88", len: 32, delay: 0.05 },
+  { d: "M50 75 C46 78 43 82 40 90", len: 18, delay: 0.12 },
+  { d: "M44 84 C42 86 41 88 39 93", len: 10, delay: 0.18 },
+  { d: "M60 65 C66 70 72 76 78 88", len: 32, delay: 0.05 },
+  { d: "M70 75 C74 78 77 82 80 90", len: 18, delay: 0.12 },
+  { d: "M76 84 C78 86 79 88 81 93", len: 10, delay: 0.18 },
+  { d: "M58 80 C52 84 48 88 45 95", len: 20, delay: 0.22 },
+  { d: "M62 80 C68 84 72 88 75 95", len: 20, delay: 0.22 },
+  { d: "M60 90 C58 92 57 94 56 96", len: 8, delay: 0.28 },
+  { d: "M60 90 C62 92 63 94 64 96", len: 8, delay: 0.28 },
+];
 
 function CelebrationOverlay({ onDone }: { onDone: () => void }) {
   const [fadingOut, setFadingOut] = useState(false);
 
   useEffect(() => {
-    // 3 ciclos de 3s = 9s, depois fade-out de 1s
     const fadeTimer = setTimeout(() => setFadingOut(true), 3000 * 3);
     const doneTimer = setTimeout(() => onDone(), 3000 * 3 + 1000);
     return () => {
@@ -161,70 +172,148 @@ function CelebrationOverlay({ onDone }: { onDone: () => void }) {
         pointerEvents: "none",
       }}
     >
-      <svg
-        width="120"
-        height="120"
-        viewBox="0 0 120 120"
-        style={{ animation: "celebDrop 3s ease-in-out infinite" }}
-      >
-        {/* Glow filter para o brilho final */}
+      <svg width="120" height="120" viewBox="0 0 120 120" overflow="visible">
         <defs>
           <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feFlood floodColor="#c8a97e" floodOpacity="1" />
-            <feComposite in2="blur" operator="in" />
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
             <feMerge>
-              <feMergeNode />
+              <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <radialGradient id="beanGrad" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stopColor="#7a3a1a" />
+            <stop offset="60%" stopColor="#4a200a" />
+            <stop offset="100%" stopColor="#2a1005" />
+          </radialGradient>
         </defs>
 
-        {/* Camada de brilho — pisca 2x quando o grão aparece */}
-        <path
-          d={BEAN_PATH}
-          fill="none"
-          stroke="#c8a97e"
-          strokeWidth="2"
-          filter="url(#goldGlow)"
-          style={{ animation: "beanGlow 3s ease-in-out infinite" }}
-        />
+        {/* FASE 1 — Copo caindo + morphing para tronco */}
+        <g style={{ animation: "cupDrop 3s ease-in-out infinite" }}>
+          <path
+            fill="none"
+            stroke="#2d6a4f"
+            strokeWidth="2"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          >
+            <animate
+              attributeName="d"
+              dur="3s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keyTimes="0;0.27;0.32;1"
+              keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0 0 1 1"
+              values={`${CUP_PATH};${CUP_PATH};${TRUNK_PATH};${TRUNK_PATH}`}
+            />
+            <animate
+              attributeName="opacity"
+              dur="3s"
+              repeatCount="indefinite"
+              keyTimes="0;0.32;0.4;1"
+              values="1;1;0;0"
+            />
+          </path>
+        </g>
 
-        {/* Path principal — morfa continuamente entre as 3 silhuetas */}
-        <path
-          fill="none"
+        {/* FASE 2 — Raízes orgânicas crescendo */}
+        <g
           stroke="#2d6a4f"
-          strokeWidth="2"
-          strokeLinejoin="round"
           strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          style={{ animation: "rootsGroup 3s linear infinite" }}
         >
-          <animate
-            attributeName="d"
-            dur="3s"
-            repeatCount="indefinite"
-            calcMode="spline"
-            keyTimes="0;0.4;0.73;1"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"
-            values={`${CUP_PATH};${CUP_PATH};${ROOTS_PATH};${BEAN_PATH}`}
+          {ROOT_PATHS.map((r, i) => {
+            const sw = r.len > 25 ? 1.8 : r.len > 12 ? 1.3 : 0.9;
+            return (
+              <path
+                key={i}
+                d={r.d}
+                strokeWidth={sw}
+                strokeDasharray={r.len}
+                strokeDashoffset={r.len}
+                style={{ animation: `rootDraw-${i} 3s ease-out infinite` }}
+              />
+            );
+          })}
+        </g>
+
+        {/* FASE 3 — Grão de café realista */}
+        <g style={{ animation: "beanAppear 3s ease-out infinite", transformOrigin: "60px 60px" }}>
+          <ellipse
+            cx="60"
+            cy="60"
+            rx="20"
+            ry="26"
+            fill="#c8a97e"
+            opacity="0"
+            style={{ animation: "beanGlow 3s ease-in-out infinite", filter: "blur(6px)" }}
           />
-        </path>
+          <ellipse
+            cx="60"
+            cy="60"
+            rx="15"
+            ry="22"
+            fill="url(#beanGrad)"
+            stroke="#2a1005"
+            strokeWidth="0.8"
+            filter="url(#goldGlow)"
+          />
+          <path
+            d="M60 40 C58 48 57 55 58 60 C59 65 58 72 60 80"
+            stroke="#1a0a02"
+            strokeWidth="1.4"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <ellipse cx="55" cy="50" rx="4" ry="7" fill="#c8a97e" opacity="0.35" />
+        </g>
       </svg>
 
       <style>{`
         @keyframes celebFadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes celebFadeOut { from { opacity: 1; } to { opacity: 0; } }
-        @keyframes celebDrop {
-          0% { transform: translateY(-80px); }
-          30% { transform: translateY(0); }
+
+        @keyframes cupDrop {
+          0%   { transform: translateY(-90px); }
+          27%  { transform: translateY(0); }
           100% { transform: translateY(0); }
         }
+
+        @keyframes rootsGroup {
+          0%, 27% { opacity: 0; }
+          30%     { opacity: 1; }
+          67%     { opacity: 1; }
+          72%     { opacity: 0; }
+          100%    { opacity: 0; }
+        }
+
+        ${ROOT_PATHS.map((r, i) => {
+          const startPct = 30 + r.delay * 100;
+          const endPct = Math.min(startPct + 25, 67);
+          return `
+          @keyframes rootDraw-${i} {
+            0%, ${startPct}% { stroke-dashoffset: ${r.len}; }
+            ${endPct}%, 67%  { stroke-dashoffset: 0; }
+            72%, 100%        { stroke-dashoffset: 0; opacity: 0; }
+          }`;
+        }).join("\n")}
+
+        @keyframes beanAppear {
+          0%, 67% { opacity: 0; transform: scale(0.4); }
+          73%     { opacity: 1; transform: scale(1.08); }
+          78%     { transform: scale(1); }
+          100%    { opacity: 1; transform: scale(1); }
+        }
+
         @keyframes beanGlow {
-          0%, 78% { opacity: 0; }
-          82% { opacity: 1; }
-          86% { opacity: 0; }
-          90% { opacity: 1; }
-          94% { opacity: 0; }
-          100% { opacity: 0; }
+          0%, 67% { opacity: 0; }
+          73%     { opacity: 0.9; }
+          80%     { opacity: 0.2; }
+          87%     { opacity: 0.9; }
+          95%     { opacity: 0.2; }
+          100%    { opacity: 0.4; }
         }
       `}</style>
     </div>
