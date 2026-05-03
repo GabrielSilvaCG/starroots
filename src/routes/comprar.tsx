@@ -41,6 +41,17 @@ function useInView(delay = 0) {
 const LeafIcon = () => <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M22 5C12 5 6 10 6 18c8 1 15-4 16-13Z" stroke="currentColor" strokeWidth="2" /><path d="M7 20c4-5 8-8 14-14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>;
 const StarIcon = () => <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="m14 4 2.6 6.2 6.7.5-5.1 4.4 1.6 6.5-5.8-3.5-5.8 3.5 1.6-6.5-5.1-4.4 6.7-.5L14 4Z" stroke="currentColor" strokeWidth="2" /></svg>;
 
+// --- Sabores disponíveis (cor pastel para o fundo) ---
+const FLAVORS = [
+  { id: "classico",  name: "Café Clássico",  bg: "#efe7d8", accent: "#6b4a2b" },
+  { id: "avela",     name: "Avelã",          bg: "#f0e0cb", accent: "#8a5a36" },
+  { id: "caramelo",  name: "Caramelo",       bg: "#f6e3c4", accent: "#9c6b2f" },
+  { id: "chocolate", name: "Chocolate",      bg: "#e8d6c6", accent: "#5a2e1a" },
+  { id: "baunilha",  name: "Baunilha",       bg: "#f6efd8", accent: "#a8884a" },
+  { id: "matcha",    name: "Matcha",         bg: "#dde8d2", accent: "#3d5a2a" },
+  { id: "morango",   name: "Morango",        bg: "#f4d8db", accent: "#a23a4a" },
+];
+
 // --- O Gerador de Cookie (Onde a mágica acontece) ---
 function CookieGenerator() {
   const [name, setName] = useState("");
