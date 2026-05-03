@@ -145,16 +145,17 @@ const TRUNK_PATH =
 // (mesmo número de comandos). Por isso usamos cubics em todos.
 
 // Raiz central (fissura do grão) — desce reta, depois curva levemente como a fenda
+// Raiz central → vira o "risco" diagonal do símbolo Origem (⊘)
 const ROOT_CENTER = "M60 55 C60 65 60 75 60 95";
-const BEAN_FISSURE = "M60 45 C58 53 57 65 60 80";
+const BEAN_FISSURE = "M44 78 C50 70 70 54 76 46";
 
-// Raiz principal esquerda — vira a metade esquerda do contorno do grão
+// Raiz esquerda → vira a metade esquerda do círculo
 const ROOT_LEFT = "M60 65 C54 70 48 76 42 88";
-const BEAN_LEFT = "M60 45 C45 50 42 65 60 80";
+const BEAN_LEFT = "M60 40 C38 40 38 84 60 84";
 
-// Raiz principal direita — vira a metade direita do contorno do grão
+// Raiz direita → vira a metade direita do círculo
 const ROOT_RIGHT = "M60 65 C66 70 72 76 78 88";
-const BEAN_RIGHT = "M60 45 C75 50 78 65 60 80";
+const BEAN_RIGHT = "M60 40 C82 40 82 84 60 84";
 
 // Raízes secundárias / capilares — apenas crescem e somem
 const ROOT_EXTRAS = [
