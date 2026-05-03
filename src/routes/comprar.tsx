@@ -60,9 +60,10 @@ function CookieGenerator() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Edição numerada — único por sessão (detalhe exclusivo)
-  const editionNumber = useRef(
-    Math.floor(100 + Math.random() * 900)
-  ).current;
+  const [editionNumber, setEditionNumber] = useState<number | null>(null);
+  useEffect(() => {
+    setEditionNumber(Math.floor(100 + Math.random() * 900));
+  }, []);
 
   // Lógica de carregamento da fonte via TSX
   useEffect(() => {
@@ -158,7 +159,7 @@ function CookieGenerator() {
           >
             <span className="text-[9px] tracking-[0.3em] uppercase opacity-70">Edição</span>
             <span className="font-display font-black text-lg tabular-nums">
-              Nº {editionNumber}/365
+              Nº {editionNumber ?? "—"}/365
             </span>
           </div>
 
@@ -210,16 +211,16 @@ const TRUNK_PATH =
 
 // Raiz central (fissura do grão) — desce reta, depois curva levemente como a fenda
 // Raiz central → vira o "risco" diagonal do símbolo Origem (⊘)
-const ROOT_CENTER = "M60 55 C60 65 60 75 60 95";
-const BEAN_FISSURE = "M44 78 C50 70 70 54 76 46";
+const ROOT_CENTER = "M60 55 C60 62 60 72 60 80 C60 88 60 92 60 96";
+const BEAN_FISSURE = "M40 80 C48 72 56 64 60 60 C64 56 72 48 80 40";
 
 // Raiz esquerda → vira a metade esquerda do círculo
-const ROOT_LEFT = "M60 65 C54 70 48 76 42 88";
-const BEAN_LEFT = "M60 40 C38 40 38 84 60 84";
+const ROOT_LEFT = "M60 65 C56 68 52 72 48 78 C46 82 44 86 42 90";
+const BEAN_LEFT = "M60 38 C48 38 38 48 38 60 C38 72 48 82 60 82";
 
 // Raiz direita → vira a metade direita do círculo
-const ROOT_RIGHT = "M60 65 C66 70 72 76 78 88";
-const BEAN_RIGHT = "M60 40 C82 40 82 84 60 84";
+const ROOT_RIGHT = "M60 65 C64 68 68 72 72 78 C74 82 76 86 78 90";
+const BEAN_RIGHT = "M60 38 C72 38 82 48 82 60 C82 72 72 82 60 82";
 
 // Raízes secundárias / capilares — apenas crescem e somem
 const ROOT_EXTRAS = [
