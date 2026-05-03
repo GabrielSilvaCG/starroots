@@ -41,31 +41,41 @@ function useInView(delay = 0) {
 const LeafIcon = () => <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M22 5C12 5 6 10 6 18c8 1 15-4 16-13Z" stroke="currentColor" strokeWidth="2" /><path d="M7 20c4-5 8-8 14-14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>;
 const StarIcon = () => <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="m14 4 2.6 6.2 6.7.5-5.1 4.4 1.6 6.5-5.8-3.5-5.8 3.5 1.6-6.5-5.1-4.4 6.7-.5L14 4Z" stroke="currentColor" strokeWidth="2" /></svg>;
 
+// --- Sabores disponíveis (cor pastel para o fundo) ---
+const FLAVORS = [
+  { id: "classico",  name: "Café Clássico",  bg: "#efe7d8", accent: "#6b4a2b" },
+  { id: "avela",     name: "Avelã",          bg: "#f0e0cb", accent: "#8a5a36" },
+  { id: "caramelo",  name: "Caramelo",       bg: "#f6e3c4", accent: "#9c6b2f" },
+  { id: "chocolate", name: "Chocolate",      bg: "#e8d6c6", accent: "#5a2e1a" },
+  { id: "baunilha",  name: "Baunilha",       bg: "#f6efd8", accent: "#a8884a" },
+  { id: "matcha",    name: "Matcha",         bg: "#dde8d2", accent: "#3d5a2a" },
+  { id: "morango",   name: "Morango",        bg: "#f4d8db", accent: "#a23a4a" },
+];
+
 // --- O Gerador de Cookie (Onde a mágica acontece) ---
 function CookieGenerator() {
   const [name, setName] = useState("");
+  const [flavor, setFlavor] = useState(FLAVORS[0]);
   const [fontLoaded, setFontLoaded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Edição numerada — único por sessão (detalhe exclusivo)
+  const editionNumber = useRef(
+    Math.floor(100 + Math.random() * 900)
+  ).current;
 
   // Lógica de carregamento da fonte via TSX
   useEffect(() => {
     const loadCustomFont = async () => {
       try {
-        // Criando a fonte programaticamente
         const font = new FontFace("fontechocolate", `url(${fontechocolateUrl})`);
-        
-        // Esperando o browser baixar o arquivo
         const loadedFont = await font.load();
-        
-        // Adicionando a fonte ao documento para que o Canvas a enxergue
         document.fonts.add(loadedFont);
-        
         setFontLoaded(true);
       } catch (error) {
         console.error("Falha ao carregar a fonte do cookie:", error);
       }
     };
-
     loadCustomFont();
   }, []);
 
@@ -73,52 +83,106 @@ function CookieGenerator() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !fontLoaded) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const displayText = name.length > 0 ? name : "Starroots";
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Configurações do texto
-    const fontSize = Math.max(30,  80 - displayText.length * 5);
-    ctx.font = `${fontSize}px fontechocolate`; // Referenciando o nome que demos no FontFace
+    const fontSize = Math.max(30, 80 - displayText.length * 5);
+    ctx.font = `${fontSize}px fontechocolate`;
     ctx.fillStyle = "#4a200a";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-
-    // Efeito de "entalhe" no cookie
     ctx.shadowColor = "rgba(40, 15, 5, 0.5)";
     ctx.shadowBlur = 8;
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 3;
-
     ctx.fillText(displayText, canvas.width / 2, canvas.height / 2);
   }, [name, fontLoaded]);
 
   return (
-    <section className="px-6 md:px-10 py-28" style={{ backgroundColor: "var(--cream)", color: "var(--background)" }}>
+    <section
+      className="px-6 md:px-10 py-28 transition-colors duration-700"
+      style={{ backgroundColor: flavor.bg, color: "var(--background)" }}
+    >
       <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <p className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: "var(--accent-foreground)" }}>Personalize seu cookie</p>
-          <h2 className="font-display font-black leading-none mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>O seu nome vira detalhe.</h2>
+          <p
+            className="text-[10px] tracking-[0.4em] uppercase mb-5"
+            style={{ color: flavor.accent }}
+          >
+            Personalize seu combo
+          </p>
+          <h2 className="font-display font-black leading-none mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+            O seu nome vira detalhe.
+          </h2>
+
+          <label className="block text-[10px] tracking-[0.3em] uppercase mb-3 opacity-70">Seu nome</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value.replace(/[^A-Za-z]/g, "").slice(0, 10))}
             maxLength={10}
             placeholder="Digite seu nome"
-            className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none tracking-[0.2em]"
+            className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none tracking-[0.2em] mb-8"
             style={{ borderColor: "var(--background)", color: "var(--background)" }}
           />
+
+          <label className="block text-[10px] tracking-[0.3em] uppercase mb-3 opacity-70">Escolha o sabor</label>
+          <div className="flex flex-wrap gap-2">
+            {FLAVORS.map((f) => {
+              const active = f.id === flavor.id;
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => setFlavor(f)}
+                  className="px-4 py-2 text-xs tracking-[0.15em] uppercase transition-all border"
+                  style={{
+                    borderColor: active ? f.accent : "rgba(10,46,26,0.2)",
+                    backgroundColor: active ? f.accent : "transparent",
+                    color: active ? f.bg : "var(--background)",
+                  }}
+                >
+                  {f.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <div className="relative overflow-hidden rounded-full" style={{ width: "min(360px, 80vw)", height: "min(360px, 80vw)", boxShadow: "0 30px 60px -20px rgba(0,0,0,0.2)" }}>
-            <img src={cookieBase} alt="Cookie Base" className="absolute inset-0 h-full w-full object-cover" />
-            <canvas ref={canvasRef} width={360} height={360} className="absolute inset-0 h-full w-full" style={{ opacity: name.length === 0 ? 0.3 : 1, transition: "opacity 300ms ease" }} />
+          {/* Selo de edição numerada — detalhe único */}
+          <div
+            className="self-end -mb-2 flex items-center gap-3 px-4 py-2 border"
+            style={{ borderColor: flavor.accent, color: flavor.accent }}
+          >
+            <span className="text-[9px] tracking-[0.3em] uppercase opacity-70">Edição</span>
+            <span className="font-display font-black text-lg tabular-nums">
+              Nº {editionNumber}/365
+            </span>
           </div>
-          <p className="font-display italic text-lg opacity-80">Cookie artesanal Starroots</p>
+
+          <div
+            className="relative overflow-hidden rounded-full transition-shadow duration-700"
+            style={{
+              width: "min(360px, 80vw)",
+              height: "min(360px, 80vw)",
+              boxShadow: `0 30px 60px -20px ${flavor.accent}55`,
+            }}
+          >
+            <img src={cookieBase} alt="Cookie Base" className="absolute inset-0 h-full w-full object-cover" />
+            <canvas
+              ref={canvasRef}
+              width={360}
+              height={360}
+              className="absolute inset-0 h-full w-full"
+              style={{ opacity: name.length === 0 ? 0.3 : 1, transition: "opacity 300ms ease" }}
+            />
+          </div>
+
+          <p className="font-display italic text-lg" style={{ color: flavor.accent }}>
+            {flavor.name} — feito para {name || "você"}
+          </p>
         </div>
       </div>
     </section>
@@ -145,16 +209,17 @@ const TRUNK_PATH =
 // (mesmo número de comandos). Por isso usamos cubics em todos.
 
 // Raiz central (fissura do grão) — desce reta, depois curva levemente como a fenda
+// Raiz central → vira o "risco" diagonal do símbolo Origem (⊘)
 const ROOT_CENTER = "M60 55 C60 65 60 75 60 95";
-const BEAN_FISSURE = "M60 45 C58 53 57 65 60 80";
+const BEAN_FISSURE = "M44 78 C50 70 70 54 76 46";
 
-// Raiz principal esquerda — vira a metade esquerda do contorno do grão
+// Raiz esquerda → vira a metade esquerda do círculo
 const ROOT_LEFT = "M60 65 C54 70 48 76 42 88";
-const BEAN_LEFT = "M60 45 C45 50 42 65 60 80";
+const BEAN_LEFT = "M60 40 C38 40 38 84 60 84";
 
-// Raiz principal direita — vira a metade direita do contorno do grão
+// Raiz direita → vira a metade direita do círculo
 const ROOT_RIGHT = "M60 65 C66 70 72 76 78 88";
-const BEAN_RIGHT = "M60 45 C75 50 78 65 60 80";
+const BEAN_RIGHT = "M60 40 C82 40 82 84 60 84";
 
 // Raízes secundárias / capilares — apenas crescem e somem
 const ROOT_EXTRAS = [
