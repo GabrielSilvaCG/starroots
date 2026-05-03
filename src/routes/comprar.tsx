@@ -159,7 +159,7 @@ function CookieGenerator() {
           >
             <span className="text-[9px] tracking-[0.3em] uppercase opacity-70">Edição</span>
             <span className="font-display font-black text-lg tabular-nums">
-              Nº {editionNumber}/365
+              Nº {editionNumber ?? "—"}/365
             </span>
           </div>
 
