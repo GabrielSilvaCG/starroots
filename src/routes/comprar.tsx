@@ -60,9 +60,10 @@ function CookieGenerator() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Edição numerada — único por sessão (detalhe exclusivo)
-  const editionNumber = useRef(
-    Math.floor(100 + Math.random() * 900)
-  ).current;
+  const [editionNumber, setEditionNumber] = useState<number | null>(null);
+  useEffect(() => {
+    setEditionNumber(Math.floor(100 + Math.random() * 900));
+  }, []);
 
   // Lógica de carregamento da fonte via TSX
   useEffect(() => {
