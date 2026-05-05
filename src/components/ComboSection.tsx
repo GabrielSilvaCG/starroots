@@ -163,7 +163,7 @@ export function ComboSection() {
               className="font-display font-black leading-[0.9] tracking-[-0.02em]"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
             >
-              Único. <em className="italic">Numerado.</em><br />Limitado.
+              Único. <em className="italic">Numerado.</em><br />Ilimitado.
             </h3>
           </FadeInSection>
 
