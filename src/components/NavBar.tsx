@@ -93,33 +93,35 @@ export function NavBar() {
 
         {/* Mobile Menu Overlay */}
         <div 
-          className={`fixed inset-0 bg-background transition-all duration-500 md:hidden flex flex-col pt-24 pb-10 px-6 overflow-y-auto ${
+          className={`fixed inset-0 bg-background transition-all duration-500 md:hidden flex flex-col pt-20 pb-10 ${
             mobileMenuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-4"
           }`}
         >
-          <ul className="flex flex-col items-center gap-6 text-[11px] tracking-[0.4em] uppercase text-foreground/70">
-            {links.map((l) => (
-              <li key={l.href} className="w-full text-center">
-                {l.isInternal ? (
-                  <Link
-                    to={l.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="hover:text-accent transition-colors duration-300 block py-3 border-b border-foreground/5"
-                  >
-                    {l.label}
-                  </Link>
-                ) : (
-                  <a
-                    href={l.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="hover:text-accent transition-colors duration-300 block py-3 border-b border-foreground/5"
-                  >
-                    {l.label}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div className="flex-1 overflow-y-auto px-6 py-8">
+            <ul className="flex flex-col items-center gap-1 text-[11px] tracking-[0.4em] uppercase text-foreground/70">
+              {links.map((l) => (
+                <li key={l.href} className="w-full text-center">
+                  {l.isInternal ? (
+                    <Link
+                      to={l.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="hover:text-accent transition-colors duration-300 block py-4 border-b border-foreground/5"
+                    >
+                      {l.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={l.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="hover:text-accent transition-colors duration-300 block py-4 border-b border-foreground/5"
+                    >
+                      {l.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
