@@ -54,12 +54,68 @@ function OrganicRoots() {
   );
 }
 
-function TopicIcon({ icon, color }: { icon: string; color: string }) {
-  if (icon === "coffee") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><ellipse className="coffee-bean" cx="14" cy="14" rx="7" ry="10" stroke={color} strokeWidth="2" /><path className="coffee-bean" d="M14 5c-3 4 3 7 0 18" stroke={color} strokeWidth="1.6" strokeLinecap="round" /></svg>;
-  if (icon === "leaf") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="leaf-icon" d="M22 5C12 5 6 10 6 18c8 1 15-4 16-13Z" stroke={color} strokeWidth="2" /><path className="leaf-icon" d="M7 20c4-5 8-8 14-14" stroke={color} strokeWidth="1.6" strokeLinecap="round" /></svg>;
-  if (icon === "heart") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="heart-icon" d="M14 23S5 18 5 10.5C5 7 7.5 5 10.5 5c1.8 0 3 1 3.5 2 .5-1 1.7-2 3.5-2C20.5 5 23 7 23 10.5 23 18 14 23 14 23Z" stroke={color} strokeWidth="2" strokeLinejoin="round" /></svg>;
-  if (icon === "profit") return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="profit-icon" d="M7 20 20 7m0 0v10m0-10H10" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-  return <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path className="bolt-icon" d="m16 3-9 13h7l-2 9 9-13h-7l2-9Z" stroke={color} strokeWidth="2" strokeLinejoin="round" /></svg>;
+function TopicIcon({ icon, color, visible }: { icon: string; color: string; visible: boolean }) {
+  const commonProps = {
+    width: "28",
+    height: "28",
+    viewBox: "0 0 28 28",
+    fill: "none",
+    style: { color }
+  };
+
+  if (icon === "coffee") {
+    return (
+      <svg {...commonProps}>
+        <g style={{ animation: visible ? "spin 4s linear infinite" : "none", transformOrigin: "14px 14px" }}>
+          <ellipse cx="14" cy="14" rx="7" ry="10" stroke="currentColor" strokeWidth="2" />
+          <path d="M14 5c-3 4 3 7 0 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </g>
+      </svg>
+    );
+  }
+  if (icon === "leaf") {
+    return (
+      <svg {...commonProps}>
+        <g style={{ animation: visible ? "sway 2s ease-in-out infinite" : "none", transformOrigin: "14px 18px" }}>
+          <path d="M22 5C12 5 6 10 6 18c8 1 15-4 16-13Z" stroke="currentColor" strokeWidth="2" />
+          <path d="M7 20c4-5 8-8 14-14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </g>
+      </svg>
+    );
+  }
+  if (icon === "heart") {
+    return (
+      <svg {...commonProps}>
+        <path
+          d="M14 23S5 18 5 10.5C5 7 7.5 5 10.5 5c1.8 0 3 1 3.5 2 .5-1 1.7-2 3.5-2C20.5 5 23 7 23 10.5 23 18 14 23 14 23Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinejoin="round"
+          style={{ animation: visible ? "pulse 1.5s ease-in-out infinite" : "none", transformOrigin: "14px 14px" }}
+        />
+      </svg>
+    );
+  }
+  if (icon === "profit") {
+    return (
+      <svg {...commonProps}>
+        <g style={{ animation: visible ? "float 2s ease-in-out infinite" : "none" }}>
+          <path d="M7 20 20 7m0 0v10m0-10H10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      </svg>
+    );
+  }
+  return (
+    <svg {...commonProps}>
+      <path
+        d="m16 3-9 13h7l-2 9 9-13h-7l2-9Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        style={{ animation: visible ? "flicker 1.2s ease-in-out infinite" : "none" }}
+      />
+    </svg>
+  );
 }
 
 function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number]) {
