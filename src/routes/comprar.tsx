@@ -402,6 +402,116 @@ export function CheckoutPage() {
 
       <CookieGenerator />
 
+      {/* Seção: Um café que planta o futuro */}
+      <section className="px-6 py-32 overflow-hidden" style={{ backgroundColor: "#1a3d2b", color: "white" }}>
+        <div className="max-w-[1100px] mx-auto text-center mb-20">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-primary mb-6">O Ciclo da Vida</p>
+          <h2 className="font-display font-black text-5xl md:text-7xl leading-tight mb-6">
+            Um café que <br /> <em className="italic font-semibold text-primary">planta o futuro.</em>
+          </h2>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto italic">
+            Nossa economia circular garante que nada seja desperdiçado.
+          </p>
+        </div>
+
+        <div className="max-w-[1000px] mx-auto relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 items-center relative z-10">
+            {/* Passo 1: Copo */}
+            <div className="flex flex-col items-center group">
+              <div className="w-24 h-24 mb-6 flex items-center justify-center border border-white/10 rounded-full transition-transform duration-500 group-hover:scale-110">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="text-primary animate-pulse">
+                  <path d="M12 8 L28 8 L26 28 C25 32 15 32 14 28 Z" stroke="currentColor" strokeWidth="2" />
+                  <path d="M10 8 L30 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </div>
+              <p className="font-display font-bold text-xl uppercase tracking-widest">Copo</p>
+              <p className="text-white/40 text-xs mt-2 uppercase tracking-[0.2em]">Biodegradável</p>
+            </div>
+
+            {/* Passo 2: Adubo */}
+            <div className="flex flex-col items-center group">
+              <div className="w-24 h-24 mb-6 flex items-center justify-center border border-white/10 rounded-full transition-transform duration-500 group-hover:scale-110">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="text-primary">
+                  <circle cx="20" cy="20" r="12" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" className="animate-spin-slow" />
+                  <path d="M16 20 L24 20 M20 16 L20 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </div>
+              <p className="font-display font-bold text-xl uppercase tracking-widest">Adubo</p>
+              <p className="text-white/40 text-xs mt-2 uppercase tracking-[0.2em]">Nutrição Orgânica</p>
+            </div>
+
+            {/* Passo 3: Planta */}
+            <div className="flex flex-col items-center group">
+              <div className="w-24 h-24 mb-6 flex items-center justify-center border border-white/10 rounded-full transition-transform duration-500 group-hover:scale-110">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="text-primary animate-bounce-subtle">
+                  <path d="M20 32 V12 M20 12 C25 12 30 15 30 20 M20 18 C15 18 10 21 10 26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="20" cy="12" r="2" fill="currentColor" />
+                </svg>
+              </div>
+              <p className="font-display font-bold text-xl uppercase tracking-widest">Planta</p>
+              <p className="text-white/40 text-xs mt-2 uppercase tracking-[0.2em]">Novo Café</p>
+            </div>
+          </div>
+
+          {/* Setas Conectoras (Desktop) */}
+          <div className="hidden md:block absolute top-12 left-0 w-full h-1 pointer-events-none opacity-20">
+            <svg width="100%" height="10" viewBox="0 0 1000 10" preserveAspectRatio="none">
+              <path d="M200 5 L400 5 M600 5 L800 5" stroke="white" strokeWidth="1" strokeDasharray="5 5" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* Seção: Por que escolher o Starroots? */}
+      <section className="px-6 py-32" style={{ backgroundColor: "#f5f0e8", color: "#1a3d2b" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-20">
+            <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mb-6">Diferenciais</p>
+            <h2 className="font-display font-black text-5xl md:text-6xl tracking-tight">
+              Por que escolher <br /> o Starroots?
+            </h2>
+          </div>
+
+          <div className="space-y-6">
+            {/* Card Sustentável */}
+            <div className="flex flex-col md:flex-row items-center gap-8 p-10 bg-white/50 border border-black/5 hover:bg-white transition-all duration-500 group">
+              <div className="shrink-0 text-primary group-hover:scale-110 transition-transform duration-500">
+                <LeafIcon />
+              </div>
+              <div className="text-center md:text-left">
+                <h4 className="font-display text-2xl font-bold mb-2 uppercase tracking-tight">Sustentável</h4>
+                <p className="text-black/60 font-body">Cada copo utilizado em nossa rede vira adubo de alta qualidade em apenas 90 dias.</p>
+              </div>
+            </div>
+
+            {/* Card Único */}
+            <div className="flex flex-col md:flex-row items-center gap-8 p-10 bg-white/50 border border-black/5 hover:bg-white transition-all duration-500 group">
+              <div className="shrink-0 text-primary group-hover:scale-110 transition-transform duration-500">
+                <StarIcon />
+              </div>
+              <div className="text-center md:text-left">
+                <h4 className="font-display text-2xl font-bold mb-2 uppercase tracking-tight">Único</h4>
+                <p className="text-black/60 font-body">Seu nome é gravado artesanalmente em cada cookie, tornando cada combo uma peça exclusiva.</p>
+              </div>
+            </div>
+
+            {/* Card Acessível */}
+            <div className="flex flex-col md:flex-row items-center gap-8 p-10 bg-white/50 border border-black/5 hover:bg-white transition-all duration-500 group">
+              <div className="shrink-0 text-primary group-hover:scale-110 transition-transform duration-500">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                  <path d="M10 8c-2 2 -2 6 0 8s4 2 6 0s2 -6 0 -8s-4 -2 -6 0z" transform="rotate(-45 12 12)" />
+                </svg>
+              </div>
+              <div className="text-center md:text-left">
+                <h4 className="font-display text-2xl font-bold mb-2 uppercase tracking-tight">Acessível</h4>
+                <p className="text-black/60 font-body">Apenas R$12,50 por um combo completo: bebida à escolha, cookie personalizado e impacto positivo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Final */}
       <section className="py-28 text-center" style={{ backgroundColor: "var(--accent)", color: "var(--background)" }}>
         <h2 className="font-display font-black text-6xl mb-10">Peça o seu agora.</h2>
