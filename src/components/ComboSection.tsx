@@ -13,7 +13,7 @@ const included = [
 const exclusivity = [
   "Cada cookie é feito na hora com o seu nome",
   "O copo é numerado — nenhum é igual ao outro",
-  "Disponível apenas em quantidade limitada por dia",
+  "Disponível em todas as unidades participantes",
 ];
 
 export function ComboSection() {
