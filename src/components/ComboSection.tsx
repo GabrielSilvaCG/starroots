@@ -13,7 +13,7 @@ const included = [
 const exclusivity = [
   "Cada cookie é feito na hora com o seu nome",
   "O copo é numerado — nenhum é igual ao outro",
-  "Disponível apenas em quantidade limitada por dia",
+  "Disponível em todas as unidades participantes",
 ];
 
 export function ComboSection() {
@@ -49,7 +49,7 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-28" style={{ backgroundColor: "#1a3d2b" }}>
         <div className="max-w-[1400px] mx-auto grid md:grid-cols-12 gap-12 md:gap-16 items-center">
           <FadeInSection className="md:col-span-6">
-            <p className="text-[20px] tracking-[0.4em] uppercase text-accent mb-6">Edição limitada</p>
+            <p className="text-[20px] tracking-[0.4em] uppercase text-accent mb-6">Exclusivo</p>
             <h3
   className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
   style={{ fontSize: "clamp(60px, 8vw, 100px)" }} // Mínimo 40px, ideal 8% da tela, máximo 90px
@@ -163,7 +163,7 @@ export function ComboSection() {
               className="font-display font-black leading-[0.9] tracking-[-0.02em]"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
             >
-              Único. <em className="italic">Numerado.</em><br />Limitado.
+              Único. <em className="italic">Numerado.</em><br />Ilimitado.
             </h3>
           </FadeInSection>
 
