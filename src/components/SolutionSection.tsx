@@ -123,7 +123,7 @@ function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number])
 
   return (
     <div ref={ref} style={{ "--topic-delay": `${delay}s` } as CSSProperties} className={`roots-topic flex gap-4 ${visible ? "is-visible" : ""}`}>
-      <div className="mt-1 shrink-0"><TopicIcon icon={icon} color={color} /></div>
+      <div className="mt-1 shrink-0"><TopicIcon icon={icon} color={color} visible={visible} /></div>
       <div>
         <h3 className="font-display text-xl text-foreground">{title}</h3>
         <p className="text-sm leading-relaxed text-foreground/65">{text}</p>
