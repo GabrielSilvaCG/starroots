@@ -56,6 +56,21 @@ export function NavBar() {
             </li>
           ))}
         </ul>
+        <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] font-medium ml-6">
+          <button
+            onClick={() => setLanguage('PT')}
+            className={`transition-colors duration-300 ${language === 'PT' ? 'text-accent' : 'text-foreground/40'}`}
+          >
+            PT
+          </button>
+          <span className="text-foreground/20">/</span>
+          <button
+            onClick={() => setLanguage('EN')}
+            className={`transition-colors duration-300 ${language === 'EN' ? 'text-accent' : 'text-foreground/40'}`}
+          >
+            EN
+          </button>
+        </div>
       </nav>
     </header>
   );

@@ -1,4 +1,5 @@
 import { FadeInSection } from "./FadeInSection";
+import { useLanguage } from "@/store/useLanguage";
 
 const actions = [
   {
@@ -28,16 +29,22 @@ const actions = [
 ];
 
 export function ActionsSection() {
+  const { t } = useLanguage();
   return (
     <section id="acoes" className="scroll-anchor px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 items-end">
         <FadeInSection className="md:col-span-7">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 03 — Pilares</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('chapter.pilares')}</p>
           <h2
             className="font-display font-black leading-[0.9] tracking-[-0.03em]"
             style={{ fontSize: "clamp(2.75rem, 6vw, 5.5rem)" }}
           >
-            Ações que <em className="italic font-semibold text-accent">regeneram.</em>
+            {t('chapter.pilares.title').split(' ').map((word, i, arr) => (
+              <span key={i}>
+                {word === 'regeneram.' || word === 'regenerate.' ? <em className="italic font-semibold text-accent">{word}</em> : word}
+                {i < arr.length - 1 && ' '}
+              </span>
+            ))}
           </h2>
         </FadeInSection>
         <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">

@@ -1,5 +1,6 @@
 import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
+import { useLanguage } from "@/store/useLanguage";
 
 const MARQUEE_WORDS = [
   "Raízes", "Sustentabilidade", "Compostagem", "Energia limpa",
@@ -32,7 +33,7 @@ export function ConclusionSection() {
             <em className="italic font-semibold text-accent">É um movimento.</em>
           </h2>
           <p className="text-xl md:text-2xl font-display italic text-foreground/80 max-w-2xl mx-auto leading-snug">
-            "Dos campos de café até o seu copo, a natureza é a prioridade."
+            {t('footer.tagline')}
           </p>
         </FadeInSection>
       </div>
