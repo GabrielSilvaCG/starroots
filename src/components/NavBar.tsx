@@ -93,18 +93,18 @@ export function NavBar() {
 
         {/* Mobile Menu Overlay */}
         <div 
-          className={`fixed inset-0 bg-background transition-transform duration-500 md:hidden flex flex-col items-center justify-center ${
-            mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+          className={`fixed inset-0 bg-background transition-all duration-500 md:hidden flex flex-col pt-24 pb-10 px-6 overflow-y-auto ${
+            mobileMenuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-4"
           }`}
         >
-          <ul className="flex flex-col items-center gap-8 text-[12px] tracking-[0.4em] uppercase text-foreground/70">
+          <ul className="flex flex-col items-center gap-6 text-[11px] tracking-[0.4em] uppercase text-foreground/70">
             {links.map((l) => (
-              <li key={l.href}>
+              <li key={l.href} className="w-full text-center">
                 {l.isInternal ? (
                   <Link
                     to={l.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="hover:text-accent transition-colors duration-300"
+                    className="hover:text-accent transition-colors duration-300 block py-3 border-b border-foreground/5"
                   >
                     {l.label}
                   </Link>
@@ -112,7 +112,7 @@ export function NavBar() {
                   <a
                     href={l.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="hover:text-accent transition-colors duration-300"
+                    className="hover:text-accent transition-colors duration-300 block py-3 border-b border-foreground/5"
                   >
                     {l.label}
                   </a>
