@@ -4,11 +4,11 @@ import { FloatingLeaves } from "./FloatingLeaves";
 import logoImg from "@/assets/logo.png";
 
 const topics = [
-  { title: "Origem", text: "Café e plantação como ponto de partida.", color: "var(--primary)", delay: 0, icon: "coffee" },
-  { title: "Sustentabilidade", text: "Natureza e ambiente no centro da experiência.", color: "var(--primary)", delay: 0.3, icon: "leaf" },
-  { title: "Comunidade", text: "Pessoas e impacto social como raiz da marca.", color: "var(--accent)", delay: 0.6, icon: "heart" },
-  { title: "Economia", text: "Lucro conectado à circularidade e retorno local.", color: "var(--accent)", delay: 0.9, icon: "profit" },
-  { title: "Inovação", text: "Tecnologia elétrica para reduzir o caminho até você.", color: "var(--primary)", delay: 1.2, icon: "bolt" },
+  { title: "Origem", text: "Café e plantação como ponto de partida.", color: "#a8d5b5", delay: 0, icon: "coffee" },
+  { title: "Sustentabilidade", text: "Natureza e ambiente no centro da experiência.", color: "#a8d5b5", delay: 0.3, icon: "leaf" },
+  { title: "Comunidade", text: "Pessoas e impacto social como raiz da marca.", color: "#a8d5b5", delay: 0.6, icon: "heart" },
+  { title: "Economia", text: "Lucro conectado à circularidade e retorno local.", color: "#a8d5b5", delay: 0.9, icon: "profit" },
+  { title: "Inovação", text: "Tecnologia elétrica para reduzir o caminho até você.", color: "#a8d5b5", delay: 1.2, icon: "bolt" },
 ];
 
 function useRevealOnce(delay = 0) {
