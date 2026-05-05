@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 import { FloatingLeaves } from "./FloatingLeaves";
 import { MagneticLink } from "./MagneticLink";
+import { useLanguage } from "@/store/useLanguage";
 
 const TITLE = "STARROOTS";
 
 export function HeroSection() {
+  const { t } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
@@ -38,7 +40,7 @@ export function HeroSection() {
 
       {/* top meta bar */}
       <div className="relative z-10 max-w-[1400px] w-full mx-auto flex items-center justify-between text-[10px] tracking-[0.35em] uppercase text-foreground/60">
-        <span>Edição 01 — Rebrand</span>
+        <span>Edição 01 — {t('nav.identidade')}</span>
         <span className="hidden md:inline">2025 / Manifesto Verde</span>
       </div>
 
@@ -57,7 +59,7 @@ export function HeroSection() {
         <p
           className={`text-[10px] md:text-xs tracking-[0.5em] uppercase text-accent mb-6 transition-opacity duration-700 ${mounted ? "opacity-100" : "opacity-0"}`}
         >
-          Rebrand Sustentável — Capítulo 01
+          {t('hero.rebrand')} — Capítulo 01
         </p>
 
         <h1
@@ -79,7 +81,9 @@ export function HeroSection() {
           <p
             className={`text-xl md:text-3xl font-display italic leading-snug text-foreground/90 transition-all duration-1000 delay-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
           >
-            "Dos campos de café até o seu copo,<br />a natureza é a prioridade."
+            {t('hero.tagline').split('\n').map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br />}</span>
+            ))}
           </p>
           <MagneticLink>
             <a
@@ -87,7 +91,7 @@ export function HeroSection() {
               className="inline-flex items-center gap-4 text-[11px] tracking-[0.4em] uppercase text-foreground/80 hover:text-accent transition-colors group"
             >
               <span className="w-12 h-px bg-current transition-all duration-500 group-hover:w-24" />
-              Comece a leitura
+              {t('hero.cta')}
             </a>
           </MagneticLink>
         </div>
@@ -103,9 +107,9 @@ export function HeroSection() {
             }}
             aria-hidden="true"
           />
-          Role para baixo
+          {t('hero.scroll')}
         </span>
-        <span className="hidden md:inline">07 capítulos</span>
+        <span className="hidden md:inline">{t('hero.chapters')}</span>
       </div>
     </section>
   );

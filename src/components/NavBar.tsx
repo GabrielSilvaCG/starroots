@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-
-const links = [
-  { href: "/#problema", label: "Problema" },
-  { href: "/#solucao", label: "Solução" },
-  { href: "/sobre", label: "Sobre", isInternal: true },
-  { href: "/#acoes", label: "Ações" },
-  { href: "/#combo", label: "Combo" },
-  { href: "/#impacto", label: "Impacto" },
-  { href: "/#financeiro", label: "Financeiro" },
-  { href: "/#identidade", label: "Identidade" },
-];
+import { useLanguage } from "@/store/useLanguage";
 
 export function NavBar() {
+  const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+
+  const links = [
+    { href: "/#problema", label: t('nav.problema') },
+    { href: "/#solucao", label: t('nav.solucao') },
+    { href: "/sobre", label: t('nav.sobre'), isInternal: true },
+    { href: "/#acoes", label: t('nav.acoes') },
+    { href: "/#combo", label: t('nav.combo') },
+    { href: "/#impacto", label: t('nav.impacto') },
+    { href: "/#financeiro", label: t('nav.financeiro') },
+    { href: "/#identidade", label: t('nav.identidade') },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -56,6 +58,21 @@ export function NavBar() {
             </li>
           ))}
         </ul>
+        <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] font-medium ml-6">
+          <button
+            onClick={() => setLanguage('PT')}
+            className={`transition-colors duration-300 ${language === 'PT' ? 'text-accent' : 'text-foreground/40'}`}
+          >
+            PT
+          </button>
+          <span className="text-foreground/20">/</span>
+          <button
+            onClick={() => setLanguage('EN')}
+            className={`transition-colors duration-300 ${language === 'EN' ? 'text-accent' : 'text-foreground/40'}`}
+          >
+            EN
+          </button>
+        </div>
       </nav>
     </header>
   );

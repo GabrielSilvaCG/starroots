@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useLanguage } from "@/store/useLanguage";
 import { NavBar } from "@/components/NavBar";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { HeroSection } from "@/components/HeroSection";
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { t } = useLanguage();
   return (
     <>
       <ScrollProgress />
@@ -48,11 +50,13 @@ function Index() {
           <div className="max-w-[1400px] mx-auto text-center">
             <div className="w-12 h-px bg-accent mx-auto mb-8" />
             <p className="text-2xl md:text-4xl font-display italic leading-snug max-w-3xl mx-auto mb-12">
-              "Dos campos de café até o seu copo,<br />a natureza é a prioridade."
+              {t('footer.tagline').split('\n').map((line, i) => (
+                <span key={i}>{line}{i === 0 && <br />}</span>
+              ))}
             </p>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] tracking-[0.4em] uppercase text-foreground/50">
               <p>@starroots.ofc</p>
-              <p className="text-center">Projeto desenvolvido por Allyce, Ana Luiza e Gabriel Silva</p>
+              <p className="text-center">{t('footer.developedBy')} Allyce, Ana Luiza e Gabriel Silva</p>
               <p>© Starroots</p>
             </div>
           </div>

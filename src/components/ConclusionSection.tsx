@@ -1,12 +1,14 @@
 import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
-
-const MARQUEE_WORDS = [
-  "Raízes", "Sustentabilidade", "Compostagem", "Energia limpa",
-  "Comunidade", "Café responsável", "Origem", "Frota elétrica",
-];
+import { useLanguage } from "@/store/useLanguage";
 
 export function ConclusionSection() {
+  const { t } = useLanguage();
+  const MARQUEE_WORDS = [
+    t('marquee.roots'), t('marquee.sustainability'), t('marquee.composting'), t('marquee.cleanEnergy'),
+    t('marquee.community'), t('marquee.responsibleCoffee'), t('marquee.origin'), t('marquee.electricFleet'),
+  ];
+
   return (
     <section
       className="relative px-6 md:px-10 py-40 grain-bg leaf-bg overflow-hidden"
@@ -32,7 +34,7 @@ export function ConclusionSection() {
             <em className="italic font-semibold text-accent">É um movimento.</em>
           </h2>
           <p className="text-xl md:text-2xl font-display italic text-foreground/80 max-w-2xl mx-auto leading-snug">
-            "Dos campos de café até o seu copo, a natureza é a prioridade."
+            {t('footer.tagline')}
           </p>
         </FadeInSection>
       </div>

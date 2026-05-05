@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
+import { useLanguage } from "@/store/useLanguage";
 import logoImg from "@/assets/logo.png";
 
 const topics = [
@@ -133,6 +134,7 @@ function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number])
 }
 
 export function SolutionSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="solucao"
@@ -142,13 +144,17 @@ export function SolutionSection() {
       <FloatingLeaves />
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center relative z-10">
         <FadeInSection className="md:col-span-7" variant="left">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 02 — Resposta</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('chapter.response')}</p>
           <h2
             className="font-display font-black leading-[0.88] tracking-[-0.03em] mb-10"
             style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
           >
-            Mesma sereia.<br />
-            <em className="italic font-semibold text-accent">Novas raízes.</em>
+            {t('chapter.response.title').split('\n').map((line, i) => (
+              <span key={i}>
+                {i === 1 ? <em className="italic font-semibold text-accent">{line}</em> : line}
+                {i === 0 && <br />}
+              </span>
+            ))}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl">
             <p className="text-base md:text-lg text-foreground/85 leading-relaxed font-body">
