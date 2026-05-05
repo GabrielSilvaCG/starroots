@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useLanguage } from "@/store/useLanguage";
+import { Menu, X } from "lucide-react";
 
 export function NavBar() {
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const links = [
     { href: "/#problema", label: t('nav.problema') },
@@ -27,16 +29,19 @@ export function NavBar() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${
-        scrolled ? "bg-background/85 backdrop-blur-md" : "bg-transparent"
+        scrolled || mobileMenuOpen ? "bg-background/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <nav className="max-w-[1400px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+      <nav className="max-w-[1400px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between relative">
         <Link
           to="/"
-          className="font-body font-medium text-[11px] tracking-[0.4em] uppercase"
+          className="font-body font-medium text-[11px] tracking-[0.4em] uppercase z-50"
+          onClick={() => setMobileMenuOpen(false)}
         >
           STAR<span className="text-accent">ROOTS</span>
         </Link>
+        
+        {/* Desktop Links */}
         <ul className="hidden md:flex items-center gap-10 text-[10px] tracking-[0.35em] uppercase text-foreground/70">
           {links.map((l) => (
             <li key={l.href}>
@@ -58,20 +63,63 @@ export function NavBar() {
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] font-medium ml-6">
-          <button
-            onClick={() => setLanguage('PT')}
-            className={`transition-colors duration-300 ${language === 'PT' ? 'text-accent' : 'text-foreground/40'}`}
+
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] font-medium z-50">
+            <button
+              onClick={() => setLanguage('PT')}
+              className={`transition-colors duration-300 ${language === 'PT' ? 'text-accent' : 'text-foreground/40'}`}
+            >
+              PT
+            </button>
+            <span className="text-foreground/20">/</span>
+            <button
+              onClick={() => setLanguage('EN')}
+              className={`transition-colors duration-300 ${language === 'EN' ? 'text-accent' : 'text-foreground/40'}`}
+            >
+              EN
+            </button>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden p-2 text-foreground z-50"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            PT
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <span className="text-foreground/20">/</span>
-          <button
-            onClick={() => setLanguage('EN')}
-            className={`transition-colors duration-300 ${language === 'EN' ? 'text-accent' : 'text-foreground/40'}`}
-          >
-            EN
-          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <div 
+          className={`fixed inset-0 bg-background transition-transform duration-500 md:hidden flex flex-col items-center justify-center ${
+            mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+          }`}
+        >
+          <ul className="flex flex-col items-center gap-8 text-[12px] tracking-[0.4em] uppercase text-foreground/70">
+            {links.map((l) => (
+              <li key={l.href}>
+                {l.isInternal ? (
+                  <Link
+                    to={l.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="hover:text-accent transition-colors duration-300"
+                  >
+                    {l.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={l.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="hover:text-accent transition-colors duration-300"
+                  >
+                    {l.label}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </nav>
     </header>
