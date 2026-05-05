@@ -323,6 +323,11 @@ function CelebrationOverlay({ onDone }: { onDone: () => void }) {
       <style>{`
         @keyframes celebFadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes celebFadeOut { from { opacity: 1; } to { opacity: 0; } }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes bounce-subtle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+        .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+        .animate-bounce-subtle { animation: bounce-subtle 3s ease-in-out infinite; }
 
         @keyframes cupDrop {
           0%   { transform: translateY(-90px); }
