@@ -28,6 +28,10 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
+      { "http-equiv": "Content-Security-Policy", content: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://cdn.gpteng.co https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://*;" },
+      { "http-equiv": "X-Content-Type-Options", content: "nosniff" },
+      { "http-equiv": "X-Frame-Options", content: "DENY" },
+      { "http-equiv": "Referrer-Policy", content: "strict-origin-when-cross-origin" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Starroots" },
       { name: "description", content: "Starroots Demo showcases a sustainable rebranding of Starbucks with a modern, professional website." },

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, useMemo, type CSSProperties } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import comboMockup from "@/assets/combo-mockup.png";
 import cookieBase from "@/assets/cookie-sem-nome.png";
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/comprar")({
 });
 
 // --- Partículas e Hooks ---
-const particles = Array.from({ length: 28 }, (_, i) => ({
+const particles = Array.from({ length: 20 }, (_, i) => ({
   left: `${(i * 37) % 100}%`,
   size: 4 + (i % 4) * 2,
   duration: `${10 + (i % 7) * 1.5}s`,
@@ -119,12 +119,14 @@ function CookieGenerator() {
             O seu nome vira detalhe.
           </h2>
 
-          <label className="block text-[10px] tracking-[0.3em] uppercase mb-3 opacity-70">Seu nome</label>
+          <label htmlFor="cookie-name" className="block text-[10px] tracking-[0.3em] uppercase mb-3 opacity-70">Seu nome</label>
           <input
+            id="cookie-name"
             value={name}
-            onChange={(e) => setName(e.target.value.replace(/[^A-Za-z]/g, "").slice(0, 10))}
+            onChange={(e) => setName(e.target.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "").slice(0, 10))}
             maxLength={10}
             placeholder="Digite seu nome"
+            autoComplete="off"
             className="w-full border-0 border-b bg-transparent px-0 py-4 text-lg outline-none tracking-[0.2em] mb-8"
             style={{ borderColor: "var(--background)", color: "var(--background)" }}
           />
@@ -368,9 +370,9 @@ export function CheckoutPage() {
     <main className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-screen grid place-items-center overflow-hidden" style={{ backgroundColor: "var(--background)", color: "white" }}>
-        {particles.map((p, i) => (
+        {useMemo(() => particles.map((p, i) => (
           <span key={i} className="coffee-particle absolute rounded-full" style={{ left: p.left, bottom: "-10vh", width: p.size, height: p.size, backgroundColor: "var(--card)", "--float-duration": p.duration, "--float-delay": p.delay } as any} />
-        ))}
+        )), [])}
         <Link to="/" className="absolute left-10 top-10 text-[10px] uppercase tracking-[0.4em] text-white/60 hover:text-white transition-colors">Voltar</Link>
         <h1 className="relative z-10 font-display font-black text-center leading-[0.9]" style={{ fontSize: "clamp(3rem, 10vw, 8rem)" }}>
           O COMBO QUE <br /> <span style={{ color: "var(--primary)" }}>PLANTA O FUTURO.</span>
