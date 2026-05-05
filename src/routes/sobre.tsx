@@ -24,7 +24,7 @@ function Sobre() {
           className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center"
           style={{ backgroundColor: "#0a2e1a", color: "white" }}
         >
-          <FadeInSection>
+          <FadeInSection delay={0.2}>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display mb-6 max-w-4xl mx-auto leading-tight">
               A história por trás das raízes.
             </h1>
@@ -65,7 +65,7 @@ function Sobre() {
                 { name: "Ana Luiza", role: "ANÁLISE FINANCEIRA E DADOS" },
                 { name: "Gabriel Silva", role: "DESIGN, IDENTIDADE VISUAL E DESENVOLVIMENTO" },
               ].map((member, i) => (
-                <FadeInSection key={member.name} delay={i * 200}>
+                <FadeInSection key={member.name} delay={0.2 * i}>
                   <div className="p-12 border border-white/10 flex flex-col items-center text-center h-full hover:bg-white/5 transition-colors duration-500">
                     <h3 className="text-4xl font-display mb-4">{member.name}</h3>
                     <p className="text-[10px] tracking-[0.35em] uppercase opacity-60 leading-relaxed max-w-[200px]">
