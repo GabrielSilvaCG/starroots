@@ -2,12 +2,13 @@ import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
 import { useLanguage } from "@/store/useLanguage";
 
-const MARQUEE_WORDS = [
-  "Raízes", "Sustentabilidade", "Compostagem", "Energia limpa",
-  "Comunidade", "Café responsável", "Origem", "Frota elétrica",
-];
-
 export function ConclusionSection() {
+  const { t } = useLanguage();
+  const MARQUEE_WORDS = [
+    t('marquee.roots'), t('marquee.sustainability'), t('marquee.composting'), t('marquee.cleanEnergy'),
+    t('marquee.community'), t('marquee.responsibleCoffee'), t('marquee.origin'), t('marquee.electricFleet'),
+  ];
+
   return (
     <section
       className="relative px-6 md:px-10 py-40 grain-bg leaf-bg overflow-hidden"
