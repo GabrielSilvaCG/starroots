@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 
 const links = [
-  { href: "#problema", label: "Problema" },
-  { href: "#solucao", label: "Solução" },
-  { href: "#acoes", label: "Ações" },
-  { href: "#combo", label: "Combo" },
-  { href: "#impacto", label: "Impacto" },
-  { href: "#financeiro", label: "Financeiro" },
-  { href: "#identidade", label: "Identidade" },
+  { href: "/#problema", label: "Problema" },
+  { href: "/#solucao", label: "Solução" },
+  { href: "/sobre", label: "Sobre", isInternal: true },
+  { href: "/#acoes", label: "Ações" },
+  { href: "/#combo", label: "Combo" },
+  { href: "/#impacto", label: "Impacto" },
+  { href: "/#financeiro", label: "Financeiro" },
+  { href: "/#identidade", label: "Identidade" },
 ];
 
 export function NavBar() {
@@ -27,21 +29,30 @@ export function NavBar() {
       }`}
     >
       <nav className="max-w-[1400px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-        <a
-          href="#top"
+        <Link
+          to="/"
           className="font-body font-medium text-[11px] tracking-[0.4em] uppercase"
         >
           STAR<span className="text-accent">ROOTS</span>
-        </a>
+        </Link>
         <ul className="hidden md:flex items-center gap-10 text-[10px] tracking-[0.35em] uppercase text-foreground/70">
           {links.map((l) => (
             <li key={l.href}>
-              <a
-                href={l.href}
-                className="link-grow inline-block hover:text-accent transition-colors duration-300"
-              >
-                {l.label}
-              </a>
+              {l.isInternal ? (
+                <Link
+                  to={l.href}
+                  className="link-grow inline-block hover:text-accent transition-colors duration-300"
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <a
+                  href={l.href}
+                  className="link-grow inline-block hover:text-accent transition-colors duration-300"
+                >
+                  {l.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
