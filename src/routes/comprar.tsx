@@ -159,9 +159,9 @@ function CookieGenerator() {
             className="self-end -mb-2 flex items-center gap-3 px-4 py-2 border"
             style={{ borderColor: flavor.accent, color: flavor.accent }}
           >
-            <span className="text-[9px] tracking-[0.3em] uppercase opacity-70">Edição</span>
+            <span className="text-[9px] tracking-[0.3em] uppercase opacity-70">Exclusividade</span>
             <span className="font-display font-black text-lg tabular-nums">
-              Nº {editionNumber ?? "—"}/365
+              ID #{editionNumber ?? "—"}/ILIMITADO
             </span>
           </div>
 
