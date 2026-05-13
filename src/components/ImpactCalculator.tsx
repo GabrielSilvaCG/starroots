@@ -69,7 +69,7 @@ export function ImpactCalculator() {
           {/* Slider panel */}
           <FadeInSection className="lg:col-span-5 bg-background p-10 md:p-12 top-rule">
             <p className="text-[10px] tracking-[0.4em] uppercase text-foreground/50 mb-6">
-              Copos por mês
+              {t('impact.cupsMonth')}
             </p>
             <p
               className="font-display font-black leading-none tracking-[-0.04em] mb-10 text-foreground"
