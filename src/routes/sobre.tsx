@@ -15,6 +15,7 @@ export const Route = createFileRoute("/sobre")({
 });
 
 function Sobre() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <NavBar />
