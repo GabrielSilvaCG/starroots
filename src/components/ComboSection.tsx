@@ -205,7 +205,7 @@ export function ComboSection() {
               className="text-2xl md:text-3xl font-display italic text-center"
               style={{ color: "#8a6a3e" }}
             >
-              "Porque sustentabilidade também pode ser especial."
+              "{t('combo.exclusivity.quote')}"
             </p>
           </FadeInSection>
         </div>
