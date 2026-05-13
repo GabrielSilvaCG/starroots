@@ -107,9 +107,10 @@ export function NavBar() {
 
         {/* Mobile Menu Overlay */}
         <div 
-          className={`fixed inset-0 bg-[#0a2e1a] transition-all duration-500 ease-in-out lg:hidden flex flex-col pt-24 ${
-            mobileMenuOpen ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-full"
+          className={`fixed inset-0 bg-[#0a2e1a] transition-all duration-500 ease-in-out lg:hidden flex flex-col pt-0 ${
+            mobileMenuOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-105"
           }`}
+          style={{ zIndex: 9999 }}
         >
           <div className="h-full overflow-y-auto px-8 py-12 flex flex-col items-center justify-center text-center">
             <div className="w-full max-w-md mx-auto">
