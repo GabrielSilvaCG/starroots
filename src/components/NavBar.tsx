@@ -128,7 +128,7 @@ export function NavBar() {
       </header>
 
       {/* Mobile Sub-Navigation (Horizontal Scroll) */}
-      <div className={`md:hidden fixed top-16 inset-x-0 z-40 bg-background/80 backdrop-blur-md border-b border-foreground/5 transition-transform duration-300 ${scrolled ? 'translate-y-0' : '-translate-y-full opacity-0'}`}>
+      <div className={`md:hidden fixed top-16 inset-x-0 z-40 bg-background/85 backdrop-blur-md border-b border-foreground/5 transition-all duration-300`}>
         <div className="overflow-x-auto scrollbar-hide">
           <ul className="flex items-center px-6 h-12 gap-8 text-[9px] tracking-[0.2em] uppercase font-medium text-foreground/60">
             {links.map((l) => (
