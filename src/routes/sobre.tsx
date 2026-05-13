@@ -28,10 +28,10 @@ function Sobre() {
         >
           <FadeInSection delay={0.2}>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display mb-6 max-w-4xl mx-auto leading-tight">
-              A história por trás das raízes.
+              {t('about.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl font-display italic max-w-2xl mx-auto" style={{ color: "#a8d5b5" }}>
-              Um projeto escolar que virou um movimento real.
+              {t('about.hero.subtitle')}
             </p>
           </FadeInSection>
         </section>
