@@ -97,11 +97,11 @@ export function NavBar() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="lg:hidden p-2 text-foreground z-50 bg-foreground/5 hover:bg-foreground/10 transition-colors"
+            className="lg:hidden p-2 text-foreground z-[10000] bg-foreground/5 hover:bg-foreground/10 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={24} className="text-white" /> : <Menu size={24} />}
           </button>
         </div>
 
