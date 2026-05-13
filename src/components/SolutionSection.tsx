@@ -135,6 +135,7 @@ function RootTopic({ title, text, color, delay, icon }: { title: string; text: s
 
 export function SolutionSection() {
   const { t } = useLanguage();
+  const topics = getTopics(t);
   return (
     <section
       id="solucao"
@@ -158,14 +159,15 @@ export function SolutionSection() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl">
             <p className="text-base md:text-lg text-foreground/85 leading-relaxed font-body">
-              <strong className="font-semibold text-foreground">Starroots</strong> mantém a alma do café que você conhece —
-              mas planta novas bases. <em className="text-accent not-italic">Roots</em> são raízes,
-              origem, natureza: o ponto onde a marca se reconecta com a terra.
+              {t('chapter.response.desc1').split('Starroots').map((part, i) => (
+                <span key={i}>
+                  {i > 0 && <strong className="font-semibold text-foreground">Starroots</strong>}
+                  {part}
+                </span>
+              ))}
             </p>
             <p className="text-sm md:text-base text-foreground/65 leading-relaxed font-body">
-              Uma identidade que cresce a partir do que sustenta o produto: o solo, as plantações,
-              as comunidades. Cada elemento — da sereia coroada de folhas às embalagens kraft —
-              fala essa mesma língua.
+              {t('chapter.response.desc2')}
             </p>
           </div>
           <div className="root-sanctuary relative mt-14 pl-20 md:pl-44">
