@@ -148,7 +148,7 @@ export function ComboSection() {
               </Link>
             </MagneticLink>
             <p className="text-[10px] tracking-[0.3em] uppercase mt-6 opacity-60">
-              Disponível nas unidades participantes
+              {t('combo.availability')}
             </p>
           </FadeInSection>
         </div>
