@@ -126,12 +126,12 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-32 md:py-40" style={{ backgroundColor: "#c8a97e", color: "#0a2e1a" }}>
         <div className="max-w-[1400px] mx-auto grid md:grid-cols-12 gap-10 items-center">
           <FadeInSection className="md:col-span-7">
-            <p className="text-[10px] tracking-[0.5em] uppercase mb-6 opacity-70">Por apenas</p>
+            <p className="text-[10px] tracking-[0.5em] uppercase mb-6 opacity-70">{t('combo.price.label')}</p>
             <p
               className="font-display font-black leading-[0.8] tracking-[-0.05em]"
               style={{ fontSize: "clamp(4rem, 10vw, 9rem)" }}
             >
-              R$12,50
+              {t('combo.price.value')}
             </p>
           </FadeInSection>
           <FadeInSection delay={0.15} className="md:col-span-5">
