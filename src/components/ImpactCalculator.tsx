@@ -95,7 +95,7 @@ export function ImpactCalculator() {
           {/* Results panel */}
           <FadeInSection delay={0.1} className="lg:col-span-7 bg-background grid grid-cols-1 sm:grid-cols-2">
             <div className="p-10 md:p-12 sm:border-r border-border/40" style={{ borderTop: "3px solid var(--chart-2)" }}>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">CO₂ evitado</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('impact.co2Saved')}</p>
               <p
                 key={`co2-${cups}`}
                 className="font-display font-black leading-[0.9] tracking-[-0.04em] text-foreground animate-rise"
@@ -103,10 +103,10 @@ export function ImpactCalculator() {
               >
                 {format(co2)}
               </p>
-              <p className="text-sm text-foreground/60 mt-4 font-body">por mês</p>
+              <p className="text-sm text-foreground/60 mt-4 font-body">{t('impact.perMonth')}</p>
             </div>
             <div className="p-10 md:p-12" style={{ borderTop: "3px solid var(--accent)" }}>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">Adubo gerado</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('impact.compostGenerated')}</p>
               <p
                 key={`comp-${cups}`}
                 className="font-display font-black leading-[0.9] tracking-[-0.04em] text-foreground animate-rise"
@@ -114,10 +114,10 @@ export function ImpactCalculator() {
               >
                 {format(compost)}
               </p>
-              <p className="text-sm text-foreground/60 mt-4 font-body">via compostagem</p>
+              <p className="text-sm text-foreground/60 mt-4 font-body">{t('impact.viaComposting')}</p>
             </div>
             <div className="sm:col-span-2 p-10 md:p-12 border-t border-border/40">
-              <p className="text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Mensagem</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('impact.messageLabel')}</p>
               <p
                 key={phrase}
                 className="font-display italic text-2xl md:text-3xl leading-snug animate-rise"
