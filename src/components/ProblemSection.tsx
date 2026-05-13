@@ -34,6 +34,7 @@ const getProblems = (t: (key: string) => string) => [
 
 export function ProblemSection() {
   const { t } = useLanguage();
+  const problems = getProblems(t);
   return (
     <section id="problema" className="scroll-anchor relative px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 mb-20">
@@ -54,8 +55,7 @@ export function ProblemSection() {
         <FadeInSection delay={0.15} variant="right" className="md:col-span-6 md:col-start-7 self-end">
           <div className="editorial-rule mb-6 text-foreground/40" />
           <p className="text-base md:text-lg text-foreground/75 leading-relaxed font-body">
-            Por trás de cada copo, há um custo ambiental que precisa ser repensado. O diagnóstico não é
-            confortável — mas é o ponto de partida para qualquer rebrand honesto.
+            {t('chapter.diagnostic.desc')}
           </p>
         </FadeInSection>
       </div>
