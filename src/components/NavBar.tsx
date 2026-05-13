@@ -43,9 +43,7 @@ export function NavBar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled || mobileMenuOpen ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-transparent"
-      }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 bg-background/95 backdrop-blur-md border-b border-white/5 shadow-lg`}
     >
       <nav className="max-w-[1400px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between relative">
         <Link
