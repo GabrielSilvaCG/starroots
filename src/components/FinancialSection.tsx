@@ -92,7 +92,7 @@ export function FinancialSection() {
 
       <FadeInSection delay={0.3}>
         <p className="mt-12 text-center text-accent text-sm md:text-base tracking-wide font-body">
-          Se 30% dos clientes escolherem o combo Starroots → lucro salta de US$3,5B para US$5,1B (+46%)
+          {t('financial.footer')}
         </p>
       </FadeInSection>
     </section>
