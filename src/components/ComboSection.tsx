@@ -136,14 +136,14 @@ export function ComboSection() {
           </FadeInSection>
           <FadeInSection delay={0.15} className="md:col-span-5">
             <p className="text-2xl md:text-3xl font-display italic mb-10 leading-snug">
-              Um combo que cuida de você e do planeta.
+              {t('combo.price.desc')}
             </p>
             <MagneticLink>
               <Link
                 to="/comprar"
                 className="sheen-on-hover group inline-flex items-center gap-5 border-2 border-[#0a2e1a] px-10 py-6 text-sm tracking-[0.3em] uppercase font-semibold bg-[#0a2e1a] text-[#c8a97e] hover:bg-transparent hover:text-[#0a2e1a] transition-colors duration-500"
               >
-                Quero meu combo
+                {t('combo.cta')}
                 <span className="w-8 h-px bg-current transition-all duration-500 group-hover:w-16" />
               </Link>
             </MagneticLink>
