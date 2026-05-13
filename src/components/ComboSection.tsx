@@ -3,20 +3,24 @@ import { Link } from "@tanstack/react-router";
 import { MagneticLink } from "./MagneticLink";
 import { FloatingLeaves } from "./FloatingLeaves";
 import comboMockup from "@/assets/combo-mockup.png";
+import { useLanguage } from "@/store/useLanguage";
 
-const included = [
-  { n: "01", title: "Bebida", text: "À sua escolha, no copo biodegradável Starroots." },
-  { n: "02", title: "Cookie", text: "Artesanal, feito na hora, com o seu nome." },
-  { n: "03", title: "Impacto", text: "Cada compra financia a logística sustentável." },
+const getIncluded = (t: (key: string) => string) => [
+  { n: "01", title: t('combo.item1.title'), text: t('combo.item1.text') },
+  { n: "02", title: t('combo.item2.title'), text: t('combo.item2.text') },
+  { n: "03", title: t('combo.item3.title'), text: t('combo.item3.text') },
 ];
 
-const exclusivity = [
-  "Cada cookie é feito na hora com o seu nome",
-  "O copo é numerado — nenhum é igual ao outro",
-  "Disponível em todas as unidades participantes",
+const getExclusivity = (t: (key: string) => string) => [
+  t('combo.exclusivity.item1'),
+  t('combo.exclusivity.item2'),
+  t('combo.exclusivity.item3'),
 ];
 
 export function ComboSection() {
+  const { t } = useLanguage();
+  const included = getIncluded(t);
+  const exclusivity = getExclusivity(t);
   return (
     <section id="combo" aria-labelledby="combo-title" className="scroll-anchor">
       {/* HEADER — kraft */}
