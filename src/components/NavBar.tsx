@@ -97,19 +97,20 @@ export function NavBar() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="lg:hidden p-2 text-foreground z-50 bg-foreground/5 hover:bg-foreground/10 transition-colors"
+            className="lg:hidden p-2 text-foreground z-[10000] bg-foreground/5 hover:bg-foreground/10 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={24} className="text-white" /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu Overlay */}
         <div 
-          className={`fixed inset-0 bg-[#0a2e1a] transition-all duration-500 ease-in-out lg:hidden flex flex-col pt-24 ${
-            mobileMenuOpen ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-full"
+          className={`fixed inset-0 bg-[#0a2e1a] transition-all duration-500 ease-in-out lg:hidden flex flex-col pt-0 ${
+            mobileMenuOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-105"
           }`}
+          style={{ zIndex: 9999 }}
         >
           <div className="h-full overflow-y-auto px-8 py-12 flex flex-col items-center justify-center text-center">
             <div className="w-full max-w-md mx-auto">
