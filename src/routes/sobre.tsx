@@ -89,8 +89,8 @@ function Sobre() {
         <section className="py-32 px-6" style={{ backgroundColor: "#c8a97e", color: "#0a2e1a" }}>
           <div className="max-w-4xl mx-auto">
             <FadeInSection className="text-center mb-20">
-              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-70">Marcos</h2>
-              <p className="text-3xl font-display italic">O Reconhecimento</p>
+              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-70">{t('about.milestones.tag')}</h2>
+              <p className="text-3xl font-display italic">{t('about.milestones.title')}</p>
             </FadeInSection>
 
             <div className="relative pl-8 md:pl-0">
