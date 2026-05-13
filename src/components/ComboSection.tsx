@@ -173,12 +173,17 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-32" style={{ backgroundColor: "#f5f0e8", color: "#0a2e1a" }}>
         <div className="max-w-[1100px] mx-auto">
           <FadeInSection className="mb-16">
-            <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mb-6">Por que é exclusivo</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mb-6">{t('combo.exclusivity.label')}</p>
             <h3
               className="font-display font-black leading-[0.9] tracking-[-0.02em]"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
             >
-              Único. <em className="italic">Numerado.</em><br />Ilimitado.
+              {t('combo.exclusivity.title').split('Numbered.').map((part, i) => (
+                <span key={i}>
+                  {i > 0 && <em className="italic">Numbered.</em>}
+                  {part}
+                </span>
+              ))}
             </h3>
           </FadeInSection>
 
