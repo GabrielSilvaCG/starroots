@@ -99,9 +99,9 @@ function Sobre() {
               
               <div className="space-y-16">
                 {[
-                  "A professora amou o projeto e pediu pra apresentar em cada sala da escola.",
-                  "O grupo entrou em contato com o Starbucks Brasil.",
-                  "O Starbucks respondeu positivamente e encaminhou para a área responsável."
+                  t('about.milestones.item1'),
+                  t('about.milestones.item2'),
+                  t('about.milestones.item3')
                 ].map((step, i) => (
                   <FadeInSection key={i} className={`flex flex-col md:flex-row items-start md:items-center ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                     <div className="flex-1 w-full" />
