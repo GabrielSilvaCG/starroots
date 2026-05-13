@@ -157,10 +157,14 @@ export function ComboSection() {
       {/* Banner — circularidade */}
       <div className="px-6 md:px-10 py-20" style={{ backgroundColor: "#1a3d2b" }}>
         <FadeInSection className="max-w-[1100px] mx-auto text-center">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Economia circular</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('combo.circularity.label')}</p>
           <p className="text-2xl md:text-4xl font-display italic leading-snug">
-            Seu copo de hoje vira{" "}
-            <span className="not-italic font-semibold text-accent">o adubo do café de amanhã.</span>
+            {t('combo.circularity.text').split('the fertilizer').map((part, i) => (
+              <span key={i}>
+                {i > 0 && <span className="not-italic font-semibold text-accent">the fertilizer</span>}
+                {part}
+              </span>
+            ))}
           </p>
         </FadeInSection>
       </div>
