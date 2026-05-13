@@ -128,7 +128,11 @@ export function NavBar() {
       </header>
 
       {/* Mobile Sub-Navigation (Horizontal Scroll) */}
-      <div className={`md:hidden fixed top-16 inset-x-0 z-40 bg-background/90 backdrop-blur-lg border-b border-foreground/5 transition-all duration-500 ease-in-out ${scrolled && !mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0 pointer-events-none'}`}>
+      <div 
+        className={`md:hidden fixed top-16 inset-x-0 z-[40] bg-background/95 backdrop-blur-md border-b border-foreground/5 transition-all duration-500 ease-in-out ${
+          scrolled && !mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
+        }`}
+      >
         <div className="overflow-x-auto scrollbar-hide py-1">
           <ul className="flex items-center px-6 h-12 gap-8 text-[10px] tracking-[0.25em] uppercase font-medium">
             {links.map((l) => (
