@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useLanguage } from "@/store/useLanguage";
 import { NavBar } from "@/components/NavBar";
 import { FadeInSection } from "@/components/FadeInSection";
 import { ArrowRight } from "lucide-react";
