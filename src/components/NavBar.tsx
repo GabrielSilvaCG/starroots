@@ -111,7 +111,7 @@ export function NavBar() {
             mobileMenuOpen ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-full"
           }`}
         >
-          <div className="flex-1 overflow-y-auto px-8 pb-12">
+          <div className="h-full overflow-y-auto px-8 py-12 flex flex-col items-center justify-center text-center">
             <div className="mb-8">
               <span className="text-[11px] tracking-[0.5em] uppercase text-accent font-bold mb-6 block opacity-80">Menu</span>
               <ul className="flex flex-col gap-1">
