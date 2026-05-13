@@ -128,19 +128,25 @@ export function NavBar() {
       </header>
 
       {/* Mobile Sub-Navigation (Horizontal Scroll) */}
-      <div className={`md:hidden fixed top-16 inset-x-0 z-40 bg-background/85 backdrop-blur-md border-b border-foreground/5 transition-all duration-300`}>
-        <div className="overflow-x-auto scrollbar-hide">
-          <ul className="flex items-center px-6 h-12 gap-8 text-[9px] tracking-[0.2em] uppercase font-medium text-foreground/60">
+      <div className={`md:hidden fixed top-16 inset-x-0 z-40 bg-background/90 backdrop-blur-lg border-b border-foreground/5 transition-all duration-500 ease-in-out ${scrolled && !mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0 pointer-events-none'}`}>
+        <div className="overflow-x-auto scrollbar-hide py-1">
+          <ul className="flex items-center px-6 h-12 gap-8 text-[10px] tracking-[0.25em] uppercase font-medium">
             {links.map((l) => (
               <li key={l.href} className="flex-shrink-0">
                 {l.isInternal ? (
                   <Link 
                     to={l.href} 
-                    className="hover:text-accent transition-colors py-2 block"
+                    className="text-foreground/60 hover:text-accent transition-colors py-2 block"
+                    activeProps={{ className: "text-accent" }}
                     onClick={() => {
                       if (l.href.startsWith('/#')) {
                         const id = l.href.split('#')[1];
-                        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                        const element = document.getElementById(id);
+                        if (element) {
+                          const yOffset = -120; 
+                          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({top: y, behavior: 'smooth'});
+                        }
                       }
                     }}
                   >
@@ -149,12 +155,17 @@ export function NavBar() {
                 ) : (
                   <a 
                     href={l.href} 
-                    className="hover:text-accent transition-colors py-2 block"
+                    className="text-foreground/60 hover:text-accent transition-colors py-2 block"
                     onClick={(e) => {
                       if (l.href.startsWith('/#')) {
                         e.preventDefault();
                         const id = l.href.split('#')[1];
-                        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                        const element = document.getElementById(id);
+                        if (element) {
+                          const yOffset = -120; 
+                          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({top: y, behavior: 'smooth'});
+                        }
                         window.history.pushState(null, '', l.href);
                       }
                     }}
