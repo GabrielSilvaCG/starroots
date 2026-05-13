@@ -1,52 +1,60 @@
 import { FadeInSection } from "./FadeInSection";
+import { useLanguage } from "@/store/useLanguage";
 
-const cards = [
+const getCards = (t: (key: string) => string) => [
   {
-    tag: "Problema",
+    tag: t('financial.tag1'),
     barColor: "var(--chart-1)", // red
-    title: "Copo Atual",
+    title: t('financial.card1.title'),
     value: "US$280M",
-    details: ["4B copos plásticos × US$0,07", "Revestimento plástico — não recicláveis"],
+    details: [t('financial.card1.detail1'), t('financial.card1.detail2')],
   },
   {
-    tag: "Investimento",
+    tag: t('financial.tag2'),
     barColor: "var(--chart-2)", // green
-    title: "Copo PLA",
+    title: t('financial.card2.title'),
     value: "US$480M",
-    details: ["4B copos biodegradáveis × US$0,12", "Custo adicional de US$200M/ano"],
+    details: [t('financial.card2.detail1'), t('financial.card2.detail2')],
   },
   {
-    tag: "Retorno",
+    tag: t('financial.tag3'),
     barColor: "var(--chart-3)", // blue
-    title: "Economia",
+    title: t('financial.card3.title'),
     value: "US$20M",
-    details: ["Compostagem dos copos vira adubo", "15% do adubo poluente substituído"],
+    details: [t('financial.card3.detail1'), t('financial.card3.detail2')],
   },
   {
-    tag: "Resultado",
+    tag: t('financial.tag4'),
     barColor: "var(--chart-4)", // gold
-    title: "Lucro Final",
+    title: t('financial.card4.title'),
     value: "US$5,1B",
-    details: ["Lucro atual: US$3,5B", "+ Cookie (30% clientes): US$1,8B", "+46% sobre lucro atual"],
+    details: [t('financial.card4.detail1'), t('financial.card4.detail2'), t('financial.card4.detail3')],
   },
 ];
 
 export function FinancialSection() {
+  const { t } = useLanguage();
+  const cards = getCards(t);
   return (
     <section id="financeiro" className="scroll-anchor px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 items-end">
         <FadeInSection className="md:col-span-7">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 06 — Business Case</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('chapter.business')}</p>
           <h2
             className="font-display font-black leading-[0.9] tracking-[-0.03em]"
             style={{ fontSize: "clamp(2.75rem, 6vw, 5.5rem)" }}
           >
-            Um projeto que<br /><em className="italic font-semibold text-accent">se paga sozinho.</em>
+            {t('chapter.business.title').split('\n').map((line, i) => (
+              <span key={i}>
+                {i === 1 ? <em className="italic font-semibold text-accent">{line}</em> : line}
+                {i === 0 && <br />}
+              </span>
+            ))}
           </h2>
         </FadeInSection>
         <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
           <p className="text-base text-foreground/70 leading-relaxed font-body">
-            Dos custos operacionais ao retorno final — todos os números fecham a conta.
+            {t('chapter.business.desc')}
           </p>
         </FadeInSection>
       </div>
@@ -84,7 +92,7 @@ export function FinancialSection() {
 
       <FadeInSection delay={0.3}>
         <p className="mt-12 text-center text-accent text-sm md:text-base tracking-wide font-body">
-          Se 30% dos clientes escolherem o combo Starroots → lucro salta de US$3,5B para US$5,1B (+46%)
+          {t('financial.footer')}
         </p>
       </FadeInSection>
     </section>

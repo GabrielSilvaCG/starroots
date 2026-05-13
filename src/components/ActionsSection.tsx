@@ -1,35 +1,36 @@
 import { FadeInSection } from "./FadeInSection";
 import { useLanguage } from "@/store/useLanguage";
 
-const actions = [
+const getActions = (t: (key: string) => string) => [
   {
     n: "01",
-    tag: "Ambiental",
-    title: "Copo que vira adubo",
-    text: "Copos PLA biodegradáveis se decompõem e retornam às plantações de café como adubo. Economia circular real.",
+    tag: t('action.1.tag'),
+    title: t('action.1.title'),
+    text: t('action.1.text'),
   },
   {
     n: "02",
-    tag: "Ambiental",
-    title: "Energia limpa",
-    text: "Frota de entrega 100% elétrica, energia solar nas lojas e estações de carregamento abertas ao público.",
+    tag: t('action.2.tag'),
+    title: t('action.2.title'),
+    text: t('action.2.text'),
   },
   {
     n: "03",
-    tag: "Econômica",
-    title: "Combo Starroots",
-    text: "Bebida + cookie personalizado com o nome do cliente por R$12,50 — receita que financia toda a logística verde.",
+    tag: t('action.3.tag'),
+    title: t('action.3.title'),
+    text: t('action.3.text'),
   },
   {
     n: "04",
-    tag: "Social",
-    title: "Educação ambiental",
-    text: "Parcerias com ONGs para conscientização ambiental de crianças e adolescentes em comunidades.",
+    tag: t('action.4.tag'),
+    title: t('action.4.title'),
+    text: t('action.4.text'),
   },
 ];
 
 export function ActionsSection() {
   const { t } = useLanguage();
+  const actions = getActions(t);
   return (
     <section id="acoes" className="scroll-anchor px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 items-end">
@@ -49,7 +50,7 @@ export function ActionsSection() {
         </FadeInSection>
         <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
           <p className="text-lg md:text-xl text-foreground/75 leading-relaxed font-body">
-            Quatro frentes integradas — ambiental, econômica e social — operando como um sistema vivo.
+            {t('chapter.pilares.desc')}
           </p>
         </FadeInSection>
       </div>

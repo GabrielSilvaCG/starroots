@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useLanguage } from "@/store/useLanguage";
 import { NavBar } from "@/components/NavBar";
 import { FadeInSection } from "@/components/FadeInSection";
 import { ArrowRight } from "lucide-react";
@@ -14,6 +15,7 @@ export const Route = createFileRoute("/sobre")({
 });
 
 function Sobre() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <NavBar />
@@ -26,10 +28,10 @@ function Sobre() {
         >
           <FadeInSection delay={0.2}>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display mb-6 max-w-4xl mx-auto leading-tight">
-              A história por trás das raízes.
+              {t('about.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl font-display italic max-w-2xl mx-auto" style={{ color: "#a8d5b5" }}>
-              Um projeto escolar que virou um movimento real.
+              {t('about.hero.subtitle')}
             </p>
           </FadeInSection>
         </section>
@@ -38,13 +40,18 @@ function Sobre() {
         <section className="py-32 px-6" style={{ backgroundColor: "#f5f0e8" }}>
           <div className="max-w-4xl mx-auto">
             <FadeInSection>
-              <h2 className="text-xs uppercase tracking-[0.5em] mb-12 opacity-50">A Origem</h2>
+              <h2 className="text-xs uppercase tracking-[0.5em] mb-12 opacity-50">{t('about.origin.tag')}</h2>
               <div className="grid md:grid-cols-2 gap-12 items-start">
                 <p className="text-2xl md:text-3xl font-display leading-relaxed text-balance text-[#1a3d2b]">
-                  O projeto nasceu de uma aula de sustentabilidade no curso técnico de administração da <span className="underline decoration-accent underline-offset-4">Escola Estadual Catarina Jorge Gonçalves</span> em Contagem-MG.
+                  {t('about.origin.title').split('Escola Estadual Catarina Jorge Gonçalves').map((part, i) => (
+                    <span key={i}>
+                      {i > 0 && <span className="underline decoration-accent underline-offset-4">Escola Estadual Catarina Jorge Gonçalves</span>}
+                      {part}
+                    </span>
+                  ))}
                 </p>
                 <p className="text-lg leading-relaxed text-foreground/70">
-                  A professora desafiou o grupo a escolher uma empresa real e propor mudanças sustentáveis genuínas. Escolheram o Starbucks para repensar como uma gigante mundial poderia adotar práticas de economia circular de forma viável e impactante.
+                  {t('about.origin.text')}
                 </p>
               </div>
             </FadeInSection>
@@ -55,15 +62,15 @@ function Sobre() {
         <section className="py-32 px-6" style={{ backgroundColor: "#1a3d2b", color: "white" }}>
           <div className="max-w-6xl mx-auto">
             <FadeInSection className="text-center mb-20">
-              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-50">A Equipe</h2>
-              <p className="text-3xl font-display italic">Os idealizadores do Starroots</p>
+              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-50">{t('about.team.tag')}</h2>
+              <p className="text-3xl font-display italic">{t('about.team.title')}</p>
             </FadeInSection>
             
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { name: "Allyce", role: "PARTE ESCRITA E PESQUISA" },
-                { name: "Ana Luiza", role: "ANÁLISE FINANCEIRA E DADOS" },
-                { name: "Gabriel Silva", role: "DESIGN, IDENTIDADE VISUAL E DESENVOLVIMENTO" },
+                { name: "Allyce", role: t('about.team.member1.role') },
+                { name: "Ana Luiza", role: t('about.team.member2.role') },
+                { name: "Gabriel Silva", role: t('about.team.member3.role') },
               ].map((member, i) => (
                 <FadeInSection key={member.name} delay={0.2 * i}>
                   <div className="p-12 border border-white/10 flex flex-col items-center text-center h-full hover:bg-white/5 transition-colors duration-500">
@@ -82,8 +89,8 @@ function Sobre() {
         <section className="py-32 px-6" style={{ backgroundColor: "#c8a97e", color: "#0a2e1a" }}>
           <div className="max-w-4xl mx-auto">
             <FadeInSection className="text-center mb-20">
-              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-70">Marcos</h2>
-              <p className="text-3xl font-display italic">O Reconhecimento</p>
+              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-70">{t('about.milestones.tag')}</h2>
+              <p className="text-3xl font-display italic">{t('about.milestones.title')}</p>
             </FadeInSection>
 
             <div className="relative pl-8 md:pl-0">
@@ -92,9 +99,9 @@ function Sobre() {
               
               <div className="space-y-16">
                 {[
-                  "A professora amou o projeto e pediu pra apresentar em cada sala da escola.",
-                  "O grupo entrou em contato com o Starbucks Brasil.",
-                  "O Starbucks respondeu positivamente e encaminhou para a área responsável."
+                  t('about.milestones.item1'),
+                  t('about.milestones.item2'),
+                  t('about.milestones.item3')
                 ].map((step, i) => (
                   <FadeInSection key={i} className={`flex flex-col md:flex-row items-start md:items-center ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                     <div className="flex-1 w-full" />
@@ -121,13 +128,13 @@ function Sobre() {
           <FadeInSection>
             <div className="w-12 h-px bg-accent mx-auto mb-12" />
             <h2 className="text-3xl md:text-5xl font-display italic mb-12 max-w-3xl mx-auto">
-              "Dos campos de café até o seu copo,<br />a natureza é a prioridade."
+              {t('footer.tagline')}
             </h2>
             <Link 
               to="/comprar"
               className="inline-flex items-center gap-3 px-10 py-5 bg-accent text-[#0a2e1a] text-[10px] tracking-[0.4em] uppercase font-medium hover:bg-white transition-all duration-500 group"
             >
-              Comprar Agora
+              {t('about.final.cta')}
               <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
             </Link>
           </FadeInSection>

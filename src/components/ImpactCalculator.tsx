@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
 import { Slider } from "@/components/ui/slider";
+import { useLanguage } from "@/store/useLanguage";
 
 // Approximate impact factors per disposable cup avoided:
 // - CO₂ saved: ~110g per cup (production + disposal vs PLA)
@@ -9,12 +10,12 @@ import { Slider } from "@/components/ui/slider";
 const CO2_PER_CUP = 110;
 const COMPOST_PER_CUP = 12;
 
-function motivational(cups: number) {
-  if (cups <= 5) return "Pequenos gestos plantam grandes florestas.";
-  if (cups <= 15) return "Você já está virando parte da raiz.";
-  if (cups <= 30) return "Seu café move um ciclo inteiro de vida.";
-  if (cups <= 60) return "Você é solo fértil para a próxima safra.";
-  return "Você é, literalmente, uma floresta em movimento.";
+function motivational(cups: number, t: (key: string) => string) {
+  if (cups <= 5) return t('impact.m1');
+  if (cups <= 15) return t('impact.m2');
+  if (cups <= 30) return t('impact.m3');
+  if (cups <= 60) return t('impact.m4');
+  return t('impact.m5');
 }
 
 function format(n: number) {
@@ -23,15 +24,16 @@ function format(n: number) {
 }
 
 export function ImpactCalculator() {
+  const { t } = useLanguage();
   const [cups, setCups] = useState(20);
 
   const { co2, compost, phrase } = useMemo(() => {
     return {
       co2: cups * CO2_PER_CUP,
       compost: cups * COMPOST_PER_CUP,
-      phrase: motivational(cups),
+      phrase: motivational(cups, t),
     };
-  }, [cups]);
+  }, [cups, t]);
 
   return (
     <section
@@ -43,17 +45,22 @@ export function ImpactCalculator() {
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 items-end">
           <FadeInSection className="md:col-span-7">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 05 — Calcule</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('chapter.calculate')}</p>
             <h2
               className="font-display font-black leading-[0.9] tracking-[-0.03em]"
               style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
             >
-              Seu café,<br /><em className="italic font-semibold text-accent">seu impacto.</em>
+              {t('chapter.calculate.title').split('\n').map((line, i) => (
+                <span key={i}>
+                  {i === 1 ? <em className="italic font-semibold text-accent">{line}</em> : line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
             <p className="text-base text-foreground/70 leading-relaxed font-body">
-              Mova o controle e descubra quanto CO₂ você evita e quanto adubo retorna ao solo todo mês.
+              {t('chapter.calculate.desc')}
             </p>
           </FadeInSection>
         </div>
@@ -62,7 +69,7 @@ export function ImpactCalculator() {
           {/* Slider panel */}
           <FadeInSection className="lg:col-span-5 bg-background p-10 md:p-12 top-rule">
             <p className="text-[10px] tracking-[0.4em] uppercase text-foreground/50 mb-6">
-              Copos por mês
+              {t('impact.cupsMonth')}
             </p>
             <p
               className="font-display font-black leading-none tracking-[-0.04em] mb-10 text-foreground"
@@ -88,7 +95,7 @@ export function ImpactCalculator() {
           {/* Results panel */}
           <FadeInSection delay={0.1} className="lg:col-span-7 bg-background grid grid-cols-1 sm:grid-cols-2">
             <div className="p-10 md:p-12 sm:border-r border-border/40" style={{ borderTop: "3px solid var(--chart-2)" }}>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">CO₂ evitado</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('impact.co2Saved')}</p>
               <p
                 key={`co2-${cups}`}
                 className="font-display font-black leading-[0.9] tracking-[-0.04em] text-foreground animate-rise"
@@ -96,10 +103,10 @@ export function ImpactCalculator() {
               >
                 {format(co2)}
               </p>
-              <p className="text-sm text-foreground/60 mt-4 font-body">por mês</p>
+              <p className="text-sm text-foreground/60 mt-4 font-body">{t('impact.perMonth')}</p>
             </div>
             <div className="p-10 md:p-12" style={{ borderTop: "3px solid var(--accent)" }}>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">Adubo gerado</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('impact.compostGenerated')}</p>
               <p
                 key={`comp-${cups}`}
                 className="font-display font-black leading-[0.9] tracking-[-0.04em] text-foreground animate-rise"
@@ -107,10 +114,10 @@ export function ImpactCalculator() {
               >
                 {format(compost)}
               </p>
-              <p className="text-sm text-foreground/60 mt-4 font-body">via compostagem</p>
+              <p className="text-sm text-foreground/60 mt-4 font-body">{t('impact.viaComposting')}</p>
             </div>
             <div className="sm:col-span-2 p-10 md:p-12 border-t border-border/40">
-              <p className="text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Mensagem</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('impact.messageLabel')}</p>
               <p
                 key={phrase}
                 className="font-display italic text-2xl md:text-3xl leading-snug animate-rise"

@@ -4,12 +4,12 @@ import { FloatingLeaves } from "./FloatingLeaves";
 import { useLanguage } from "@/store/useLanguage";
 import logoImg from "@/assets/logo.png";
 
-const topics = [
-  { title: "Origem", text: "Café e plantação como ponto de partida.", color: "#a8d5b5", delay: 0, icon: "coffee" },
-  { title: "Sustentabilidade", text: "Natureza e ambiente no centro da experiência.", color: "#a8d5b5", delay: 0.3, icon: "leaf" },
-  { title: "Comunidade", text: "Pessoas e impacto social como raiz da marca.", color: "#a8d5b5", delay: 0.6, icon: "heart" },
-  { title: "Economia", text: "Lucro conectado à circularidade e retorno local.", color: "#a8d5b5", delay: 0.9, icon: "profit" },
-  { title: "Inovação", text: "Tecnologia elétrica para reduzir o caminho até você.", color: "#a8d5b5", delay: 1.2, icon: "bolt" },
+const getTopics = (t: (key: string) => string) => [
+  { title: t('solution.origin.title'), text: t('solution.origin.text'), color: "#a8d5b5", delay: 0, icon: "coffee" },
+  { title: t('solution.sustainability.title'), text: t('solution.sustainability.text'), color: "#a8d5b5", delay: 0.3, icon: "leaf" },
+  { title: t('solution.community.title'), text: t('solution.community.text'), color: "#a8d5b5", delay: 0.6, icon: "heart" },
+  { title: t('solution.economy.title'), text: t('solution.economy.text'), color: "#a8d5b5", delay: 0.9, icon: "profit" },
+  { title: t('solution.innovation.title'), text: t('solution.innovation.text'), color: "#a8d5b5", delay: 1.2, icon: "bolt" },
 ];
 
 function useRevealOnce(delay = 0) {
@@ -119,7 +119,7 @@ function TopicIcon({ icon, color, visible }: { icon: string; color: string; visi
   );
 }
 
-function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number]) {
+function RootTopic({ title, text, color, delay, icon }: { title: string; text: string; color: string; delay: number; icon: string }) {
   const { ref, visible } = useRevealOnce(delay);
 
   return (
@@ -135,6 +135,7 @@ function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number])
 
 export function SolutionSection() {
   const { t } = useLanguage();
+  const topics = getTopics(t);
   return (
     <section
       id="solucao"
@@ -158,14 +159,15 @@ export function SolutionSection() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl">
             <p className="text-base md:text-lg text-foreground/85 leading-relaxed font-body">
-              <strong className="font-semibold text-foreground">Starroots</strong> mantém a alma do café que você conhece —
-              mas planta novas bases. <em className="text-accent not-italic">Roots</em> são raízes,
-              origem, natureza: o ponto onde a marca se reconecta com a terra.
+              {t('chapter.response.desc1').split('Starroots').map((part, i) => (
+                <span key={i}>
+                  {i > 0 && <strong className="font-semibold text-foreground">Starroots</strong>}
+                  {part}
+                </span>
+              ))}
             </p>
             <p className="text-sm md:text-base text-foreground/65 leading-relaxed font-body">
-              Uma identidade que cresce a partir do que sustenta o produto: o solo, as plantações,
-              as comunidades. Cada elemento — da sereia coroada de folhas às embalagens kraft —
-              fala essa mesma língua.
+              {t('chapter.response.desc2')}
             </p>
           </div>
           <div className="root-sanctuary relative mt-14 pl-20 md:pl-44">

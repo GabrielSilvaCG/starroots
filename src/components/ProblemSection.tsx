@@ -1,39 +1,40 @@
 import { FadeInSection } from "./FadeInSection";
 import { useLanguage } from "@/store/useLanguage";
 
-const problems = [
+const getProblems = (t: (key: string) => string) => [
   {
     stat: "6B",
-    unit: "copos / ano",
-    title: "Descartáveis com plástico",
-    text: "Mais de 6 bilhões de copos por ano com revestimento plástico interno — não recicláveis em larga escala.",
+    unit: t('problem.stat1.unit'),
+    title: t('problem.stat1.title'),
+    text: t('problem.stat1.text'),
     accent: "var(--accent)",
   },
   {
     stat: "+30%",
-    unit: "CO₂ vs 2019",
-    title: "Emissões em alta",
-    text: "Logística global gera emissões massivas. Em 2024 os níveis seguem acima do patamar pré-pandemia.",
+    unit: t('problem.stat2.unit'),
+    title: t('problem.stat2.title'),
+    text: t('problem.stat2.text'),
     accent: "var(--primary)",
   },
   {
     stat: "Tons.",
-    unit: "diariamente",
-    title: "Desperdício alimentar",
-    text: "Toneladas de alimentos descartadas todos os dias nas lojas ao redor do mundo, sem reaproveitamento.",
+    unit: t('problem.stat3.unit'),
+    title: t('problem.stat3.title'),
+    text: t('problem.stat3.text'),
     accent: "var(--accent)",
   },
   {
     stat: "24/7",
-    unit: "consumo intenso",
-    title: "Energia & água",
-    text: "Alto consumo energético e hídrico em milhares de operações simultâneas, com pouca recuperação.",
+    unit: t('problem.stat4.unit'),
+    title: t('problem.stat4.title'),
+    text: t('problem.stat4.text'),
     accent: "var(--primary)",
   },
 ];
 
 export function ProblemSection() {
   const { t } = useLanguage();
+  const problems = getProblems(t);
   return (
     <section id="problema" className="scroll-anchor relative px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 mb-20">
@@ -54,8 +55,7 @@ export function ProblemSection() {
         <FadeInSection delay={0.15} variant="right" className="md:col-span-6 md:col-start-7 self-end">
           <div className="editorial-rule mb-6 text-foreground/40" />
           <p className="text-base md:text-lg text-foreground/75 leading-relaxed font-body">
-            Por trás de cada copo, há um custo ambiental que precisa ser repensado. O diagnóstico não é
-            confortável — mas é o ponto de partida para qualquer rebrand honesto.
+            {t('chapter.diagnostic.desc')}
           </p>
         </FadeInSection>
       </div>

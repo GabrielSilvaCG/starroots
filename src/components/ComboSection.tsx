@@ -3,20 +3,24 @@ import { Link } from "@tanstack/react-router";
 import { MagneticLink } from "./MagneticLink";
 import { FloatingLeaves } from "./FloatingLeaves";
 import comboMockup from "@/assets/combo-mockup.png";
+import { useLanguage } from "@/store/useLanguage";
 
-const included = [
-  { n: "01", title: "Bebida", text: "À sua escolha, no copo biodegradável Starroots." },
-  { n: "02", title: "Cookie", text: "Artesanal, feito na hora, com o seu nome." },
-  { n: "03", title: "Impacto", text: "Cada compra financia a logística sustentável." },
+const getIncluded = (t: (key: string) => string) => [
+  { n: "01", title: t('combo.item1.title'), text: t('combo.item1.text') },
+  { n: "02", title: t('combo.item2.title'), text: t('combo.item2.text') },
+  { n: "03", title: t('combo.item3.title'), text: t('combo.item3.text') },
 ];
 
-const exclusivity = [
-  "Cada cookie é feito na hora com o seu nome",
-  "O copo é numerado — nenhum é igual ao outro",
-  "Disponível em todas as unidades participantes",
+const getExclusivity = (t: (key: string) => string) => [
+  t('combo.exclusivity.item1'),
+  t('combo.exclusivity.item2'),
+  t('combo.exclusivity.item3'),
 ];
 
 export function ComboSection() {
+  const { t } = useLanguage();
+  const included = getIncluded(t);
+  const exclusivity = getExclusivity(t);
   return (
     <section id="combo" aria-labelledby="combo-title" className="scroll-anchor">
       {/* HEADER — kraft */}
@@ -29,17 +33,21 @@ export function ComboSection() {
         </div>
         <div className="max-w-[1400px] mx-auto relative z-10">
           <FadeInSection>
-            <p className="text-[10px] tracking-[0.5em] uppercase mb-8 opacity-70">Capítulo 04 — Lançamento</p>
+            <p className="text-[10px] tracking-[0.5em] uppercase mb-8 opacity-70">{t('chapter.launch')}</p>
             <h2
               id="combo-title"
               className="font-display font-black leading-[0.85] tracking-[-0.03em] mb-10"
               style={{ fontSize: "clamp(3rem, 9vw, 8rem)" }}
             >
-              Conheça o<br />
-              <em className="italic font-semibold">Combo Starroots.</em>
+              {t('chapter.launch.title').split('\n').map((line, i) => (
+                <span key={i}>
+                  {i === 1 ? <em className="italic font-semibold">{line}</em> : line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
             </h2>
             <p className="text-xl md:text-3xl font-display italic max-w-3xl">
-              Exclusivo. Sustentável. Com o seu nome.
+              {t('chapter.launch.subtitle')}
             </p>
           </FadeInSection>
         </div>
@@ -51,16 +59,14 @@ export function ComboSection() {
           <FadeInSection className="md:col-span-6">
             <p className="text-[20px] tracking-[0.4em] uppercase text-accent mb-6">Exclusivo</p>
             <h3
-  className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
-  style={{ fontSize: "clamp(60px, 8vw, 100px)" }} // Mínimo 40px, ideal 8% da tela, máximo 90px
->
-  O copo que tem nome.<br />
-  <em className="italic font-semibold text-accent">O cookie que é só seu.</em>
-</h3>
+              className="font-display font-black leading-[0.92] tracking-[-0.02em] mb-8"
+              style={{ fontSize: "clamp(60px, 8vw, 100px)" }}
+            >
+              {t('combo.title1')}<br />
+              <em className="italic font-semibold text-accent">{t('combo.title2')}</em>
+            </h3>
             <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-body max-w-xl">
-              O Combo Starroots é mais do que uma compra — é uma experiência. Sua bebida vem no copo
-              biodegradável que, após o uso, vira adubo nas plantações de café. E o cookie artesanal?
-              Feito com o seu nome.
+              {t('chapter.launch.desc')}
             </p>
           </FadeInSection>
 
@@ -89,9 +95,14 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-28 bg-background">
         <div className="max-w-[1400px] mx-auto">
           <FadeInSection className="mb-14">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4">O que está incluso</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4">{t('combo.included.label')}</p>
             <h3 className="font-display font-bold text-3xl md:text-5xl tracking-[-0.02em]">
-              Três elementos. <em className="italic text-accent">Um propósito.</em>
+              {t('combo.included.title').split(' ').map((word, i) => (
+                <span key={i}>
+                  {i > 1 ? <em className="italic text-accent">{word}</em> : word}
+                  {i < 3 && ' '}
+                </span>
+              ))}
             </h3>
           </FadeInSection>
 
@@ -115,29 +126,29 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-32 md:py-40" style={{ backgroundColor: "#c8a97e", color: "#0a2e1a" }}>
         <div className="max-w-[1400px] mx-auto grid md:grid-cols-12 gap-10 items-center">
           <FadeInSection className="md:col-span-7">
-            <p className="text-[10px] tracking-[0.5em] uppercase mb-6 opacity-70">Por apenas</p>
+            <p className="text-[10px] tracking-[0.5em] uppercase mb-6 opacity-70">{t('combo.price.label')}</p>
             <p
               className="font-display font-black leading-[0.8] tracking-[-0.05em]"
               style={{ fontSize: "clamp(4rem, 10vw, 9rem)" }}
             >
-              R$12,50
+              {t('combo.price.value')}
             </p>
           </FadeInSection>
           <FadeInSection delay={0.15} className="md:col-span-5">
             <p className="text-2xl md:text-3xl font-display italic mb-10 leading-snug">
-              Um combo que cuida de você e do planeta.
+              {t('combo.price.desc')}
             </p>
             <MagneticLink>
               <Link
                 to="/comprar"
                 className="sheen-on-hover group inline-flex items-center gap-5 border-2 border-[#0a2e1a] px-10 py-6 text-sm tracking-[0.3em] uppercase font-semibold bg-[#0a2e1a] text-[#c8a97e] hover:bg-transparent hover:text-[#0a2e1a] transition-colors duration-500"
               >
-                Quero meu combo
+                {t('combo.cta')}
                 <span className="w-8 h-px bg-current transition-all duration-500 group-hover:w-16" />
               </Link>
             </MagneticLink>
             <p className="text-[10px] tracking-[0.3em] uppercase mt-6 opacity-60">
-              Disponível nas unidades participantes
+              {t('combo.availability')}
             </p>
           </FadeInSection>
         </div>
@@ -146,10 +157,14 @@ export function ComboSection() {
       {/* Banner — circularidade */}
       <div className="px-6 md:px-10 py-20" style={{ backgroundColor: "#1a3d2b" }}>
         <FadeInSection className="max-w-[1100px] mx-auto text-center">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Economia circular</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('combo.circularity.label')}</p>
           <p className="text-2xl md:text-4xl font-display italic leading-snug">
-            Seu copo de hoje vira{" "}
-            <span className="not-italic font-semibold text-accent">o adubo do café de amanhã.</span>
+            {t('combo.circularity.text').split('the fertilizer').map((part, i) => (
+              <span key={i}>
+                {i > 0 && <span className="not-italic font-semibold text-accent">the fertilizer</span>}
+                {part}
+              </span>
+            ))}
           </p>
         </FadeInSection>
       </div>
@@ -158,12 +173,17 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-32" style={{ backgroundColor: "#f5f0e8", color: "#0a2e1a" }}>
         <div className="max-w-[1100px] mx-auto">
           <FadeInSection className="mb-16">
-            <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mb-6">Por que é exclusivo</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase opacity-60 mb-6">{t('combo.exclusivity.label')}</p>
             <h3
               className="font-display font-black leading-[0.9] tracking-[-0.02em]"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
             >
-              Único. <em className="italic">Numerado.</em><br />Ilimitado.
+              {t('combo.exclusivity.title').split('Numbered.').map((part, i) => (
+                <span key={i}>
+                  {i > 0 && <em className="italic">Numbered.</em>}
+                  {part}
+                </span>
+              ))}
             </h3>
           </FadeInSection>
 
@@ -185,7 +205,7 @@ export function ComboSection() {
               className="text-2xl md:text-3xl font-display italic text-center"
               style={{ color: "#8a6a3e" }}
             >
-              "Porque sustentabilidade também pode ser especial."
+              "{t('combo.exclusivity.quote')}"
             </p>
           </FadeInSection>
         </div>
