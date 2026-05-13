@@ -1,30 +1,30 @@
 import { FadeInSection } from "./FadeInSection";
 import { useLanguage } from "@/store/useLanguage";
 
-const actions = [
+const getActions = (t: (key: string) => string) => [
   {
     n: "01",
-    tag: "Ambiental",
-    title: "Copo que vira adubo",
-    text: "Copos PLA biodegradáveis se decompõem e retornam às plantações de café como adubo. Economia circular real.",
+    tag: t('action.1.tag'),
+    title: t('action.1.title'),
+    text: t('action.1.text'),
   },
   {
     n: "02",
-    tag: "Ambiental",
-    title: "Energia limpa",
-    text: "Frota de entrega 100% elétrica, energia solar nas lojas e estações de carregamento abertas ao público.",
+    tag: t('action.2.tag'),
+    title: t('action.2.title'),
+    text: t('action.2.text'),
   },
   {
     n: "03",
-    tag: "Econômica",
-    title: "Combo Starroots",
-    text: "Bebida + cookie personalizado com o nome do cliente por R$12,50 — receita que financia toda a logística verde.",
+    tag: t('action.3.tag'),
+    title: t('action.3.title'),
+    text: t('action.3.text'),
   },
   {
     n: "04",
-    tag: "Social",
-    title: "Educação ambiental",
-    text: "Parcerias com ONGs para conscientização ambiental de crianças e adolescentes em comunidades.",
+    tag: t('action.4.tag'),
+    title: t('action.4.title'),
+    text: t('action.4.text'),
   },
 ];
 
