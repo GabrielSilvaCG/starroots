@@ -62,15 +62,15 @@ function Sobre() {
         <section className="py-32 px-6" style={{ backgroundColor: "#1a3d2b", color: "white" }}>
           <div className="max-w-6xl mx-auto">
             <FadeInSection className="text-center mb-20">
-              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-50">A Equipe</h2>
-              <p className="text-3xl font-display italic">Os idealizadores do Starroots</p>
+              <h2 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-50">{t('about.team.tag')}</h2>
+              <p className="text-3xl font-display italic">{t('about.team.title')}</p>
             </FadeInSection>
             
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { name: "Allyce", role: "PARTE ESCRITA E PESQUISA" },
-                { name: "Ana Luiza", role: "ANÁLISE FINANCEIRA E DADOS" },
-                { name: "Gabriel Silva", role: "DESIGN, IDENTIDADE VISUAL E DESENVOLVIMENTO" },
+                { name: "Allyce", role: t('about.team.member1.role') },
+                { name: "Ana Luiza", role: t('about.team.member2.role') },
+                { name: "Gabriel Silva", role: t('about.team.member3.role') },
               ].map((member, i) => (
                 <FadeInSection key={member.name} delay={0.2 * i}>
                   <div className="p-12 border border-white/10 flex flex-col items-center text-center h-full hover:bg-white/5 transition-colors duration-500">
