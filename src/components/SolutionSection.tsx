@@ -119,7 +119,7 @@ function TopicIcon({ icon, color, visible }: { icon: string; color: string; visi
   );
 }
 
-function RootTopic({ title, text, color, delay, icon }: (typeof topics)[number]) {
+function RootTopic({ title, text, color, delay, icon }: { title: string; text: string; color: string; delay: number; icon: string }) {
   const { ref, visible } = useRevealOnce(delay);
 
   return (
