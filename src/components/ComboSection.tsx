@@ -33,17 +33,21 @@ export function ComboSection() {
         </div>
         <div className="max-w-[1400px] mx-auto relative z-10">
           <FadeInSection>
-            <p className="text-[10px] tracking-[0.5em] uppercase mb-8 opacity-70">Capítulo 04 — Lançamento</p>
+            <p className="text-[10px] tracking-[0.5em] uppercase mb-8 opacity-70">{t('chapter.launch')}</p>
             <h2
               id="combo-title"
               className="font-display font-black leading-[0.85] tracking-[-0.03em] mb-10"
               style={{ fontSize: "clamp(3rem, 9vw, 8rem)" }}
             >
-              Conheça o<br />
-              <em className="italic font-semibold">Combo Starroots.</em>
+              {t('chapter.launch.title').split('\n').map((line, i) => (
+                <span key={i}>
+                  {i === 1 ? <em className="italic font-semibold">{line}</em> : line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
             </h2>
             <p className="text-xl md:text-3xl font-display italic max-w-3xl">
-              Exclusivo. Sustentável. Com o seu nome.
+              {t('chapter.launch.subtitle')}
             </p>
           </FadeInSection>
         </div>
