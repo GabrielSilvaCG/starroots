@@ -30,6 +30,7 @@ const getActions = (t: (key: string) => string) => [
 
 export function ActionsSection() {
   const { t } = useLanguage();
+  const actions = getActions(t);
   return (
     <section id="acoes" className="scroll-anchor px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 items-end">
@@ -49,7 +50,7 @@ export function ActionsSection() {
         </FadeInSection>
         <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
           <p className="text-lg md:text-xl text-foreground/75 leading-relaxed font-body">
-            Quatro frentes integradas — ambiental, econômica e social — operando como um sistema vivo.
+            {t('chapter.pilares.desc')}
           </p>
         </FadeInSection>
       </div>
