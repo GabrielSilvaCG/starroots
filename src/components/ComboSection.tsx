@@ -95,9 +95,14 @@ export function ComboSection() {
       <div className="px-6 md:px-10 py-28 bg-background">
         <div className="max-w-[1400px] mx-auto">
           <FadeInSection className="mb-14">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4">O que está incluso</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4">{t('combo.included.label')}</p>
             <h3 className="font-display font-bold text-3xl md:text-5xl tracking-[-0.02em]">
-              Três elementos. <em className="italic text-accent">Um propósito.</em>
+              {t('combo.included.title').split(' ').map((word, i) => (
+                <span key={i}>
+                  {i > 1 ? <em className="italic text-accent">{word}</em> : word}
+                  {i < 3 && ' '}
+                </span>
+              ))}
             </h3>
           </FadeInSection>
 
