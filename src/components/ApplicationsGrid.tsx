@@ -2,14 +2,18 @@ import embalagemImg from "@/assets/embalagem.png";
 import lojaImg from "@/assets/logoemloja.png";
 import copoImg from "@/assets/copopequeno.png";
 import { FadeInSection } from "./FadeInSection";
+import { useLanguage } from "@/store/useLanguage";
 
-const main = { src: lojaImg, alt: "Logo aplicado na fachada da loja", label: "Fachada", caption: "01 — Identidade no ponto de venda" };
-const side = [
-  { src: copoImg, alt: "Copo pequeno com identidade Starroots", label: "Copo", caption: "02 — Embalagem primária" },
-  { src: embalagemImg, alt: "Embalagem kraft com logo", label: "Embalagem", caption: "03 — Material kraft" },
+const getMain = (t: (key: string) => string) => ({ src: lojaImg, alt: "Logo aplicado na fachada da loja", label: "Fachada", caption: t('lookbook.caption1') });
+const getSide = (t: (key: string) => string) => [
+  { src: copoImg, alt: "Copo pequeno com identidade Starroots", label: "Copo", caption: t('lookbook.caption2') },
+  { src: embalagemImg, alt: "Embalagem kraft com logo", label: "Embalagem", caption: t('lookbook.caption3') },
 ];
 
 export function ApplicationsGrid() {
+  const { t } = useLanguage();
+  const main = getMain(t);
+  const side = getSide(t);
   return (
     <section id="identidade" className="scroll-anchor px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 items-end">
