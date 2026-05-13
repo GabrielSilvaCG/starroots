@@ -128,13 +128,13 @@ function Sobre() {
           <FadeInSection>
             <div className="w-12 h-px bg-accent mx-auto mb-12" />
             <h2 className="text-3xl md:text-5xl font-display italic mb-12 max-w-3xl mx-auto">
-              "Dos campos de café até o seu copo,<br />a natureza é a prioridade."
+              {t('footer.tagline')}
             </h2>
             <Link 
               to="/comprar"
               className="inline-flex items-center gap-3 px-10 py-5 bg-accent text-[#0a2e1a] text-[10px] tracking-[0.4em] uppercase font-medium hover:bg-white transition-all duration-500 group"
             >
-              Comprar Agora
+              {t('about.final.cta')}
               <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
             </Link>
           </FadeInSection>
