@@ -24,15 +24,16 @@ function format(n: number) {
 }
 
 export function ImpactCalculator() {
+  const { t } = useLanguage();
   const [cups, setCups] = useState(20);
 
   const { co2, compost, phrase } = useMemo(() => {
     return {
       co2: cups * CO2_PER_CUP,
       compost: cups * COMPOST_PER_CUP,
-      phrase: motivational(cups),
+      phrase: motivational(cups, t),
     };
-  }, [cups]);
+  }, [cups, t]);
 
   return (
     <section
@@ -44,17 +45,22 @@ export function ImpactCalculator() {
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 items-end">
           <FadeInSection className="md:col-span-7">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 05 — Calcule</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('chapter.calculate')}</p>
             <h2
               className="font-display font-black leading-[0.9] tracking-[-0.03em]"
               style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
             >
-              Seu café,<br /><em className="italic font-semibold text-accent">seu impacto.</em>
+              {t('chapter.calculate.title').split('\n').map((line, i) => (
+                <span key={i}>
+                  {i === 1 ? <em className="italic font-semibold text-accent">{line}</em> : line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
             <p className="text-base text-foreground/70 leading-relaxed font-body">
-              Mova o controle e descubra quanto CO₂ você evita e quanto adubo retorna ao solo todo mês.
+              {t('chapter.calculate.desc')}
             </p>
           </FadeInSection>
         </div>
