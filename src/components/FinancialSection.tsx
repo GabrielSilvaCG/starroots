@@ -39,17 +39,22 @@ export function FinancialSection() {
     <section id="financeiro" className="scroll-anchor px-6 md:px-10 py-32 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 items-end">
         <FadeInSection className="md:col-span-7">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Capítulo 06 — Business Case</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">{t('chapter.business')}</p>
           <h2
             className="font-display font-black leading-[0.9] tracking-[-0.03em]"
             style={{ fontSize: "clamp(2.75rem, 6vw, 5.5rem)" }}
           >
-            Um projeto que<br /><em className="italic font-semibold text-accent">se paga sozinho.</em>
+            {t('chapter.business.title').split('\n').map((line, i) => (
+              <span key={i}>
+                {i === 1 ? <em className="italic font-semibold text-accent">{line}</em> : line}
+                {i === 0 && <br />}
+              </span>
+            ))}
           </h2>
         </FadeInSection>
         <FadeInSection delay={0.15} className="md:col-span-4 md:col-start-9">
           <p className="text-base text-foreground/70 leading-relaxed font-body">
-            Dos custos operacionais ao retorno final — todos os números fecham a conta.
+            {t('chapter.business.desc')}
           </p>
         </FadeInSection>
       </div>
