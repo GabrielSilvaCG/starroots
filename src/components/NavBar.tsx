@@ -111,17 +111,17 @@ export function NavBar() {
             mobileMenuOpen ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-full"
           }`}
         >
-          <div className="flex-1 overflow-y-auto px-8 pb-12">
-            <div className="mb-8">
-              <span className="text-[11px] tracking-[0.5em] uppercase text-accent font-bold mb-6 block opacity-80">Menu</span>
-              <ul className="flex flex-col gap-1">
+          <div className="h-full overflow-y-auto px-8 py-12 flex flex-col items-center justify-center text-center">
+            <div className="w-full max-w-md mx-auto">
+              <span className="text-[11px] tracking-[0.5em] uppercase text-accent font-bold mb-10 block opacity-80">Menu</span>
+              <ul className="flex flex-col gap-2">
                 {links.map((l) => (
                   <li key={l.href}>
                     {l.isInternal ? (
                       <Link
                         to={l.href}
                         onClick={() => handleLinkClick(l.href, true)}
-                        className="text-3xl font-display font-bold py-5 block text-white hover:text-accent transition-all duration-300 border-b border-white/10"
+                        className="text-2xl md:text-3xl font-display font-bold py-3 block text-white hover:text-accent transition-all duration-300"
                       >
                         {l.label}
                       </Link>
@@ -129,7 +129,7 @@ export function NavBar() {
                       <a
                         href={l.href}
                         onClick={(e) => handleLinkClick(l.href, false, e)}
-                        className="text-3xl font-display font-bold py-5 block text-white hover:text-accent transition-all duration-300 border-b border-white/10"
+                        className="text-2xl md:text-3xl font-display font-bold py-3 block text-white hover:text-accent transition-all duration-300"
                       >
                         {l.label}
                       </a>
@@ -139,11 +139,11 @@ export function NavBar() {
               </ul>
             </div>
             
-            <div className="mt-auto pt-8 border-t border-white/10">
-              <p className="text-[11px] tracking-[0.3em] uppercase text-white/60 font-medium mb-4">Starroots © 2026</p>
-              <div className="flex gap-4">
-                <div className="w-12 h-[2px] bg-accent" />
-                <div className="w-6 h-[2px] bg-accent/40" />
+            <div className="mt-12 pt-8 border-t border-white/10 w-full max-w-xs mx-auto">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 font-medium mb-4 italic">Starroots Project</p>
+              <div className="flex gap-2 justify-center">
+                <div className="w-8 h-[1px] bg-accent/60" />
+                <div className="w-4 h-[1px] bg-accent/30" />
               </div>
             </div>
           </div>
