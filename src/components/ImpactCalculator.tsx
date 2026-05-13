@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { FadeInSection } from "./FadeInSection";
 import { FloatingLeaves } from "./FloatingLeaves";
 import { Slider } from "@/components/ui/slider";
+import { useLanguage } from "@/store/useLanguage";
 
 // Approximate impact factors per disposable cup avoided:
 // - CO₂ saved: ~110g per cup (production + disposal vs PLA)
@@ -9,12 +10,12 @@ import { Slider } from "@/components/ui/slider";
 const CO2_PER_CUP = 110;
 const COMPOST_PER_CUP = 12;
 
-function motivational(cups: number) {
-  if (cups <= 5) return "Pequenos gestos plantam grandes florestas.";
-  if (cups <= 15) return "Você já está virando parte da raiz.";
-  if (cups <= 30) return "Seu café move um ciclo inteiro de vida.";
-  if (cups <= 60) return "Você é solo fértil para a próxima safra.";
-  return "Você é, literalmente, uma floresta em movimento.";
+function motivational(cups: number, t: (key: string) => string) {
+  if (cups <= 5) return t('impact.m1');
+  if (cups <= 15) return t('impact.m2');
+  if (cups <= 30) return t('impact.m3');
+  if (cups <= 60) return t('impact.m4');
+  return t('impact.m5');
 }
 
 function format(n: number) {
