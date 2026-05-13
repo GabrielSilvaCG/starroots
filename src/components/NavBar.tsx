@@ -28,8 +28,8 @@ export function NavBar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${
-        scrolled || mobileMenuOpen ? "bg-background/85 backdrop-blur-md" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        scrolled || mobileMenuOpen ? "bg-background/95 backdrop-blur-md" : "bg-transparent"
       }`}
     >
       <nav className="max-w-[1400px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between relative">
@@ -124,6 +124,60 @@ export function NavBar() {
           </div>
         </div>
       </nav>
+
+      {/* Mobile Sub-Navigation (Horizontal Scroll) */}
+      <div 
+        className={`md:hidden border-t border-white/5 overflow-x-auto scrollbar-hide transition-all duration-500 ease-in-out bg-background/98 ${
+          scrolled && !mobileMenuOpen ? 'max-h-14 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+        }`}
+      >
+        <ul className="flex items-center px-6 h-14 gap-8 text-[10px] tracking-[0.25em] uppercase font-semibold">
+          {links.map((l) => (
+            <li key={l.href} className="flex-shrink-0">
+              {l.isInternal ? (
+                <Link 
+                  to={l.href} 
+                  className="text-foreground/60 hover:text-accent transition-colors py-2 block"
+                  activeProps={{ className: "text-accent" }}
+                  onClick={() => {
+                    if (l.href.startsWith('/#')) {
+                      const id = l.href.split('#')[1];
+                      const element = document.getElementById(id);
+                      if (element) {
+                        const yOffset = -110; 
+                        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                      }
+                    }
+                  }}
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <a 
+                  href={l.href} 
+                  className="text-foreground/60 hover:text-accent transition-colors py-2 block"
+                  onClick={(e) => {
+                    if (l.href.startsWith('/#')) {
+                      e.preventDefault();
+                      const id = l.href.split('#')[1];
+                      const element = document.getElementById(id);
+                      if (element) {
+                        const yOffset = -110; 
+                        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                      }
+                      window.history.pushState(null, '', l.href);
+                    }
+                  }}
+                >
+                  {l.label}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }
