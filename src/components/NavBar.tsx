@@ -127,11 +127,11 @@ export function NavBar() {
 
       {/* Mobile Sub-Navigation (Horizontal Scroll) */}
       <div 
-        className={`md:hidden border-t border-foreground/5 overflow-x-auto scrollbar-hide transition-all duration-500 ease-in-out ${
-          scrolled && !mobileMenuOpen ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+        className={`md:hidden border-t border-white/5 overflow-x-auto scrollbar-hide transition-all duration-500 ease-in-out bg-background/98 ${
+          scrolled && !mobileMenuOpen ? 'max-h-14 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
         }`}
       >
-        <ul className="flex items-center px-6 h-12 gap-8 text-[9px] tracking-[0.2em] uppercase font-medium">
+        <ul className="flex items-center px-6 h-14 gap-8 text-[10px] tracking-[0.25em] uppercase font-semibold">
           {links.map((l) => (
             <li key={l.href} className="flex-shrink-0">
               {l.isInternal ? (
