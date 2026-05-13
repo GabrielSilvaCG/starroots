@@ -40,13 +40,18 @@ function Sobre() {
         <section className="py-32 px-6" style={{ backgroundColor: "#f5f0e8" }}>
           <div className="max-w-4xl mx-auto">
             <FadeInSection>
-              <h2 className="text-xs uppercase tracking-[0.5em] mb-12 opacity-50">A Origem</h2>
+              <h2 className="text-xs uppercase tracking-[0.5em] mb-12 opacity-50">{t('about.origin.tag')}</h2>
               <div className="grid md:grid-cols-2 gap-12 items-start">
                 <p className="text-2xl md:text-3xl font-display leading-relaxed text-balance text-[#1a3d2b]">
-                  O projeto nasceu de uma aula de sustentabilidade no curso técnico de administração da <span className="underline decoration-accent underline-offset-4">Escola Estadual Catarina Jorge Gonçalves</span> em Contagem-MG.
+                  {t('about.origin.title').split('Escola Estadual Catarina Jorge Gonçalves').map((part, i) => (
+                    <span key={i}>
+                      {i > 0 && <span className="underline decoration-accent underline-offset-4">Escola Estadual Catarina Jorge Gonçalves</span>}
+                      {part}
+                    </span>
+                  ))}
                 </p>
                 <p className="text-lg leading-relaxed text-foreground/70">
-                  A professora desafiou o grupo a escolher uma empresa real e propor mudanças sustentáveis genuínas. Escolheram o Starbucks para repensar como uma gigante mundial poderia adotar práticas de economia circular de forma viável e impactante.
+                  {t('about.origin.text')}
                 </p>
               </div>
             </FadeInSection>
